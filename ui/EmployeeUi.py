@@ -27,9 +27,11 @@ def startPageMenuPrint():
 def startPageMenuAction():
     action = input("User Action: ")
     if action == '1':
-        print('picked 1')
-        return True
+        print("picked 1")
+    elif action == '3':
+        print ("picked 3")
     elif action == '12':
-        print('Exiting program')
+        print("Exiting program")
         return False
+    return True
 
