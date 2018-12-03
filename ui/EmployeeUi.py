@@ -3,10 +3,10 @@ class EmployeeUi():
     def __init__(self):
         pass
     def startPageMenu(self):
-        action = ''
-        while action != '12':
+        action = True
+        while action:
             startPageMenuPrint()
-            startPageMenuAction()
+            action = startPageMenuAction()
 
         
 def startPageMenuPrint():
@@ -27,7 +27,9 @@ def startPageMenuPrint():
 def startPageMenuAction():
     action = input("User Action: ")
     if action == '1':
-        pass
+        print('picked 1')
+        return True
     elif action == '12':
-        return action
+        print('Exiting program')
+        return False
 
