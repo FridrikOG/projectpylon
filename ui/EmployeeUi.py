@@ -33,4 +33,5 @@ def startPageMenuAction():
     elif action == '12':
         print("Exiting program")
         return False
+    return True
 
