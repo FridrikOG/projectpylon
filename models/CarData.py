@@ -1,5 +1,4 @@
-class Customer():
-    def __init__(self,name,age,ssn):
-        self.__name = name
-        self.__age = age
-        self.__ssn = ssn
+class Car():
+    def __init__(self, carType, number):
+        self.__carType= carType
+        self.__number = number
