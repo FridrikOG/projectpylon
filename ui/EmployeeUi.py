@@ -1,7 +1,7 @@
 
 class EmployeeUi():
     def __init__(self):
-        
+        pass
     def startPageMenu(self):
         action = True
         while action:
@@ -20,7 +20,7 @@ def startPageMenuPrint():
     print("7. Show list of orders.")
     print("8. Return a car.")
     print("9. Edit order.")
-    print("10. Quit")
+    print("q. Quit")
 
 def startPageMenuAction():
     action = input("User Action: ")
@@ -28,7 +28,7 @@ def startPageMenuAction():
         print("picked 1")
     elif action == '3':
         print ("picked 3")
-    elif action == '12':
+    elif action == 'q':
         print("Exiting program")
         return False
     return True
