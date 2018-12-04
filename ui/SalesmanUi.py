@@ -8,6 +8,7 @@ class SalesmanUi:
 
     def __init__(self):
         self.__car_service = CarService()
+        self.__customerService = CustomerService()
 
     def mainMenu(self):
 
