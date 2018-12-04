@@ -1,8 +1,8 @@
-from repositories.VideoRepository import VideoRepository
+from repositories.CarRepository import CarRepository
 
-class VideoService:
+class CarService:
     def __init__(self):
-        self.__video_repo = VideoRepository()
+        self.__car_repo = CarRepository()
 
     def add_video(self, video):
         if self.is_valid_video(video):
@@ -13,8 +13,8 @@ class VideoService:
         #validate the video
         return True
 
-    def get_videos(self):
-        return self.__video_repo.get_videos()
+    def get_cars(self, action):
+        return self.__car_repo.get_cars(action)
 
     def get_videos_by_genre(self, genre):
         pass

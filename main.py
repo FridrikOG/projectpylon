@@ -1,10 +1,8 @@
+from ui.SalesmanUi import SalesmanUi
 
-from ui.EmployeeUi import EmployeeUi
-
-#The main program starts here
 def main():
-    ui = EmployeeUi()
-    ui.startPageMenu()
+    ui = SalesmanUi()
+    ui.main_menu()
 
 main()
 
