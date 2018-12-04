@@ -1,3 +1,4 @@
+import time
 
 class EmployeeUi():
     def __init__(self):
@@ -22,10 +23,12 @@ def startPageMenuPrint():
     print("9. Edit order.")
     print("q. Quit")
 
+
+
 def startPageMenuAction():
     action = input("User Action: ")
     if action == '1':
-        print("picked 1")
+        print("1.")
     elif action == '3':
         print ("picked 3")
     elif action == 'q':
