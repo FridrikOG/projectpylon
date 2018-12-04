@@ -1,4 +1,4 @@
-type,make,licenseplate,color,passengers,transmission,rentcost,available
+type,make,licenseplate,color,passengers,transmission,rentcost,status
 Compact,VW Golf,MZ-G06,White,5,Manual,14000,available
 Compact,Hunday i-10,KX-E32,Blue,5,Auto,14000,available
 Compact,Toyota Auris,GS-V90,Silver,5,Manual,14000,available
