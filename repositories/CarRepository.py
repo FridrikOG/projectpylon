@@ -12,8 +12,8 @@ class CarRepository:
        
     def get_cars(self,action):
 
-        with open('data/cars.csv', 'r') as car_file:
-            csv_reader = csv.DictReader(car_file)
+        with open('data/cars.csv', 'r') as carFile:
+            csv_reader = csv.DictReader(carFile)
 
             for line in csv_reader:
                 type = line['type']
@@ -25,14 +25,14 @@ class CarRepository:
                 rentcost = line['rentcost']
                 available = line['available']
 
-                new_car = Car(type, make,licenseplate, color, passengers,\
+                newCar = Car(type, make,licenseplate, color, passengers,\
                 transmission, rentcost, available)
                 if available == 'available':
                     if licenseplate not in self.__cars_available:
-                        self.__cars_available.append(new_car)                
+                        self.__cars_available.append(newCar)                
                 if available == 'unavailable':
                     if licenseplate not in self.__cars_unavailable:
-                        self.__cars_unavailable.append(new_car)       
+                        self.__cars_unavailable.append(newCar)       
         if action == '2':
             return self.__cars_available
         if action == '3':
