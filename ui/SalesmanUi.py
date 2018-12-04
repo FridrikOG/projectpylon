@@ -34,11 +34,6 @@ class SalesmanUi:
                 newCustomer = Customer(name,age,ssn)
                 self.__customerService.addCustomer(newCustomer)
 
-        
-def startPageMenuPrint():
-    print("--------Start-Page--------")
-    print("3. Register customer.")
-
 def createCustomer():
     name = input('Enter name: ')
     age = input('Enter age: ')
