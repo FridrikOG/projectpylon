@@ -16,4 +16,8 @@ class CustomerService:
     def getAllCustomers(self):
         return self.__customerRepo.getAllCustomers()
 
-
+    def findCustomer(self, searchTerm):
+        return self.__customerRepo.findCustomer(searchTerm)
+        
+    def countingCustomers(self):
+        return self.__customerRepo.countingCustomers()

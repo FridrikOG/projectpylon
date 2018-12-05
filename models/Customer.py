@@ -1,11 +1,14 @@
 class Customer():
-    def __init__(self,name,age,ssn):
+    def __init__(self,name,age,ssn, address, number):
         self.__name = name
         self.__age = age
         self.__ssn = ssn
+        self.__address = address
+        self.__number = number
 
     def __str__(self):
-        return '{:15} {:15} {:15}'.format(self.__name,self.__age,self.__ssn)
+        s = '{:15} {:15} {:15} {:15} {:15}'.format(self.__name,self.__age,self.__ssn, self.__address, self.__number)
+        return s 
     
     def __repr__(self):
         return self.__str__()
@@ -18,3 +21,9 @@ class Customer():
     
     def getSsn(self):
         return self.__ssn
+
+    def getAddress(self):
+        return self.__address
+
+    def getNumber(self):
+        return self.__number
