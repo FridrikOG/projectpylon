@@ -13,7 +13,7 @@ class SalesmanUi:
     def mainMenu(self):
 
         action = True
-        while action:
+        while action != "q":
             mainMenuPrint()
 
             action = input("Choose an option: ").lower()
@@ -33,6 +33,7 @@ class SalesmanUi:
                 name,age,ssn = createCustomer()
                 newCustomer = Customer(name,age,ssn)
                 self.__customerService.addCustomer(newCustomer)
+
 
 def createCustomer():
     name = input('Enter name: ')

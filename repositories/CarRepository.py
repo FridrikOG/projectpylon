@@ -33,7 +33,7 @@ class CarRepository:
                 if status == 'unavailable':
                     if licenseplate not in self.__cars_unavailable:
                         self.__cars_unavailable.append(newCar)       
-                if action == '1':
-                    return self.__cars_available
-                if action == '2':
-                    return self.__cars_unavailable
+            if action == '1':
+                return self.__cars_available
+            if action == '2':
+                return self.__cars_unavailable
