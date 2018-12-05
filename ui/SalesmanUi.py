@@ -81,6 +81,21 @@ class SalesmanUi:
         number = self.countingCustomers()
         number += 1
 
+        return name,age,ssn, address, number
+
+    def errorCheckingSsn(self):
+        ssn = ''
+        while len(str(ssn)) != 10:
+            try:
+                ssn = int(input("Step 3/5 - Enter an SSN of 10 numbers: "))
+            except ValueError:
+                print("Please enter only 10 integers")
+        return ssn
+
+    def countingCustomers(self):
+        listOfSsn = self.__customerService.countingCustomers()
+        return len(listOfSsn)
+
     # Displays options that the user has.
     def findCustomerMenuPrint(self):
         print("0. <-- Go back")
@@ -94,21 +109,9 @@ class SalesmanUi:
         for customer in customers:
             print(customer)
     
-    def searchCustomerPrintHeader(self):
+    def searchCustomerPrintHeader(self,customer):
         print("--------------------------------------------Search for customer-------------------------------------------")
-    
-    def errorCheckingSsn(self):
-        ssn = ''
-        while len(str(ssn)) != 10:
-            try:
-                ssn = int(input("Step 3/5 - Enter an SSN of 10 numbers: "))
-            except ValueError:
-                print("Please enter only 10 integers")
-        return ssn
-
-    def countingCustomers(self):
-        listOfSsn = self.__customerService.countingCustomers()
-        return len(listOfSsn)
+        print(customer)
 
 
 
