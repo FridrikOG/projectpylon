@@ -74,10 +74,10 @@ class SalesmanUi:
 
     def createCustomer(self):
         print("-----------Creating customer account-----------")
-        name = input('Step 1/5 - Enter name: ').strip()
-        age = input('Step 2/5 - Enter age: ').strip()
+        name = input('Step 1/3 - Enter name: ').strip()
+        age = input('Step 2/3 - Enter age: ').strip()
         ssn = self.errorCheckingSsn()
-        address = input('Step 4/5 Enter address: ').strip()
+        address = input('Step 3/3 Enter address: ').strip()
         number = self.countingCustomers()
         number += 1
 
