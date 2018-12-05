@@ -13,7 +13,7 @@ class SalesmanUi:
     def mainMenu(self):
 
         action = True
-        while action:
+        while action != "q":
             mainMenuPrint()
 
             action = input('Choose an option: ').lower()

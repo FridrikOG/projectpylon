@@ -13,7 +13,7 @@ class CarRepository:
        
     def getCars(self,action):
         
-        with open('/Users/fjolnirthrastarson/Documents/Forritun/git service/projectpylon/data/cars.csv', 'r') as carFile:
+        with open('./data/cars.csv', 'r') as carFile:
             csv_reader = csv.DictReader(carFile)
 
             for line in csv_reader:
