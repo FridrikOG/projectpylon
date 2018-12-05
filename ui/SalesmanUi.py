@@ -20,8 +20,7 @@ class SalesmanUi:
                 self.searchCustomerPrintHeader()
             elif findCustomerAction == '2':
                 customers = self.__customerService.getAllCustomers()
-                customers = self.displayAllCustomersPrint(customers)
-                return False
+                self.displayAllCustomersPrint(customers)
 
     def mainMenu(self):
         action = ''
@@ -30,13 +29,8 @@ class SalesmanUi:
             action = input('Action: ')
 
             if action == '1' or action == '2':
-                LINE = '---------------'
                 cars = self.__carService.getCars(action)
-                print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
-                'Color', 'Passengers','Transmission','Rent Cost'))
-                print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
-                for x in cars:
-                    print(x)
+                self.displayAllCarsPrint(cars)
 
             if action == '3':
                 name,age,ssn = self.createCustomer()
@@ -76,10 +70,17 @@ class SalesmanUi:
     def displayAllCustomersPrint(self,customers):
         print("{:15} {:15} {:15}".format("Name", "Age", "SSN"))
         print("{:15} {:15} {:15}".format("---------------",\
-        "---------------","---------------","---------------","---------------",\
-        "---------------","---------------",))
+        "---------------","---------------"))
         for customer in customers:
             print(customer)
+    
+    def displayAllCarsPrint(self,cars):
+        LINE = '---------------'
+        print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
+        'Color', 'Passengers','Transmission','Rent Cost'))
+        print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
+        for car in cars:
+            print(car)
         
 
     def searchCustomerPrintHeader(self):
