@@ -5,5 +5,3 @@ def main():
     ui.mainMenu()
 
 main()
-
-"""FIXED"""

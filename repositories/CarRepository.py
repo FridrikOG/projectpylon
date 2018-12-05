@@ -6,7 +6,7 @@ class CarRepository:
     def __init__(self):
         self.__carsUnavailable = []
         self.__carsAvailable = []
-        self.__entries = set()
+        self.__carLicenseplates = set()
 
     def addCar(self, car):
        pass
@@ -27,8 +27,8 @@ class CarRepository:
                 status = line['status']
                 
 
-                if licenseplate not in self.__entries:
-                    self.__entries.add(licenseplate)
+                if licenseplate not in self.__carLicenseplates:
+                    self.__carLicenseplates.add(licenseplate)
                     newCar = Car(type, make,licenseplate, color, passengers,transmission, rentcost, status)
 
                     if status == 'available':
