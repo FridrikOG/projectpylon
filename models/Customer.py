@@ -5,10 +5,10 @@ class Customer():
         self.__ssn = ssn
 
     def __str__(self):
-        s = f'Name: {self.__name}\n'
-        s += f'Age: {self.__age}\n'
-        s += f'SSN: {self.__ssn}\n'
-        return s
+        return '{:15} {:15} {:15}'.format(self.__name,self.__age,self.__ssn)
+    
+    def __repr__(self):
+        return self.__str__()
 
     def getName(self):
         return self.__name
