@@ -20,28 +20,28 @@ class Car:
     def __repr__(self):
         return self.__str__()
 
-    def get_type(self):
+    def get_Type(self):
         return self.__type
     
-    def get_make(self):
+    def getMake(self):
         return self.__make
     
-    def get_color(self):
+    def getColor(self):
         return self.__color
     
-    def get_licenseplate(self):
+    def getLicenseplate(self):
         return self.__licenseplate
 
-    def get_passengers(self):
+    def getPassengers(self):
         return self.__passengers
 
-    def get_transmission(self):
+    def getTransmission(self):
         return self.__transmission
     
-    def get_rentcost(self):
+    def getRentcost(self):
         return self.__rentcost
 
-    def get_available(self):
+    def getAvailable(self):
         return self.__available
 
 

@@ -4,15 +4,16 @@ from models.Car import Car
 class CarRepository:
     
     def __init__(self):
-        self.__cars_unavailable = []
-        self.__cars_available = []
+        self.__carsUnavailable = []
+        self.__carsAvailable = []
+        self.__entries = set()
 
-    def add_car(self, car):
+    def addCar(self, car):
        pass
        
-    def get_cars(self,action):
-
-        with open('data/cars.csv', 'r') as carFile:
+    def getCars(self,action):
+        
+        with open('/Users/fjolnirthrastarson/Documents/Forritun/git service/projectpylon/data/cars.csv', 'r') as carFile:
             csv_reader = csv.DictReader(carFile)
 
             for line in csv_reader:
@@ -24,16 +25,17 @@ class CarRepository:
                 licenseplate = line['licenseplate']
                 rentcost = line['rentcost']
                 status = line['status']
+                
 
-                newCar = Car(type, make,licenseplate, color, passengers,transmission, rentcost, status)
+                if licenseplate not in self.__entries:
+                    self.__entries.add(licenseplate)
+                    newCar = Car(type, make,licenseplate, color, passengers,transmission, rentcost, status)
 
-                if status == 'available':
-                    if licenseplate not in self.__cars_available:
-                        self.__cars_available.append(newCar)                
-                if status == 'unavailable':
-                    if licenseplate not in self.__cars_unavailable:
-                        self.__cars_unavailable.append(newCar)       
+                    if status == 'available':
+                        self.__carsAvailable.append(newCar)                
+                    if status == 'unavailable':
+                        self.__carsUnavailable.append(newCar)       
             if action == '1':
-                return self.__cars_available
+                return self.__carsAvailable
             if action == '2':
-                return self.__cars_unavailable
+                return self.__carsUnavailable

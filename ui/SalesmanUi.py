@@ -7,25 +7,24 @@ from models.Customer import Customer
 class SalesmanUi:
 
     def __init__(self):
-        self.__car_service = CarService()
+        self.__carService = CarService()
         self.__customerService = CustomerService()
 
     def mainMenu(self):
 
         action = True
-        while action != "q":
+        while action:
             mainMenuPrint()
 
-            action = input("Choose an option: ").lower()
-            print("\n")
-
-            if action == "1" or action == "2":
-                cars = self.__car_service.get_cars(action)
-                print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format("Type", "Make", "License Plate",\
-                "Color", "Passengers","Transmission","Rent Cost"))
-                print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format('---------------',\
-                '---------------','---------------','---------------','---------------',\
-                '---------------','---------------',))
+            action = input('Choose an option: ').lower()
+            print()
+            
+            if action == '1' or action == '2':
+                LINE = '---------------'
+                cars = self.__carService.getCars(action)
+                print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
+                'Color', 'Passengers','Transmission','Rent Cost'))
+                print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
                 for x in cars:
                     print(x)
             
@@ -33,6 +32,9 @@ class SalesmanUi:
                 name,age,ssn = createCustomer()
                 newCustomer = Customer(name,age,ssn)
                 self.__customerService.addCustomer(newCustomer)
+
+
+
 
 
 def createCustomer():
