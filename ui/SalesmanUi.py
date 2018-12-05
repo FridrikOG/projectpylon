@@ -33,11 +33,10 @@ class SalesmanUi:
             if action == '1' or action == '2':
                 cars = self.__carService.getCars(action)
                 self.displayAllCarsPrint(cars)
-                
 
             elif action == '3':
-                name,age,ssn = self.createCustomer()
-                newCustomer = Customer(name,age,ssn)
+                name,age,ssn,address,number = self.createCustomer()
+                newCustomer = Customer(name,age,ssn,address,number)
                 self.__customerService.addCustomer(newCustomer)
 
             elif action == '5':
@@ -65,7 +64,13 @@ class SalesmanUi:
         print("10. Register car")
         print("press q to quit\n")
 
+
+
+
     ''' -------------------- Customer Functions -------------------- '''
+
+
+
 
     def createCustomer(self):
         print("-----------Creating customer account-----------")
@@ -92,8 +97,25 @@ class SalesmanUi:
     def searchCustomerPrintHeader(self):
         print("--------------------------------------------Search for customer-------------------------------------------")
     
+    def errorCheckingSsn(self):
+        ssn = ''
+        while len(str(ssn)) != 10:
+            try:
+                ssn = int(input("Step 3/5 - Enter an SSN of 10 numbers: "))
+            except ValueError:
+                print("Please enter only 10 integers")
+        return ssn
+
+    def countingCustomers(self):
+        listOfSsn = self.__customerService.countingCustomers()
+        return len(listOfSsn)
+
+
 
     ''' -------------------- Car Functions -------------------- '''
+
+
+
 
     def createCar(self):
         print("\nSelect from Car Types:\n1. Compact\n2. Comfort\n3. CUV\
