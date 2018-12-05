@@ -31,8 +31,9 @@ class SalesmanUi:
             if action == '1' or action == '2':
                 cars = self.__carService.getCars(action)
                 self.displayAllCarsPrint(cars)
+                
 
-            if action == '3':
+            elif action == '3':
                 name,age,ssn = self.createCustomer()
                 newCustomer = Customer(name,age,ssn)
                 self.__customerService.addCustomer(newCustomer)
@@ -41,18 +42,25 @@ class SalesmanUi:
                 self.findCustomerMenuPrint()
                 self.findCustomerMenu()
 
+            elif action == '10':
+                carType,make,licenseplate,color,passengers,transmission,rentCost,status = self.createCar()
+                newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status)
+                self.__carService.addCar(newCar)
+
+
 
     def mainMenuPrint(self):
         print("\nYou can do the following: ")
-        print("1. List all available cars")
-        print("2. List all unavailable cars")
-        print("3. Register customer.")
-        print("4. Create car reservation.")
-        print("5. Find a customer.")
-        print("6. Look up an order.")
-        print("7. Show list of orders.")
-        print("8. Return a car.")
-        print("9. Edit order.")
+        print("1.  List all available cars")
+        print("2.  List all unavailable cars")
+        print("3.  Register customer.")
+        print("4.  Create car reservation.")
+        print("5.  Find a customer.")
+        print("6.  Look up an order.")
+        print("7.  Show list of orders.")
+        print("8.  Return a car.")
+        print("9.  Edit order.")
+        print("10. Register car")
         print("press q to quit\n")
 
     def createCustomer(self):
@@ -74,14 +82,91 @@ class SalesmanUi:
         for customer in customers:
             print(customer)
     
+    def createCar(self):
+        print("\nSelect from Car Types:\n1. Compact\n2. Comfort\n3. CUV\
+                \n4. Highland\n5. Luxury\n")
+        while True:
+            try:
+                carTypeInput = int(input('Choose car type number:  '))
+                if 0 < carTypeInput < 6:
+                    break
+                else:
+                    print('Please choose from available types\n')
+            except:
+                print("Please only insert integer values\n")
+        make = input('Make (f.x. Toyota Yaris): ').capitalize()
+        color = input('Color: ').capitalize()
+        while True:
+            try:
+                passengers = int(input('Passengers: '))
+                break
+            except:
+                print("\nPlease only insert integer values\n")
+        print("Transmission:\n1. Auto\n2. Manual\n")
+        while True:
+            try:
+                transmissionInput = int(input('Choose: '))
+                if 0 < transmissionInput < 3:
+                    break
+                else:
+                    print('Please choose from available transmissions\n')
+            except:
+                print("Please only insert integer values\n")
+        transmission = self.getTransmission(transmissionInput)
+        while True:
+            licenseplate = input('License plate (F.x. LL-L00): ').upper()
+            if len(list(licenseplate)) == 6:
+                break
+            else:
+                print("Not a valid license plate")
+
+        rentCost, carType = self.findRentCost(carTypeInput)
+        status = 'available'
+        newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status)
+        print("\nCar successfully created!")
+        self.printCarHeader()
+        print(newCar)
+        return carType,make,licenseplate,color,passengers,transmission,rentCost,status
+
+    def getTransmission(self, transmissionInput):
+        if transmissionInput == 1:
+            transmission = 'Auto'
+        else:
+            transmission = 'Manual'
+        return transmission
+
+    def findRentCost(self,carTypeInput):
+        if carTypeInput == 1:
+            carType = 'Compact'
+            rentCost = 14000
+        if carTypeInput == 2:
+            carType = 'Comfort'
+            rentCost = 20000
+        if carTypeInput == 3:
+            carType = 'CUV'
+            rentCost = 25000
+        if carTypeInput == 4:
+            carType = 'Highland'
+            rentCost = 30000
+        if carTypeInput == 5:
+            carType = 'Luxury'
+            rentCost = 35000
+        return rentCost, carType
+
+
+
+
     def displayAllCarsPrint(self,cars):
-        LINE = '---------------'
-        print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
-        'Color', 'Passengers','Transmission','Rent Cost'))
-        print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
+        self.printCarHeader()
         for car in cars:
             print(car)
-        
+
+    def printCarHeader(self):
+        LINE = '---------------'
+        print("\n{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
+        'Color', 'Passengers','Transmission','Rent Cost'))
+        print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
+
 
     def searchCustomerPrintHeader(self):
         print("--------------------------------------------Search for customer-------------------------------------------")

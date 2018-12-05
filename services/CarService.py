@@ -7,3 +7,6 @@ class CarService:
 
     def getCars(self, action):
         return self.__carRepo.getCars(action)
+
+    def addCar(self, newCar):
+        self.__carRepo.addCar(newCar)

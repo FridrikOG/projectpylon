@@ -1,7 +1,7 @@
 class Car:
 
     def __init__(self,type, make,licenseplate, color, passengers, \
-    transmission, rentcost, available):
+    transmission, rentcost, status):
         self.__type = type
         self.__make = make
         self.__licenseplate = licenseplate
@@ -9,7 +9,7 @@ class Car:
         self.__passengers = passengers
         self.__transmission = transmission
         self.__rentcost = rentcost
-        self.__available = available
+        self.__status = status
 
 
     def __str__(self):
@@ -20,7 +20,7 @@ class Car:
     def __repr__(self):
         return self.__str__()
 
-    def get_Type(self):
+    def getType(self):
         return self.__type
     
     def getMake(self):
@@ -41,7 +41,7 @@ class Car:
     def getRentcost(self):
         return self.__rentcost
 
-    def getAvailable(self):
-        return self.__available
+    def getStatus(self):
+        return self.__status
 
 
