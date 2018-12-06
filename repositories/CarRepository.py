@@ -1,5 +1,8 @@
 import csv
 from models.Car import Car
+from datetime import datetime, timedelta
+import operator
+
 
 class CarRepository:
     
@@ -28,20 +31,20 @@ class CarRepository:
             licenseplate = newCar.getLicenseplate()
             rentCost = newCar.getRentcost()
             status = newCar.getStatus()
-            carFile.write("{},{},{},{},{},{},{},{}\n".format(carType,make,licenseplate,color,passengers,transmission,rentCost,status))
+            rentOutCar = newCar.getRentOutCar()
+            returnCar = newCar.getReturnCar()
+            
+            carFile.write("{},{},{},{},{},{},{},{},{},{}\n".format(carType,make,licenseplate,color,passengers,transmission,\
+            rentCost,status,rentOutCar,returnCar))
 
-
-    # def addCustomer(self,customer):
-    #     with open('./data/customers.csv','a',) as customerFile:
-    #         name = customer.getName()
-    #         age = customer.getAge()
-    #         ssn = customer.getSsn()
-    #         customerFile.write(f'{name},{age},{ssn}\n')
+    def createDate(self, rentDate):
+        day, month, year, hour, minutes = map(int, rentDate.split('-'))
+        return datetime(year, month, day, hour, minutes)
        
-    def getCars(self, action, typeAction):
+    def getCars(self, action, typeAction, dateAvailable):
         
         with open('./data/cars.csv', 'r') as carFile:
-            csvReader = csv.DictReader(carFile)
+            csvReader = csv.DictReader(carFile, delimiter=',')
 
             for line in csvReader:
                 carType = line['type']
@@ -52,13 +55,27 @@ class CarRepository:
                 licenseplate = line['licenseplate']
                 rentcost = line['rentcost']
                 status = line['status']
-                
+                rentOutCar = self.createDate(line['rentout'])
+                returnCar = self.createDate(line['return'])
+                   
 
                 if licenseplate not in self.__carLicenseplates:
                     self.__carLicenseplates.add(licenseplate)
-                    newCar = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status)
+                    newCar = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
 
-                    if status == 'available':
+                    if rentOutCar < dateAvailable < returnCar:
+                        self.__carsUnavailable.append(newCar)  
+                        if carType == 'Compact':
+                            self.__carsCompactUnavailable.append(newCar)
+                        if carType == 'Comfort':
+                            self.__carsComfortUnavailable.append(newCar)  
+                        if carType == 'Luxury':
+                            self.__carsLuxuryUnavailable.append(newCar)
+                        if carType == 'CUV':
+                            self.__carsCUVUnavailable.append(newCar)  
+                        if carType == 'Highland':
+                            self.__carsHighlandUnavailable.append(newCar) 
+                    else:
                         self.__carsAvailable.append(newCar)  
                         if carType == 'Compact':
                             self.__carsCompactAvailable.append(newCar)
@@ -70,18 +87,7 @@ class CarRepository:
                             self.__carsCUVAvailable.append(newCar)  
                         if carType == 'Highland':
                             self.__carsHighlandAvailable.append(newCar)               
-                    if status == 'unavailable':
-                        self.__carsUnavailable.append(newCar)  
-                        if carType == 'Compact':
-                            self.__carsCompactUnavailable.append(newCar)
-                        if carType == 'Comfort':
-                            self.__carsComfortUnavailable.append(newCar)  
-                        if carType == 'Luxury':
-                            self.__carsLuxuryUnavailable.append(newCar)
-                        if carType == 'CUV':
-                            self.__carsCUVUnavailable.append(newCar)  
-                        if carType == 'Highland':
-                            self.__carsHighlandUnavailable.append(newCar)      
+                       
             if action == '1' and typeAction == '':
                 return self.__carsAvailable
             if action == '1' and typeAction == 'compact':

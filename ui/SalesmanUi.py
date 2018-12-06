@@ -4,6 +4,7 @@ from services.CustomerService import CustomerService
 from models.Customer import Customer
 from models.Order import Order
 from services.OrderService import OrderService
+from datetime import datetime, timedelta
 
 
 
@@ -22,9 +23,10 @@ class SalesmanUi:
 
             if action == '1' or action == '2':
                 typeAction = ''
-                cars = self.__carService.getCars(action, typeAction)
+                dateAvailable = datetime.now()
+                cars = self.__carService.getCars(action, typeAction, dateAvailable)
                 self.displayAllCarsPrint(cars)
-                self.showCarsByTypeMenu(action)
+                self.showCarsByTypeMenu(action,dateAvailable)
 
 
             elif action == '3':
@@ -46,8 +48,8 @@ class SalesmanUi:
                 #print all orders and options
 
             elif action == '10':
-                carType,make,licenseplate,color,passengers,transmission,rentCost,status = self.createCar()
-                newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status)
+                carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar = self.createCar()
+                newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
                 self.__carService.addCar(newCar)
 
     def mainMenuPrint(self):
@@ -67,7 +69,7 @@ class SalesmanUi:
 
 
 
-    ''' -------------------- Customer Functions -------------------- '''
+# ''' -------------------- Customer Functions -------------------- '''
 
     def findCustomerMenu(self):
         self.findCustomerMenuPrint()
@@ -145,7 +147,7 @@ class SalesmanUi:
     
     
     
-    ''' -------------------- Car Functions -------------------- '''
+# ''' -------------------- Car Functions -------------------- '''
 
     def findCarTypeMenuPrint(self):
         print("0. <-- Go back")
@@ -155,10 +157,10 @@ class SalesmanUi:
         print("4. Show only Highland")
         print("5. Show only Luxury")
 
-    def showCarsByTypeMenu(self, action):
+    def showCarsByTypeMenu(self, action,dateAvailable):
         while True:
             self.findCarTypeMenuPrint()
-            typeAction = input('Choose action: ')
+            typeAction = input('\nChoose action: ')
             if typeAction == '0':
                 break
             elif typeAction == '1':
@@ -171,7 +173,7 @@ class SalesmanUi:
                 typeAction = 'highland'
             elif typeAction == '5':
                 typeAction = 'luxury'
-            cars = self.__carService.getCars(action, typeAction)
+            cars = self.__carService.getCars(action, typeAction,dateAvailable)
             self.displayAllCarsPrint(cars)
 
     def createCar(self):
@@ -188,11 +190,13 @@ class SalesmanUi:
         transmission = self.getTransmission(transmissionInput)
         rentCost, carType = self.getCarTypeVariables(carTypeInput)
         status = 'available'
-        newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status)
+        rentOutCar = self.__carService.checkValidDate()
+        returnCar = rentOutCar
+        newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
         print("\nCar successfully created!")
         self.printCarHeader()
         print(newCar)
-        return carType,make,licenseplate,color,passengers,transmission,rentCost,status
+        return carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar
 
 
     def getTransmission(self, transmissionInput):

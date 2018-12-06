@@ -1,16 +1,24 @@
-type,make,licenseplate,color,passengers,transmission,rentcost,status
-Compact,VW Golf,MZ-G06,White,5,Manual,14000,available
-Compact,Hunday i-10,KX-E32,Blue,5,Auto,14000,available
-Compact,Toyota Auris,GS-V90,Silver,5,Manual,14000,available
-CUV,Ford Kuga,MS-S12,Red,5,Auto,25000,available
-Luxury,M-Benz C-class,BG-G37,Black,5,Auto,35000,available
-Highland,Toyota Hilux,TE-E93,White,5,Auto,30000,available
-Highland,Toyota Hilux,LK-L98,Silver,2,Auto,30000,unavailable
-Comfort,Toyota Camry,AP-G29,Blue,5,Auto,20000,available
-Compact,Toyota yaris,SH-K78,Blue,5,Manual,14000,available
-Highland,Nissan navara,ML-E43,Purple,5,Auto,30000,available
-CUV,Ford,SS-Y21,Blue,7,Auto,25000,available
-Comfort,Skoda octavia,LO-P65,Grey,5,Auto,20000,available
-CUV,Ford kuga,LK-P43,Silver,5,Auto,25000,available
-Compact,Toyota aygo,KE-A43,4,4,Manual,14000,available
-Compact,Youris,LLL000,Orange,3,Auto,14000,available
+type,make,licenseplate,color,passengers,transmission,rentcost,status,rentout,return
+Compact,VW Golf,MZ-G06,White,5,Manual,14000,available,10-10-2001-12-00,10-10-2001-12-00
+Compact,Hunday i-10,KX-E32,Blue,5,Auto,14000,available,10-10-2001-12-00,10-10-2001-12-00
+Compact,Toyota Auris,GS-V90,Silver,5,Manual,14000,available,10-10-2001-12-00,10-10-2001-12-00
+CUV,Ford Kuga,MS-S12,Red,5,Auto,25000,available,10-10-2001-12-00,10-10-2001-12-00
+Luxury,M-Benz C-class,BG-G37,Black,5,Auto,35000,available,10-10-2001-12-00,10-10-2001-12-00
+Highland,Toyota Hilux,TE-E93,White,5,Auto,30000,available,10-10-2001-12-00,10-10-2001-12-00
+Highland,Toyota Hilux,LK-L98,Silver,2,Auto,30000,unavailable,02-12-2018-12-00,08-12-2018-12-00
+Comfort,Toyota Camry,AP-G29,Blue,5,Auto,20000,available,10-10-2001-12-00,10-10-2001-12-00
+Compact,Toyota yaris,SH-K78,Blue,5,Manual,14000,available,10-10-2001-12-00,10-10-2001-12-00
+Highland,Nissan navara,ML-E43,Purple,5,Auto,30000,available,10-10-2001-12-00,10-10-2001-12-00
+CUV,Ford,SS-Y21,Blue,7,Auto,25000,available,10-10-2001-12-00,10-10-2001-12-00
+Comfort,Skoda octavia,LO-P65,Grey,5,Auto,20000,available,10-10-2001-12-00,10-10-2001-12-00
+CUV,Ford kuga,LK-P43,Silver,5,Auto,25000,available,02-12-2018-10-00,08-12-2018-10-00
+Highland,Nissan navara,PO-S12,Blue,5,Auto,30000,available,10-10-2001-12-00,10-10-2001-12-00
+CUV,Ford escape,LI-O04,White,5,Manual,25000,available,10-10-2001-12-00,10-10-2001-12-00
+Comfort,Toyota,DF-E38,White,5,Auto,20000,available,10-10-2001-12-00,10-10-2001-12-00
+CUV,Kia sportage,AD-T37,Brown,5,Auto,25000,available,10-10-2001-12-00,10-10-2001-12-00
+CUV,Kia sportage,AS-D28,Red,5,Auto,25000,available,06-12-2018-12-00,06-12-2018-12-00
+Compact,Huyndai i-10,GS-M11,Silver,5,Auto,14000,available,06-12-2018-12-00,06-12-2018-12-00
+CUV,Ford escape,AS-S44,Blue,5,Auto,25000,available,06-12-2018-12-00,06-12-2018-12-00
+Luxury,Audi a8,TH-M08,Black,5,Auto,35000,available,06-12-2018-12-00,06-12-2018-12-00
+Luxury,Audi a6,UY-Z83,White,5,Auto,35000,available,07-12-2018-12-00,07-12-2018-12-00
+Highland,Toyota hilux,ER-V55,5,5,Manual,30000,available,06-12-2018-12-00,06-12-2018-12-00

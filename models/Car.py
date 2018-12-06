@@ -1,7 +1,7 @@
 class Car:
 
     def __init__(self,type, make,licenseplate, color, passengers, \
-    transmission, rentcost, status):
+    transmission, rentcost, status, rentOutCar,returnCar):
         self.__type = type
         self.__make = make
         self.__licenseplate = licenseplate
@@ -10,10 +10,12 @@ class Car:
         self.__transmission = transmission
         self.__rentcost = rentcost
         self.__status = status
+        self.__rentOutCar = rentOutCar
+        self.__returnCar = returnCar
 
 
     def __str__(self):
-        return "{:15} {:15} {:15} {:15} {:15} {:15} {:6} ISK ".format(self.__type, \
+        return "{:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<6} ISK ".format(self.__type, \
         self.__make,self.__licenseplate,self.__color ,self.__passengers,self.__transmission,\
         self.__rentcost)
     
@@ -44,4 +46,8 @@ class Car:
     def getStatus(self):
         return self.__status
 
+    def getRentOutCar(self):
+        return self.__rentOutCar
 
+    def getReturnCar(self):
+        return self.__returnCar

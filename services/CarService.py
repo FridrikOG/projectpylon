@@ -1,15 +1,26 @@
 from repositories.CarRepository import CarRepository
+from datetime import datetime, timedelta
 
 class CarService:
     def __init__(self):
         self.__carRepo = CarRepository()
 
 
-    def getCars(self, action, typeAction):
-        return self.__carRepo.getCars(action, typeAction)
+    def getCars(self, action, typeAction,dateAvailable):
+        return self.__carRepo.getCars(action, typeAction,dateAvailable)
 
     def addCar(self, newCar):
         self.__carRepo.addCar(newCar)
+
+    def checkValidDate(self):
+        while True:
+            try:
+                rentOutCar = input('Date created in this format DD-MM-YYYY: ') + '-12-00'
+                day, month, year, hour, minutes = map(int, rentOutCar.split('-'))
+                break
+            except:
+                print("\nplease input valid date\n")
+        return rentOutCar
 
     def checkCarType(self):
         while True:
@@ -28,10 +39,7 @@ class CarService:
         while True:
             try:
                 passengers = int(input('Passengers: '))
-                if 1 < passengers < 13:
-                    break
-                else:
-                    print("Please only insert passenger size from 2-12")
+                break
             except:
                 print("\nPlease only insert integer values\n")
         return passengers
