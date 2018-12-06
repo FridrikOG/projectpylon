@@ -2,7 +2,9 @@ from services.CarService import CarService
 from models.Car import Car
 from services.CustomerService import CustomerService
 from models.Customer import Customer
+from models.Order import Order
 from services.OrderService import OrderService
+
 
 
 class SalesmanUi:
@@ -10,6 +12,7 @@ class SalesmanUi:
     def __init__(self):
         self.__carService = CarService()
         self.__customerService = CustomerService()
+        self.__orderservice = OrderService()
 
     def mainMenu(self):
         action = ''
@@ -38,7 +41,7 @@ class SalesmanUi:
                 pass
             
             elif action == '7':#####WORKING ON THIS
-                orders = self.__OrderService.getAllOrders()
+                orders = self.__orderservice.getAllOrders()
                 self.displayAllOrders(orders)
                 #print all orders and options
 

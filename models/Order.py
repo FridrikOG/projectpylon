@@ -5,9 +5,9 @@ class Order(object):
         self.__car = car
         self.__cost = cost
         self.__extras = extras
-        self.__startDate = startDate
-        self.__endDate = endDate
-        self.__status = status
+        #self.__startDate = startDate
+        #self.__endDate = endDate
+        #self.__status = status
     
 
     #def __str__(self):

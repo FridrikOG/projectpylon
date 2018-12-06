@@ -3,7 +3,7 @@ import csv
 # form datetime import datetime
 # CURRENTTIME = datetime.now()
 
-class OrderRepository(object):
+class OrderRepository:
     def __init__(self):
         self.__orderNumbers = set()
         self.__orders = []
@@ -13,7 +13,8 @@ class OrderRepository(object):
     #hvernig fara gögnin inn í skránna
 
     def getOrders(self):
-        csvReader = csv.DictReader(carFile)
+        with open('./data/orders.csv', 'r') as carFile:
+            csvReader = csv.DictReader(carFile)
 
         for line in csvReader:
             orderNumber= line['orderNumber']
