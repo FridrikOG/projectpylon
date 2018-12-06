@@ -28,7 +28,10 @@ class CarService:
         while True:
             try:
                 passengers = int(input('Passengers: '))
-                break
+                if 1 < passengers < 13:
+                    break
+                else:
+                    print("Please only insert passenger size from 2-12")
             except:
                 print("\nPlease only insert integer values\n")
         return passengers
