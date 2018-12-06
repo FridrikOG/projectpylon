@@ -61,10 +61,9 @@ class SalesmanUi:
             if findCustomerAction == '0':
                 self.mainMenu()
             elif findCustomerAction == '1':
-                self.searchCustomerPrintHeader()
                 searchTerm = input("Input SSN or name to find: ")
-                self.displayCustomerHeaderPrint()
-                self.__customerService.findCustomer(searchTerm)
+                customer = self.__customerService.findCustomer(searchTerm)
+                self.searchCustomerPrintHeader(customer)
                 
             elif findCustomerAction == '2':
                 customers = self.__customerService.getAllCustomers()
@@ -77,7 +76,7 @@ class SalesmanUi:
         age = cs.inputAgeCheck()
         ssn = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
-        number = self.countingCustomers()
+        number = cs.countingCustomers()
         number += 1
         return name,age,ssn, address, number
 
@@ -100,18 +99,17 @@ class SalesmanUi:
         print("1. Search for a customer")
         print("2. Show all customers")
 
-    def displayCustomerHeaderPrint(self):
+    def displayAllCustomersPrint(self,customers):
         print("{:15} {:15} {:15} {:15} {:15}".format("Name", "Age", "SSN", "Address", "Number"))
         print("{:15} {:15} {:15} {:15} {:15}".format("---------------",\
         "---------------","---------------", "---------------", "---------------"))
-    
-    def searchCustomerPrintHeader(self):
-        print("--------------------------------------------Search for customer-------------------------------------------")
-
-    def displayAllCustomersPrint(self,customers):
-        self.displayCustomerHeaderPrint()
         for customer in customers:
-            print(customer)    
+            print(customer)
+    
+    def searchCustomerPrintHeader(self,customer):
+        print("--------------------------------------------Search for customer-------------------------------------------")
+        print(customer)
+
 
 
     ''' -------------------- Car Functions -------------------- '''
