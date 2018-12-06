@@ -76,7 +76,7 @@ class SalesmanUi:
         age = cs.inputAgeCheck()
         ssn = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
-        number = self.countingCustomers()
+        number = cs.countingCustomers()
         number += 1
         return name,age,ssn, address, number
 
