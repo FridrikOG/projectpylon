@@ -22,6 +22,14 @@ class CustomerService:
         
     def countingCustomers(self):
         return self.__customerRepo.countingCustomers()
+    
+    def deletingCustomer(self,customerNumber):
+        return self.__customerRepo.deletingCustomer(customerNumber)
+        
+
+
+
+
 
 # Input check for the name of the customer
     def inputNameCheck(self):

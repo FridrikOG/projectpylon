@@ -28,10 +28,6 @@ class CustomerRepository:
                     number = line['number']
                     newCustomer = Customer(name, age, ssn, address, number)
                     self.__customers.append(newCustomer)
-
-                    # if ssn not in self.__ssnCustomers:
-                    #     newCustomer = name +'   '+ age+'    ' + ssn
-                    #     self.__ssnCustomers.add(newCustomer)   
         return self.__customers
 
     def findCustomer(self, searchTerm):
@@ -45,9 +41,8 @@ class CustomerRepository:
                     address = line['address']
                     number = line['number']
                     newCustomer = Customer(name, age, ssn, address, number)
-                    if searchTerm == number:
-
-                        print("Success")
+                    if searchTerm == number or searchTerm == ssn:
+                        print(newCustomer)
                         return newCustomer
 
     def countingCustomers(self):
@@ -58,6 +53,36 @@ class CustomerRepository:
                 ssn = line['ssn']
                 self.__ssnList.append(ssn)
             return self.__ssnList
+    
+    def deletingCustomer(self,customerNumber):
+        with open('./data/customers.csv', 'r') as customerFile:
+            csvReader = csv.DictReader(customerFile)
+            self.__customers = []
+            listOfCustomers = self.__customers
+            for line in csvReader:
+                name = line['name']
+                age = line['age']
+                ssn = line['ssn']
+                address = line['address']
+                number = line['number']
+            if number != customerNumber:
+                self.__customers.append(name+','+age+','+ssn+','+address+','+number)
+            self.emptyingFile()
+            self.addingCustomers(listOfCustomers)
+
+    def emptyingFile(self):
+        with open('./data/customers.csv', 'w') as customerFile:
+            customerFile.write('name,age,ssn,address,number\n')
+    def addingCustomers(self,listOfCustomers):
+        with open('./data/customers.csv', 'a') as customerFile:
+            for customer in listOfCustomers:
+                customerFile.write(f'{customer}\n')
+
+
+        
+
+
+
 
 
 

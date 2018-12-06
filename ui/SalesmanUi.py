@@ -70,18 +70,39 @@ class SalesmanUi:
     ''' -------------------- Customer Functions -------------------- '''
 
     def findCustomerMenu(self):
-            findCustomerAction = input('Choose action: ')
-            if findCustomerAction == '0':
-                self.mainMenu()
-            elif findCustomerAction == '1':
-                self.searchCustomerPrintHeader()
-                searchTerm = input("Input SSN or name to find: ")
-                customer = self.__customerService.findCustomer(searchTerm)
-                self.displayCustomerHeaderPrint()
-                
-            elif findCustomerAction == '2':
-                customers = self.__customerService.getAllCustomers()
-                self.displayAllCustomersPrint(customers)
+        self.findCustomerMenuPrint()
+        findCustomerAction = input("Choose action: ")
+    #Going to menu
+        if findCustomerAction == '0':
+            self.mainMenu()
+    #Finding customer
+        elif findCustomerAction == '1':
+            self.searchCustomerPrintHeader()
+            searchTerm = input("Input SSN or name to find: ")
+            self.displayCustomerHeaderPrint()
+            customer = self.__customerService.findCustomer(searchTerm)
+            self.afterCustomerIsFoundPrint()
+            self.afterCustomerIsFoundMenu(customer)
+    #show all customers
+        elif findCustomerAction == '2':
+            customers = self.__customerService.getAllCustomers()
+            self.displayAllCustomersPrint(customers)
+
+    def afterCustomerIsFoundPrint(self):
+        print("\nActions:\n")
+        print("0. Go back")
+        print("1. Edit customer info")
+        print("2. Delete customer")
+
+    def afterCustomerIsFoundMenu(self, customer):
+        afterCustomerFoundAction = input("Choose action: ")
+        if afterCustomerFoundAction == '0':
+            self.findCustomerMenu()
+        #elif afterCustomerFoundAction == '1':
+        #    self.editCustomerInfo()
+        elif afterCustomerFoundAction == '2':
+            customerNumber = customer.getNumber()
+            self.__customerService.deletingCustomer(customerNumber)
 
     def createCustomer(self):
         print("-----------Creating customer account-----------")
@@ -90,18 +111,11 @@ class SalesmanUi:
         age = cs.inputAgeCheck()
         ssn = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
-        number = cs.countingCustomers()
+        number = self.countingCustomers()
         number += 1
         return name,age,ssn, address, number
 
-    def errorCheckingSsn(self):
-        ssn = ''
-        while len(str(ssn)) != 10:
-            try:
-                ssn = int(input("Step 3/5 - Enter an SSN of 10 numbers: "))
-            except ValueError:
-                print("Please enter only 10 integers")
-        return ssn
+
 
     def countingCustomers(self):
         listOfSsn = self.__customerService.countingCustomers()
