@@ -2,6 +2,7 @@ from services.CarService import CarService
 from models.Car import Car
 from services.CustomerService import CustomerService
 from models.Customer import Customer
+from services.OrderService import OrderService
 
 
 class SalesmanUi:
@@ -31,6 +32,15 @@ class SalesmanUi:
             elif action == '5':
                 self.findCustomerMenuPrint()
                 self.findCustomerMenu()
+
+            elif action == '6':####WORKING ON THIS
+                #search for order by number
+                pass
+            
+            elif action == '7':#####WORKING ON THIS
+                orders = self.__orderService.getAllOrders()
+                self.displayAllOrders(orders)
+                #print all orders and options
 
             elif action == '10':
                 carType,make,licenseplate,color,passengers,transmission,rentCost,status = self.createCar()
@@ -216,4 +226,26 @@ class SalesmanUi:
         LINE = '---------------'
         print("\n{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
         'Color', 'Passengers','Transmission','Rent Cost'))
+        print("{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
+
+
+# '''----------------------------------ORDER FUNCTIONS-----------------------------------------------'''
+
+
+    def displayAllOrders(self, orders):
+        self.displayAllOrdersHeaderPrint()
+        for order in orders:
+            print(order) 
+            #menu?   
+
+    def listofOrdersMenu(self):
+        print("0. Go back")
+        print("1. Search for an order by order number")
+
+
+
+    def displayAllOrdersHeaderPrint(self):
+        LINE = '---------------'
+        print("\n{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format('Order number', 'Customer', 'Car number',\
+        'Time of order', 'Start of order','End of order','Rent cost'))
         print("{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
