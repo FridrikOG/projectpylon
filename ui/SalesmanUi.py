@@ -10,20 +10,6 @@ class SalesmanUi:
         self.__carService = CarService()
         self.__customerService = CustomerService()
 
-
-    def findCustomerMenu(self):
-            findCustomerAction = input('Choose action: ')
-            if findCustomerAction == '0':
-                self.mainMenu()
-            elif findCustomerAction == '1':
-                searchTerm = input("Input SSN or name to find: ")
-                customer = self.__customerService.findCustomer(searchTerm)
-                self.searchCustomerPrintHeader(customer)
-                
-            elif findCustomerAction == '2':
-                customers = self.__customerService.getAllCustomers()
-                self.displayAllCustomersPrint(customers)
-
     def mainMenu(self):
         action = ''
         while action != 'q':
@@ -48,8 +34,6 @@ class SalesmanUi:
                 newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status)
                 self.__carService.addCar(newCar)
 
-
-
     def mainMenuPrint(self):
         print("\nYou can do the following: ")
         print("1.  List all available cars")
@@ -69,8 +53,18 @@ class SalesmanUi:
 
     ''' -------------------- Customer Functions -------------------- '''
 
-
-
+    def findCustomerMenu(self):
+            findCustomerAction = input('Choose action: ')
+            if findCustomerAction == '0':
+                self.mainMenu()
+            elif findCustomerAction == '1':
+                searchTerm = input("Input SSN or name to find: ")
+                customer = self.__customerService.findCustomer(searchTerm)
+                self.searchCustomerPrintHeader(customer)
+                
+            elif findCustomerAction == '2':
+                customers = self.__customerService.getAllCustomers()
+                self.displayAllCustomersPrint(customers)
 
     def createCustomer(self):
         print("-----------Creating customer account-----------")
@@ -80,7 +74,6 @@ class SalesmanUi:
         address = input('Step 3/3 Enter address: ').strip()
         number = self.countingCustomers()
         number += 1
-
         return name,age,ssn, address, number
 
     def errorCheckingSsn(self):
