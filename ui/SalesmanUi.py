@@ -61,9 +61,10 @@ class SalesmanUi:
             if findCustomerAction == '0':
                 self.mainMenu()
             elif findCustomerAction == '1':
+                self.searchCustomerPrintHeader()
                 searchTerm = input("Input SSN or name to find: ")
-                customer = self.__customerService.findCustomer(searchTerm)
-                self.searchCustomerPrintHeader(customer)
+                self.displayCustomerHeaderPrint()
+                self.__customerService.findCustomer(searchTerm)
                 
             elif findCustomerAction == '2':
                 customers = self.__customerService.getAllCustomers()
@@ -99,17 +100,18 @@ class SalesmanUi:
         print("1. Search for a customer")
         print("2. Show all customers")
 
-    def displayAllCustomersPrint(self,customers):
+    def displayCustomerHeaderPrint(self):
         print("{:15} {:15} {:15} {:15} {:15}".format("Name", "Age", "SSN", "Address", "Number"))
         print("{:15} {:15} {:15} {:15} {:15}".format("---------------",\
         "---------------","---------------", "---------------", "---------------"))
-        for customer in customers:
-            print(customer)
     
-    def searchCustomerPrintHeader(self,customer):
+    def searchCustomerPrintHeader(self):
         print("--------------------------------------------Search for customer-------------------------------------------")
-        print(customer)
 
+    def displayAllCustomersPrint(self,customers):
+        self.displayCustomerHeaderPrint()
+        for customer in customers:
+            print(customer)    
 
 
     ''' -------------------- Car Functions -------------------- '''
