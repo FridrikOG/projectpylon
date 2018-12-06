@@ -150,40 +150,29 @@ class SalesmanUi:
     def createCar(self):
         print("\nSelect from Car Types:\n1. Compact\n2. Comfort\n3. CUV\
                 \n4. Highland\n5. Luxury\n")
-        while True:
-            try:
-                carTypeInput = int(input('Choose car type number:  '))
-                if 0 < carTypeInput < 6:
-                    break
-                else:
-                    print('Please choose from available types\n')
-            except:
-                print("Please only insert integer values\n")
+        #car type
+        carTypeInput = self.__carService.checkCarType()
         make = input('Make (f.x. Toyota Yaris): ').capitalize()
         color = input('Color: ').capitalize()
-        while True:
-            try:
-                passengers = int(input('Passengers: '))
-                break
-            except:
-                print("\nPlease only insert integer values\n")
-        print("Transmission:\n1. Auto\n2. Manual\n")
-        while True:
-            try:
-                transmissionInput = int(input('Choose: '))
-                if 0 < transmissionInput < 3:
-                    break
-                else:
-                    print('Please choose from available transmissions\n')
-            except:
-                print("Please only insert integer values\n")
+        passengers = self.__carService.checkPassengers()
+        transmissionInput = self.__carService.checkTransmission()
+        licenseplate = self.__carService.checkLicenseplate()
+
         transmission = self.getTransmission(transmissionInput)
-        while True:
-            licenseplate = input('License plate (F.x. LL-L00): ').upper()
-            if len(list(licenseplate)) == 6:
-                break
-            else:
-                print("Not a valid license plate")
+        rentCost, carType = self.getCarTypeVariables(carTypeInput)
+        status = 'available'
+        newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status)
+        print("\nCar successfully created!")
+        self.printCarHeader()
+        print(newCar)
+        return carType,make,licenseplate,color,passengers,transmission,rentCost,status
+
+    def getTransmission(self, transmissionInput):
+        if transmissionInput == 1:
+            transmission = 'Auto'
+        else:
+            transmission = 'Manual'
+        return transmission
 
         rentCost, carType = self.findRentCost(carTypeInput)
         status = 'available'
@@ -200,7 +189,7 @@ class SalesmanUi:
             transmission = 'Manual'
         return transmission
 
-    def findRentCost(self,carTypeInput):
+    def getCarTypeVariables(self,carTypeInput):
         if carTypeInput == 1:
             carType = 'Compact'
             rentCost = 14000
@@ -225,6 +214,6 @@ class SalesmanUi:
 
     def printCarHeader(self):
         LINE = '---------------'
-        print("\n{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
+        print("\n{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
         'Color', 'Passengers','Transmission','Rent Cost'))
-        print("{:15} {:15} {:15} {:15} {:15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
+        print("{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
