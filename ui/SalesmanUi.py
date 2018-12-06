@@ -38,7 +38,7 @@ class SalesmanUi:
                 pass
             
             elif action == '7':#####WORKING ON THIS
-                orders = self.__orderService.getAllOrders()
+                orders = self.__OrderService.getAllOrders()
                 self.displayAllOrders(orders)
                 #print all orders and options
 
@@ -177,20 +177,6 @@ class SalesmanUi:
         print(newCar)
         return carType,make,licenseplate,color,passengers,transmission,rentCost,status
 
-    def getTransmission(self, transmissionInput):
-        if transmissionInput == 1:
-            transmission = 'Auto'
-        else:
-            transmission = 'Manual'
-        return transmission
-
-        rentCost, carType = self.findRentCost(carTypeInput)
-        status = 'available'
-        newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status)
-        print("\nCar successfully created!")
-        self.printCarHeader()
-        print(newCar)
-        return carType,make,licenseplate,color,passengers,transmission,rentCost,status
 
     def getTransmission(self, transmissionInput):
         if transmissionInput == 1:
