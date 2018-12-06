@@ -17,8 +17,11 @@ class SalesmanUi:
             action = input('Action: ')
 
             if action == '1' or action == '2':
-                cars = self.__carService.getCars(action)
+                typeAction = ''
+                cars = self.__carService.getCars(action, typeAction)
                 self.displayAllCarsPrint(cars)
+                self.showCarsByTypeMenu(action)
+
 
             elif action == '3':
                 name,age,ssn,address,number = self.createCustomer()
@@ -110,8 +113,32 @@ class SalesmanUi:
 
     ''' -------------------- Car Functions -------------------- '''
 
+    def findCarTypeMenuPrint(self):
+        print("0. <-- Go back")
+        print("1. Show only Compact")
+        print("2. Show only Comfort")
+        print("3. Show only CUV")
+        print("4. Show only Highland")
+        print("5. Show only Luxury")
 
-
+    def showCarsByTypeMenu(self, action):
+        while True:
+            self.findCarTypeMenuPrint()
+            typeAction = input('Choose action: ')
+            if typeAction == '0':
+                break
+            elif typeAction == '1':
+                typeAction = 'compact'
+            elif typeAction == '2':
+                typeAction = 'comfort'
+            elif typeAction == '3':
+                typeAction = 'CUV'
+            elif typeAction == '4':
+                typeAction = 'highland'
+            elif typeAction == '5':
+                typeAction = 'luxury'
+            cars = self.__carService.getCars(action, typeAction)
+            self.displayAllCarsPrint(cars)
 
     def createCar(self):
         print("\nSelect from Car Types:\n1. Compact\n2. Comfort\n3. CUV\

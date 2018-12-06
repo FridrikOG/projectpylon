@@ -5,8 +5,8 @@ class CarService:
         self.__carRepo = CarRepository()
 
 
-    def getCars(self, action):
-        return self.__carRepo.getCars(action)
+    def getCars(self, action, typeAction):
+        return self.__carRepo.getCars(action, typeAction)
 
     def addCar(self, newCar):
         self.__carRepo.addCar(newCar)
