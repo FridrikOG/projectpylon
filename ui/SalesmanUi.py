@@ -25,6 +25,7 @@ class SalesmanUi:
                 typeAction = ''
                 dateAvailable = datetime.now()
                 cars = self.__carService.getCars(action, typeAction, dateAvailable)
+                self.displayAllCarsPrint(cars)
                 self.showCarsByTypeMenu(action,dateAvailable)
 
 
