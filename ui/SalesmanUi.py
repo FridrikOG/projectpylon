@@ -79,22 +79,35 @@ class SalesmanUi:
     def findCustomerMenu(self):
         self.findCustomerMenuPrint()
         findCustomerAction = input("Choose action: ")
+
     #Going to menu
         if findCustomerAction == '0':
             self.mainMenu()
+
     #Finding customer
         elif findCustomerAction == '1':
             self.searchCustomerHeaderPrint()
             searchTerm = input("Input SSN or Customernumber to find: ")
-            self.displayCustomerHeaderPrint()
-            customer, name, ssn = self.__customerService.findCustomer(searchTerm)
-            print(customer)
-            self.afterCustomerIsFoundPrint()
-            self.afterCustomerIsFoundMenu(customer)
+            customer = self.__customerService.findCustomer(searchTerm)
+            if customer == None:
+                print()
+                print("Customer not found!")
+                self.findCustomerMenu()
+            else:
+                self.displayCustomerHeaderPrint() #This displays the customer
+                print(customer)
+                name = customer.getName()
+                ssn = customer.getSsn()
+                print(name)
+                print(ssn)
+                self.afterCustomerIsFoundPrint()
+                self.afterCustomerIsFoundMenu(customer)
+
     #show all customers
         elif findCustomerAction == '2':
             customers = self.__customerService.getAllCustomers()
             self.displayAllCustomersPrint(customers)
+            self.findCustomerMenu()
 
     def afterCustomerIsFoundPrint(self):
         print("\nActions:\n")
@@ -112,6 +125,40 @@ class SalesmanUi:
             customerNumber = customer.getNumber()
             self.__customerService.deletingCustomer(customerNumber)
 
+    def editCustomerInfoMenu(self):
+            print("1. Edit customer name")
+            print("2. Edit customer age")
+            print("3. Edit customer SSN")
+            print("4. Edit customer address")
+            print("5. Edit All customer information")
+            
+    def editCustomerInfo(self,customer):
+            self.editCustomerInfoMenu()
+            cs = CustomerService()
+            afterEditCustomerSelectedAction = input("Choose action: ")
+            if afterEditCustomerSelectedAction == '5':
+                cs.customerEdit(customer)
+
+    def warningMessagePrint(self,customer):
+        print("\n")
+        print("Warning: Are you sure you want to delete this customer?")
+        print(customer)
+        print("\n")
+        print("1. Yes, delete this customer")
+        print("2. No, do not deleted this customer")
+
+    def warningMessageMenu(self,customer):
+        warningMessageAction = input("Choose action")
+        while warningMessageAction:
+            if warningMessageAction == '1':
+                customerNumber = customer.getNumber()
+                self.__customerService.deletingCustomer(customerNumber)
+                self.afterCustomerIsFoundMenu(customer)
+            elif warningMessageAction == '2':
+                self.afterCustomerIsFoundMenu(customer)
+            else:
+                self.warningMessageMenu(customer)
+
     def createCustomer(self):
         print("-----------Creating customer account-----------")
         cs = CustomerService()
@@ -121,8 +168,6 @@ class SalesmanUi:
         address = cs.inputAddressCheck()
         number = cs.getSumOfAllCustomers()
         return name,age,ssn,address,number
-
-
 
     def countingCustomers(self):
         listOfSsn = self.__customerService.countingCustomers()
@@ -144,8 +189,6 @@ class SalesmanUi:
         for customer in customers:
             print(customer)
 
-    
-    
     
     def searchCustomerHeaderPrint(self):
         print("--------------------------------------------Search for customer-------------------------------------------")
@@ -276,7 +319,9 @@ class SalesmanUi:
         print("--------------------- Find customer for car rental ---------------------")
         searchTerm = input("Enter customer SSN: ")
         try:
-            customer, name, ssn = self.__customerService.findCustomer(searchTerm)
+            customer = self.__customerService.findCustomer(searchTerm)
+            name = customer.getName()
+            ssn = customer.getSsn()
             self.displayCustomerHeaderPrint()
             print(customer)
             self.rentOutToCustomerMenu()

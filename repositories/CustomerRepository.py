@@ -42,7 +42,7 @@ class CustomerRepository:
                     number = line['number']
                     newCustomer = Customer(name, age, ssn, address, number)
                     if searchTerm == number or searchTerm == ssn:
-                        return newCustomer, name, ssn
+                        return newCustomer
 
     def countingCustomers(self):
         with open('./data/customers.csv', 'r') as customerFile:
@@ -93,3 +93,6 @@ class CustomerRepository:
         with open('./data/customerDeleted.csv', 'a') as customerFile:
             for customer in listOfCustomers:
                 customerFile.write(f'{customer}\n')
+
+    def customerEdit(self):
+        pass
