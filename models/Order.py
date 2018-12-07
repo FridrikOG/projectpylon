@@ -1,46 +1,46 @@
 class Order(object):
-    def __init__(self, number, customer, car, cost, extras, startDate, endDate):
-        self.__number = number
+    def __init__(self, orderNumber, customer, carNumber, timeOfOrder, startDate, endDate, rentCost):
+        self.__orderNumber = orderNumber
         self.__customer = customer
-        self.__car = car
-        self.__cost = cost
-        self.__extras = extras
-        #self.__startDate = startDate
-        #self.__endDate = endDate
+        self.__carNumber = carNumber
+        self.__timeOfOrder = timeOfOrder
+        #self.__extras = extras
+        self.__startDate = startDate
+        self.__endDate = endDate
+        self.__rentCost = rentCost
         #self.__status = status
-    
 
-    #def __str__(self):
-     #   return '{:15} {:15} {:15} {:15} {:15}'.format(self.__name,self.__age,self.__ssn, self.__address, self.__number)
+    def __str__(self):
+        return '{:15} {:15} {:15} {:15} {:15} {:15} {:6} ISK'.format(self.__orderNumber,self.__customer,self.__carNumber,\
+        self.__timeOfOrder, self.__startDate, self.__endDate, self.__rentCost)
       
     
-    #def __repr__(self):
-     #   return self.__str__()
+    def __repr__(self):
+        return self.__str__()
 
 
-    def getNumber(self):
-        return self.__number
+    def getOrderNumber(self):
+        return self.__orderNumber
     
     def getCustomer(self):
         return self.__customer
 
-    def get_car(self):
-        return self.__car
+    def get_carNumber(self):
+        return self.__carNumber
 
-    def getCost(self):
-        return self.__cost
-
-    def getExtras(self):
-        return self.__extras
+    #def getExtras(self):
+     #   return self.__extras
+    def getgetTimeOfOrder(self):
+        return self.__timeOfOrder
 
     def getStartDate(self):
-        return startDate
+        return self.__startDate
     
     def getEndDate(self):
-        return endDate
+        return self.__endDate
     
-    def getStatus(self):
-        return self.__status
-
+    def getRentCost(self):
+        return self.__rentCost
     
-    
+    #def getStatus(self):
+     #   return self.__status

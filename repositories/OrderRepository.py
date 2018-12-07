@@ -11,30 +11,25 @@ class OrderRepository:
 
     #geta sett inn og náð í gögn
     #hvernig fara gögnin inn í skránna
-
+    #number, customer, car, cost, startDate, endDate
+    #orderNumber, customer, carNumber, timeOfOrder, startDate, endDate, rentCost
     def getOrders(self):
-        with open('./data/orders.csv', 'r') as carFile:
-            csvReader = csv.DictReader(carFile)
-
-        for line in csvReader:
-            orderNumber= line['orderNumber']
-            customer = line['customer']
-            carNumber = line['carNumber']
-            timeOfOrder = line['timeOfOrder']
-            startDate= line['startDate']
-            endDate = line['endDate']
-            rentCost = line['rentCost']
-        
-        if orderNumber not in self.__orders:
-            self.__orderNumbers.add(orderNumber)
-            newOrder = Order(orderNumber, customer, carNumber, timeOfOrder, startDate, endDate, rentCost)
-            self.__orders.append(newOrder)
+        with open('./data/orders.csv', 'r') as orderFile:
+            csvReader = csv.DictReader(orderFile, delimiter=',')
+#orderNumber,customer,carNumber,timeOfOrder,startDate,endDate,rentCost
+            for line in csvReader:#Problems <-----
+                orderNumber= line['orderNumber']
+                customer = line['customer']
+                carNumber = line['carNumber']
+                timeOfOrder = line['timeOfOrder']
+                startDate= line['startDate']
+                endDate = line['endDate']
+                rentCost = line['rentCost']
+                
+                if orderNumber not in self.__orders:
+                    self.__orderNumbers.add(orderNumber)
+                    newOrder = Order(orderNumber, customer, carNumber, timeOfOrder, startDate, endDate, rentCost)
+                    self.__orders.append(newOrder)
         return self.__orders
         
             ###
-    # def getOrderFrameTime(self, start, end):#input from car datetime
-    #     for order in self.__orders:
-    #         if  
-
-
-                
