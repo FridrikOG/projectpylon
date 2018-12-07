@@ -42,8 +42,7 @@ class CustomerRepository:
                     number = line['number']
                     newCustomer = Customer(name, age, ssn, address, number)
                     if searchTerm == number or searchTerm == ssn:
-                        print(newCustomer)
-                        return newCustomer
+                        return newCustomer, name, ssn
 
     def countingCustomers(self):
         with open('./data/customers.csv', 'r') as customerFile:

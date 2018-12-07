@@ -13,7 +13,7 @@ class SalesmanUi:
     def __init__(self):
         self.__carService = CarService()
         self.__customerService = CustomerService()
-        self.__orderservice = OrderService()
+        self.__orderService = OrderService()
 
     def mainMenu(self):
 
@@ -40,15 +40,15 @@ class SalesmanUi:
 
             elif action == '4':
                 orderNumber, customer, carNumber, carType, timeOfOrder, startDate, endDate, rentCost = self.createOrder()
-                newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
-                self.__carService.addCar(newCar)
+                # newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
+                # self.__carService.addCar(newCar)
 
             elif action == '6':####WORKING ON THIS
                 #search for order by number
                 pass
             
             elif action == '7':#####WORKING ON THIS
-                orders, nothing = self.__orderservice.getAllOrders()
+                orders, nothing = self.S.getAllOrders()
                 self.displayAllOrders(orders)
                 #print all orders and options
 
@@ -87,7 +87,8 @@ class SalesmanUi:
             self.searchCustomerHeaderPrint()
             searchTerm = input("Input SSN or Customernumber to find: ")
             self.displayCustomerHeaderPrint()
-            customer = self.__customerService.findCustomer(searchTerm)
+            customer, name, ssn = self.__customerService.findCustomer(searchTerm)
+            print(customer)
             self.afterCustomerIsFoundPrint()
             self.afterCustomerIsFoundMenu(customer)
     #show all customers
@@ -142,9 +143,11 @@ class SalesmanUi:
         self.displayCustomerHeaderPrint()
         for customer in customers:
             print(customer)
+
     
     
-    def searchCustomerPrintHeader(self):
+    
+    def searchCustomerHeaderPrint(self):
         print("--------------------------------------------Search for customer-------------------------------------------")
 
 
@@ -242,12 +245,50 @@ class SalesmanUi:
 
 # '''----------------------------------ORDER FUNCTIONS-----------------------------------------------'''
 
+    def rentOutToCustomerPrintMenu(self):
+        print("\nActions:\n")
+        print("0. Go back to main menu")
+        print("1. Select customer")
+
+    def customerNotFoundPrintMenu(self):
+        print("\nActions:\n")
+        print("0. Go back to main menu")
+        print("1. Search again")
+
+    def customerNotFoundMenu(self):
+        self.customerNotFoundPrintMenu()
+        action = input("Choose action: ")
+        if action == '0':
+            self.mainMenu()
+        elif action == '1':
+            self.createOrder()
+
+    def rentOutToCustomerMenu(self):
+        self.rentOutToCustomerPrintMenu()
+        action = input("Choose action: ")
+        if action == '0':
+            self.mainMenu()
+        elif action == '1':
+            return
 
     def createOrder(self):
         #Order Number
-        nothing, orderNumber = self.__orderservice.getAllOrders()
-        customer = self.__orderservice
-        #         \n4. Highland\n5. Luxury\n")
+        print("--------------------- Find customer for car rental ---------------------")
+        searchTerm = input("Enter customer SSN: ")
+        try:
+            customer, name, ssn = self.__customerService.findCustomer(searchTerm)
+            self.displayCustomerHeaderPrint()
+            print(customer)
+            self.rentOutToCustomerMenu()
+        except:
+            print("Customer not found")
+            self.customerNotFoundMenu()
+        nothing, orderNumber = self.__orderService.getAllOrders()
+        print("\nInput time of rental:")
+        rentOutCar = self.__orderService.checkValidDate()
+        print("\nInput time of return:")
+        returnCar = self.__orderService.checkValidDate()
+
         # #car type
         # carTypeInput = self.__carService.checkCarType()
         # make = input('Make (f.x. Toyota Yaris): ').capitalize()
