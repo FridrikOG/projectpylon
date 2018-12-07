@@ -36,7 +36,6 @@ class SalesmanUi:
                 self.__customerService.addCustomer(newCustomer)
 
             elif action == '5':
-                self.findCustomerMenuPrint()
                 self.findCustomerMenu()
 
             elif action == '4':
@@ -85,8 +84,8 @@ class SalesmanUi:
             self.mainMenu()
     #Finding customer
         elif findCustomerAction == '1':
-            self.searchCustomerPrintHeader()
-            searchTerm = input("Input SSN or name to find: ")
+            self.searchCustomerHeaderPrint()
+            searchTerm = input("Input SSN or Customernumber to find: ")
             self.displayCustomerHeaderPrint()
             customer = self.__customerService.findCustomer(searchTerm)
             self.afterCustomerIsFoundPrint()
@@ -119,9 +118,8 @@ class SalesmanUi:
         age = cs.inputAgeCheck()
         ssn = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
-        number = self.countingCustomers()
-        number += 1
-        return name,age,ssn, address, number
+        number = cs.getSumOfAllCustomers()
+        return name,age,ssn,address,number
 
 
 
