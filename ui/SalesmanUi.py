@@ -16,6 +16,7 @@ class SalesmanUi:
         self.__orderservice = OrderService()
 
     def mainMenu(self):
+
         action = ''
         while action != 'q':
             self.mainMenuPrint()
@@ -38,12 +39,17 @@ class SalesmanUi:
                 self.findCustomerMenuPrint()
                 self.findCustomerMenu()
 
+            elif action == '4':
+                orderNumber, customer, carNumber, carType, timeOfOrder, startDate, endDate, rentCost = self.createOrder()
+                newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
+                self.__carService.addCar(newCar)
+
             elif action == '6':####WORKING ON THIS
                 #search for order by number
                 pass
             
             elif action == '7':#####WORKING ON THIS
-                orders = self.__orderservice.getAllOrders()
+                orders, nothing = self.__orderservice.getAllOrders()
                 self.displayAllOrders(orders)
                 #print all orders and options
 
@@ -238,6 +244,30 @@ class SalesmanUi:
 
 # '''----------------------------------ORDER FUNCTIONS-----------------------------------------------'''
 
+
+    def createOrder(self):
+        #Order Number
+        nothing, orderNumber = self.__orderservice.getAllOrders()
+        customer = self.__orderservice
+        #         \n4. Highland\n5. Luxury\n")
+        # #car type
+        # carTypeInput = self.__carService.checkCarType()
+        # make = input('Make (f.x. Toyota Yaris): ').capitalize()
+        # color = input('Color: ').capitalize()
+        # passengers = self.__carService.checkPassengers()
+        # transmissionInput = self.__carService.checkTransmission()
+        # licenseplate = self.__carService.checkLicenseplate()
+
+        # transmission = self.getTransmission(transmissionInput)
+        # rentCost, carType = self.getCarTypeVariables(carTypeInput)
+        # status = 'available'
+        # rentOutCar = self.__carService.checkValidDate()
+        # returnCar = rentOutCar
+        # newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
+        # print("\nCar successfully created!")
+        # self.printCarHeader()
+        # print(newCar)
+        # return orderNumber, customer, carNumber, carType, timeOfOrder, startDate, endDate, rentCost
 
     def displayAllOrders(self, orders):
         self.displayAllOrdersHeaderPrint()
