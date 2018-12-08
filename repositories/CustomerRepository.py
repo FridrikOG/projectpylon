@@ -43,6 +43,7 @@ class CustomerRepository:
                     newCustomer = Customer(name, age, ssn, address, number)
                     if searchTerm == number or searchTerm == ssn:
                         return newCustomer
+    
 
     def countingCustomers(self):
         with open('./data/customers.csv', 'r') as customerFile:
@@ -121,13 +122,19 @@ class CustomerRepository:
             self.addingCustomers(self.__customers)
 
 
+    ''' -------------------- Checking data input -------------------- '''
+    def duplicateSsnCheck(self,newSsn):
+        with open('./data/customers.csv', 'r') as customerFile:
+            csvReader = csv.DictReader(customerFile)
+            for line in csvReader:
+                    ssn = line['ssn']
+                    if newSsn == ssn:
+                        print("SSN already exists!")
+                        return False
+            return True
 
 
 
-## Function getAllCustomers that returns dictionary, In this function I open the file and put them in a dictionary.
-# And return it
-
-# Make a function writeToCustomers that takes a dictionary and writes it to the CVS file. 
 
         
 
