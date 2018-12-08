@@ -96,10 +96,6 @@ class SalesmanUi:
             else:
                 self.displayCustomerHeaderPrint() #This displays the customer
                 print(customer)
-                name = customer.getName()
-                ssn = customer.getSsn()
-                print(name)
-                print(ssn)
                 self.afterCustomerIsFoundPrint()
                 self.afterCustomerIsFoundMenu(customer)
 
@@ -193,6 +189,9 @@ class SalesmanUi:
     def searchCustomerHeaderPrint(self):
         print("--------------------------------------------Search for customer-------------------------------------------")
 
+    def invalidActionPrint(self):
+        print("Invalid Action !")
+
 
     
     
@@ -223,6 +222,9 @@ class SalesmanUi:
                 typeAction = 'highland'
             elif typeAction == '5':
                 typeAction = 'luxury'
+            else:
+                self.invalidActionPrint()
+                self.showCarsByTypeMenu(action,dateAvailable)
             cars = self.__carService.getCars(action, typeAction,dateAvailable)
             self.displayAllCarsPrint(cars)
 
