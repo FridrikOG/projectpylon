@@ -315,6 +315,41 @@ class SalesmanUi:
             self.mainMenu()
         elif action == '1':
             return
+        else:
+            print('\nPlease choose among available actions')
+            self.rentOutToCustomerMenu()
+
+    def selectCarType(self):
+        self.selectCarTypePrintMenu()
+        action = input('Select car type for rental: ')
+        rentCost, carType = self.getCarTypeVariables(action)
+
+        return rentCost, carType
+
+
+    def selectCarTypePrintMenu(self):
+        print("\nActions:")
+        print("0. <-- Go back")
+        print("1. Compact")
+        print("2. Comfort")
+        print("3. CUV")
+        print("4. Highland")
+        print("5. Luxury")
+
+    def getCostOfOrder(self, rentOutCarTime, returnCarTime, rentCost):
+        daysRented = returnCarTime - rentOutCarTime
+        if daysRented.seconds > 00:
+            daysRentedCount = daysRented + timedelta(days = 1)
+        totalDaysRented = daysRentedCount.days
+
+        print("Days Rented: ",daysRentedDays)
+
+        totalCost = int(daysRentedDays) * rentCost
+
+        print("Price: {} ISK".format(price))
+
+        return totalCost
+
 
     def createOrder(self):
         #Order Number
@@ -323,7 +358,7 @@ class SalesmanUi:
         try:
             customer = self.__customerService.findCustomer(searchTerm)
             name = customer.getName()
-            ssn = customer.getSsn()
+            SSN = customer.getSsn()
             self.displayCustomerHeaderPrint()
             print(customer)
             self.rentOutToCustomerMenu()
@@ -331,10 +366,14 @@ class SalesmanUi:
             print("Customer not found")
             self.customerNotFoundMenu()
         nothing, orderNumber = self.__orderService.getAllOrders()
-        print("\nInput time of rental:")
-        rentOutCar = self.__orderService.checkValidDate()
-        print("\nInput time of return:")
-        returnCar = self.__orderService.checkValidDate()
+        rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate()
+        carType, rentCost = self.selectCarType()
+        totalCost = self.getCostOfOrder(rentOutCarTime, returnCarTime, rentCost)
+        # cars = self.__carService.getCars(action, carType, rentOutCarTime)
+        # self.displayAllCarsPrint(cars)
+        # self.showCarsByTypeMenu(action,rentOutCarTime)
+
+
 
         # #car type
         # carTypeInput = self.__carService.checkCarType()
