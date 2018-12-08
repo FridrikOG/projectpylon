@@ -112,4 +112,14 @@ class CarRepository:
                 return self.__carsHighlandUnavailable
             if action == '2' and typeAction == 'CUV':
                 return self.__carsCUVUnavailable
+
+    def duplicateLicensePlateCheck(self, newLicensePlate):
+        with open('./data/cars.csv', 'r') as customerFile:
+            csvReader = csv.DictReader(customerFile)
+            for line in csvReader:
+                    licensePlate = line['licenseplate']
+                    if newLicensePlate == licensePlate:
+                        print("License plate already registered!")
+                        return False
+            return True
             

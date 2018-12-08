@@ -62,10 +62,13 @@ class CarService:
 
 
     def checkLicenseplate(self):
-        while True:
-            licenseplate = input('License plate (F.x. LL-L00): ').upper()
-            if len(list(licenseplate)) == 6:
-                break
+        licensePlate = ''
+        booleanCheck = False
+        while len(licensePlate) != 6 or not booleanCheck:
+            licensePlate = input("License plate (F.x. LL-L00): ")
+            if len(licensePlate) == 6:
+                booleanCheck = self.__carRepo.duplicateLicensePlateCheck(str(licensePlate))
             else:
-                print("Not a valid license plate")
-        return licenseplate
+                print("License plate has to match the format")
+
+        return licensePlate
