@@ -45,9 +45,7 @@ class SalesmanUi:
                 self.findCustomerMenu()
 
             elif action == '4':
-                orderNumber, customer, carNumber, carType, timeOfOrder, startDate, endDate, rentCost = self.createOrder()
-                # newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
-                # self.__carService.addCar(newCar)
+                self.createOrder()
 
             elif action == '6':####WORKING ON THIS
                 #search for order by number
@@ -407,28 +405,33 @@ class SalesmanUi:
         daysRented = returnCarTime - rentOutCarTime
         if daysRented.seconds > 00:
             daysRentedCount = daysRented + timedelta(days = 1)
-        totalDaysRented = daysRentedCount.day()
+            totalDaysRented = daysRentedCount.days
+        else:
+            totalDaysRented = daysRented.days
 
-        print("Days Rented: ",totalDaysRented)
+        print("\nDays Rented: ",totalDaysRented)
 
         totalCost = int(totalDaysRented) * rentCost
 
         print("Price: {} ISK".format(totalCost))
 
-        return totalCost
+        return totalCost, totalDaysRented
 
-    def addInsurance(self, totalCost):
+    def addInsurance(self, cost):
         self.addInsurancePrint()
-        action = input('Choose action: ')
+        action = input('\nChoose action: ')
+        insurance = 0
         if action == '1':
-            totalCost *= 1.05
+            totalCost = cost * 1.05
+            insurance = cost * 0.05
         elif action == '2':
+            totalCost = cost
             pass
-        return totalCost
+        return int(totalCost), int(insurance)
 
 
     def addInsurancePrint(self):
-        print("Actions:")
+        print("\nActions:")
         print("1. Add SCDW:\n-Front window\n-Sandstorm\n-Chassis\n-Theft insurance")
         print("2. No additional insurance")
 
@@ -438,10 +441,45 @@ class SalesmanUi:
         day = datetime.now().day
         hour = datetime.now().hour
         minutes = datetime.now().minute
-        timeOfOrder = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
-        return timeOfOrder
+        timeOfOrder = datetime(year, month, day, hour, minutes)
+        stringTimeOfOrder = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
+        return stringTimeOfOrder, timeOfOrder
 
-        
+    def areYouSure(self):
+        self.areYouSurePrint()
+        action = input("Choose action: ")
+        if action == '1':
+            return True
+        elif action == '2':
+            return False
+
+    def areYouSurePrint(self):
+        print("\nAre you sure?")
+        print("1. Yes")
+        print("2. Go back")
+
+
+    def finalStepOrderPrint(self):
+        print("\nActions")
+        print("1. Save and complete order")
+        print("2. Cancel order")
+
+    def finalStepOrder(self, order):
+        self.finalStepOrderPrint()
+        action = input("Choose action")
+        if action == '1':
+            status = self.areYouSure()
+            if status == True:
+                self.__orderService.addOrder(order)
+                print("Order complete!")
+            else:
+                self.finalStepOrder(order)
+        elif action == '2':
+            status = self.areYouSure()
+            if status == True:
+                self.mainMenu()
+            else:
+                self.finalStepOrder(order)
 
 
     def createOrder(self):
@@ -461,38 +499,19 @@ class SalesmanUi:
         nothing, orderNumber = self.__orderService.getAllOrders()
         rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate()
         rentCost, carType = self.selectCarType()
-        carCost = self.getCostOfOrder(rentOutCarTime, returnCarTime, rentCost)
-        totalCost = self.addInsurance(carCost)
-        timeOfOrder = self.getTimeOfOrder()
-        # Print out order:
-        self.displayAllOrdersHeaderPrint()
-        print(Order(orderNumber, name, carType, timeOfOrder, rentOutCar, returnCar, totalCost, SSN))
+        #calculate direct costs
+        carCost, totalDaysRented = self.getCostOfOrder(rentOutCarTime, returnCarTime, rentCost)
+        #Add insurance
+        totalCost, insurance = self.addInsurance(carCost)
+        #Time of order
+        stringTimeOforder, timeOfOrder = self.getTimeOfOrder()
+        # Print out order
+        # self.displayAllOrdersHeaderPrint()
+        order = Order(orderNumber, name, carType, stringTimeOforder, rentOutCar, returnCar, totalCost, SSN)
+        self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)  
+        self.finalStepOrder(order)
+        return 
 
-        
-        # cars = self.__carService.getCars(action, carType, rentOutCarTime)
-        # self.displayAllCarsPrint(cars)
-        # self.showCarsByTypeMenu(action,rentOutCarTime)
-
-
-
-        # #car type
-        # carTypeInput = self.__carService.checkCarType()
-        # make = input('Make (f.x. Toyota Yaris): ').capitalize()
-        # color = input('Color: ').capitalize()
-        # passengers = self.__carService.checkPassengers()
-        # transmissionInput = self.__carService.checkTransmission()
-        # licenseplate = self.__carService.checkLicenseplate()
-
-        # transmission = self.getTransmission(transmissionInput)
-        # rentCost, carType = self.getCarTypeVariables(carTypeInput)
-        # status = 'available'
-        # rentOutCar = self.__carService.checkValidDate()
-        # returnCar = rentOutCar
-        # newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
-        # print("\nCar successfully created!")
-        # self.printCarHeader()
-        # print(newCar)
-        # return orderNumber, customer, carNumber, carType, timeOfOrder, startDate, endDate, rentCost
 
     def displayAllOrders(self, orders):
         self.displayAllOrdersHeaderPrint()
@@ -511,3 +530,16 @@ class SalesmanUi:
         print("\n{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:15}".format('Order number', 'Customer', 'SSN', 'Car Type',\
         'Time of order', 'Start of order','End of order','Rent cost'))
         print("{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE, LINE))
+
+    def displayOrderInfo(self,order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
+        print("\n--------------------------- Order Info ---------------------------\n")
+        print("Order Number: {}".format(order.getOrderNumber()))
+        print("{} | {}".format(order.getCustomer(), order.getSSN()))
+        print("Car type rented: {} from: {} To: {} | Date rented: {}".format(order.getCarType(), rentOutCarTime, \
+        returnCarTime, timeOfOrder))
+        print("\nCost of {} days without VAT: {} ISK".format(totalDaysRented, carCost))
+        if insurance != 0:
+            print("Insurance: {} ISK".format(insurance))
+            print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost()))
+
+

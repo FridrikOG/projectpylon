@@ -37,20 +37,17 @@ class OrderRepository:
         return self.__orders, newOrderNumber
             
 
-    def addCar(self, newCar):
-        with open('./data/cars.csv', 'a') as carFile:
-            carType = newCar.getType()
-            make = newCar.getMake()
-            color = newCar.getColor()
-            passengers = newCar.getPassengers()
-            transmission = newCar.getTransmission()
-            licenseplate = newCar.getLicenseplate()
-            rentCost = newCar.getRentcost()
-            status = newCar.getStatus()
-            rentOutCar = newCar.getRentOutCar()
-            returnCar = newCar.getReturnCar()
-            
-            carFile.write("{},{},{},{},{},{},{},{},{},{}\n".format(carType,make,licenseplate,color,passengers,transmission,\
-            rentCost,status,rentOutCar,returnCar))
+    def addOrder(self, order):
+        with open('./data/orders.csv', 'a') as orderFile:
+            orderNumber = order.getOrderNumber()
+            customer = order.getCustomer()
+            carType = order.getCarType()
+            timeOfOrder = order.getTimeOfOrder()
+            startDate = order.getStartDate()
+            endDate = order.getEndDate()
+            rentCost = order.getRentCost()
+            SSN = order.getSSN()
+
+            orderFile.write("{},{},{},{},{},{},{},{}\n".format(orderNumber,customer,SSN,carType,timeOfOrder,startDate,endDate,rentCost))
         
             ###

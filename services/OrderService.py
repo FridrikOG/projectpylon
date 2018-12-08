@@ -8,6 +8,9 @@ class OrderService:
 
     def getAllOrders(self):
         return self.__orderRepo.getOrders()#Problems <--------
+
+    def addOrder(self, order):
+        self.__orderRepo.addOrder(order)
     
 
 

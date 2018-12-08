@@ -26,12 +26,12 @@ class Order(object):
     def getCustomer(self):
         return self.__customer
 
-    def get_carNumber(self):
-        return self.__carNumber
+    def getCarType(self):
+        return self.__carType
 
     #def getExtras(self):
      #   return self.__extras
-    def getgetTimeOfOrder(self):
+    def getTimeOfOrder(self):
         return self.__timeOfOrder
 
     def getStartDate(self):
