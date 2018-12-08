@@ -307,7 +307,7 @@ class SalesmanUi:
         transmission = self.getTransmission(transmissionInput)
         rentCost, carType = self.getCarTypeVariables(carTypeInput)
         status = 'available'
-        rentOutCar = self.getTimeOfOrder()
+        rentOutCar, unusedValue = self.getTimeOfOrder()
         returnCar = rentOutCar
         newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
         print("\nCar successfully created!")
