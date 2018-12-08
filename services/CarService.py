@@ -32,7 +32,7 @@ class CarService:
                     print('Please choose from available types\n')
             except:
                 print("Please only insert integer values\n")
-        return carTypeInput
+        return str(carTypeInput)
 
 
     def checkPassengers(self):

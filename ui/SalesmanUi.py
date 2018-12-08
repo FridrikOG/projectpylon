@@ -259,19 +259,19 @@ class SalesmanUi:
         return transmission
 
     def getCarTypeVariables(self,carTypeInput):
-        if carTypeInput == 1:
+        if carTypeInput == '1':
             carType = 'Compact'
             rentCost = 14000
-        if carTypeInput == 2:
+        if carTypeInput == '2':
             carType = 'Comfort'
             rentCost = 20000
-        if carTypeInput == 3:
+        if carTypeInput == '3':
             carType = 'CUV'
             rentCost = 25000
-        if carTypeInput == 4:
+        if carTypeInput == '4':
             carType = 'Highland'
             rentCost = 30000
-        if carTypeInput == 5:
+        if carTypeInput == '5':
             carType = 'Luxury'
             rentCost = 35000
         return rentCost, carType
@@ -342,11 +342,11 @@ class SalesmanUi:
             daysRentedCount = daysRented + timedelta(days = 1)
         totalDaysRented = daysRentedCount.days
 
-        print("Days Rented: ",daysRentedDays)
+        print("Days Rented: ",totalDaysRented)
 
-        totalCost = int(daysRentedDays) * rentCost
+        totalCost = int(totalDaysRented) * rentCost
 
-        print("Price: {} ISK".format(price))
+        print("Price: {} ISK".format(totalCost))
 
         return totalCost
 
@@ -367,7 +367,7 @@ class SalesmanUi:
             self.customerNotFoundMenu()
         nothing, orderNumber = self.__orderService.getAllOrders()
         rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate()
-        carType, rentCost = self.selectCarType()
+        rentCost, carType = self.selectCarType()
         totalCost = self.getCostOfOrder(rentOutCarTime, returnCarTime, rentCost)
         # cars = self.__carService.getCars(action, carType, rentOutCarTime)
         # self.displayAllCarsPrint(cars)
