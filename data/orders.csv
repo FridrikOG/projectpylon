@@ -1,3 +1,2 @@
-orderNumber,customer,carNumber,timeOfOrder,startDate,endDate,rentCost
-1,LeBron James,EL-E32,13:30 2015,13:30 2016,13:30 2017,4000000
-2,Mr. Woodcock,ET-T31,13:40 2019,14:00 2021,14:00 2023,7000000
+orderNumber,customer,SSN,carType,timeOfOrder,startDate,endDate,rentCost
+1,Fjölnir,2345678901,Highland,12-12-2018-12-00,12-12-2018-12-00,12-12-2018-12-00,102000
