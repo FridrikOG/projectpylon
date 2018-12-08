@@ -19,18 +19,24 @@ class SalesmanUi:
 
         action = ''
         while action != 'q':
+            self.spaces()
             self.mainMenuPrint()
             action = input('Action: ')
 
             if action == '1' or action == '2':
+                print("\n\033[1;37mPath: Menu/Available_Cars/\033[1;m")
                 typeAction = ''
                 dateAvailable = datetime.now()
                 cars = self.__carService.getCars(action, typeAction, dateAvailable)
                 self.displayAllCarsPrint(cars)
                 self.showCarsByTypeMenu(action,dateAvailable)
+            
+            # elif action == '2':
+                # print("\n\033[1;37mPath: Menu/Unavailable_cars/\033[1;m")
 
 
             elif action == '3':
+                print("\n\033[1;37mPath: Menu/Creating_Customer/\n\033[1;m")
                 name,age,ssn,address,number = self.createCustomer()
                 newCustomer = Customer(name,age,ssn,address,number)
                 self.__customerService.addCustomer(newCustomer)
@@ -57,8 +63,22 @@ class SalesmanUi:
                 newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
                 self.__carService.addCar(newCar)
 
+            elif action == '11':
+                print(open('./data/pricelist.txt').read())
+                action = input("Press any button to return to main menu: ")
+
+            elif action == 'q':
+                print('\n\033[1;94mHave a nice day!\033[1;m')
+                print('\033[1;94mExiting program..\033[1;m')
+                exit()
+
     def mainMenuPrint(self):
-        print("\nYou can do the following: ")
+        print("\033[1;94m___  ___     _       ___  ___")
+        print("|  \/  |__ _(_)_ _   |  \/  |___ _ _ _  _ ")
+        print("| |\/| / _` | | ' \  | |\/| / -_) ' \ || |")
+        print("\033[1;37m|_|  |_\__,_|_|_||_| |_|  |_\___|_||_\_,_|")
+        print("\nPath: Menu/")
+        print("\n\033[1;94mYou can do the following:\033[1;m")
         print("1.  List all available cars")
         print("2.  List all unavailable cars")
         print("3.  Register customer.")
@@ -68,8 +88,11 @@ class SalesmanUi:
         print("7.  Show list of orders.")
         print("8.  Return a car.")
         print("9.  Edit order.")
-        print("10. Register car")
-        print("press q to quit\n")
+        print("10. Register car\033[1;m")
+        print("\033[1;94mPress q to quit\033[1;m\n")
+    
+    def spaces(self):
+        print('\n'*43)
 
 
 
@@ -77,8 +100,9 @@ class SalesmanUi:
 #''' -------------------- Customer Functions -------------------- '''
 
     def findCustomerMenu(self):
+        self.spaces()
         self.findCustomerMenuPrint()
-        findCustomerAction = input("Choose action: ")
+        findCustomerAction = input("\033[1;94mChoose action: \033[1;m")
     #Going to menu
         if findCustomerAction == '0':
             self.mainMenu()
@@ -104,7 +128,7 @@ class SalesmanUi:
 
 
     def afterCustomerIsFoundPrint(self):
-        print("\nActions:\n")
+        print("\n\033[1;94mActions:\033[1;m")
         print("0. Go back")
         print("1. Edit customer info")
         print("2. Delete customer")
@@ -191,7 +215,7 @@ class SalesmanUi:
         print("2. No, do not deleted this customer")
 
     def warningMessageMenu(self,customer):
-        warningMessageAction = input("Choose action")
+        warningMessageAction = input("033[1;94mChoose action\033[1;m")
         while warningMessageAction:
             if warningMessageAction == '1':
                 customerNumber = customer.getNumber()
@@ -216,6 +240,7 @@ class SalesmanUi:
 
     # Displays options that the user has.
     def findCustomerMenuPrint(self):
+        print("\n\033[1;94mActions\033[1;m")
         print("\n0. <-- Go back")
         print("1. Search for a customer")
         print("2. Show all customers")
@@ -241,7 +266,7 @@ class SalesmanUi:
 # ''' -------------------- Car Functions -------------------- '''
 
     def findCarTypeMenuPrint(self):
-        print("0. <-- Go back")
+        print("\n\033[1;94m0. <-- Go back\033[1;m")
         print("1. Show only Compact")
         print("2. Show only Comfort")
         print("3. Show only CUV")
@@ -251,7 +276,7 @@ class SalesmanUi:
     def showCarsByTypeMenu(self, action,dateAvailable):
         while True:
             self.findCarTypeMenuPrint()
-            typeAction = input('\nChoose action: ')
+            typeAction = input('\n\033[1;94mChoose action: \033[1;m')
             if typeAction == '0':
                 break
             elif typeAction == '1':
