@@ -74,16 +74,14 @@ class SalesmanUi:
 
 
 
-# ''' -------------------- Customer Functions -------------------- '''
+#''' -------------------- Customer Functions -------------------- '''
 
     def findCustomerMenu(self):
         self.findCustomerMenuPrint()
         findCustomerAction = input("Choose action: ")
-
     #Going to menu
         if findCustomerAction == '0':
             self.mainMenu()
-
     #Finding customer
         elif findCustomerAction == '1':
             self.searchCustomerHeaderPrint()
@@ -98,12 +96,12 @@ class SalesmanUi:
                 print(customer)
                 self.afterCustomerIsFoundPrint()
                 self.afterCustomerIsFoundMenu(customer)
-
     #show all customers
         elif findCustomerAction == '2':
             customers = self.__customerService.getAllCustomers()
             self.displayAllCustomersPrint(customers)
             self.findCustomerMenu()
+
 
     def afterCustomerIsFoundPrint(self):
         print("\nActions:\n")
@@ -115,12 +113,12 @@ class SalesmanUi:
         afterCustomerFoundAction = input("Choose action: ")
         if afterCustomerFoundAction == '0':
             self.findCustomerMenu()
-        #elif afterCustomerFoundAction == '1':
-        #    self.editCustomerInfo()
+        elif afterCustomerFoundAction == '1':
+            self.editCustomerInfo(customer)
         elif afterCustomerFoundAction == '2':
-            customerNumber = customer.getNumber()
-            self.__customerService.deletingCustomer(customerNumber)
-
+            self.warningMessagePrint(customer)
+            self.warningMessageMenu(customer)
+    
     def editCustomerInfoMenu(self):
             print("1. Edit customer name")
             print("2. Edit customer age")
@@ -128,12 +126,61 @@ class SalesmanUi:
             print("4. Edit customer address")
             print("5. Edit All customer information")
             
+# The menu for editing the customer information, Number stays the same
     def editCustomerInfo(self,customer):
             self.editCustomerInfoMenu()
             cs = CustomerService()
             afterEditCustomerSelectedAction = input("Choose action: ")
+        # Edit customer name
+            if afterEditCustomerSelectedAction =='1':
+                name = cs.inputNameCheck()
+                age = customer.getAge()
+                ssn = customer.getSsn()
+                address = customer.getAddress()
+                number = customer.getNumber()
+                newCustomer = Customer(name,age,ssn,address,number)
+                cs.customerEdit(newCustomer)
+        #Edit customer age
+            if afterEditCustomerSelectedAction =='2':
+                name = customer.getName()
+                age = cs.inputAgeCheck()
+                ssn = customer.getSsn()
+                address = customer.getAddress()
+                number = customer.getNumber()
+                newCustomer = Customer(name,age,ssn,address,number)
+                cs.customerEdit(newCustomer)
+        #Edit customer ssn
+            if afterEditCustomerSelectedAction =='3':
+                name = customer.getName()
+                age = customer.getAge()
+                ssn = cs.inputSsnCheck()
+                address = customer.getAddress()
+                number = customer.getNumber()
+                newCustomer = Customer(name,age,ssn,address,number)
+                cs.customerEdit(newCustomer)
+        #Edit customer address
+            if afterEditCustomerSelectedAction =='4':
+                
+                name = customer.getName()
+                age = age = customer.getAge()
+                ssn = customer.getSsn()
+                address = cs.inputAddressCheck()
+                number = customer.getNumber()
+                newCustomer = Customer(name,age,ssn,address,number)
+                cs.customerEdit(newCustomer)
+
+
+        #Edit all customer information
             if afterEditCustomerSelectedAction == '5':
-                cs.customerEdit(customer)
+                cs = CustomerService()
+                name = cs.inputNameCheck()
+                age = cs.inputAgeCheck()
+                ssn = cs.inputSsnCheck()
+                address = cs.inputAddressCheck()
+                number = customer.getNumber()
+                newCustomer = Customer(name,age,ssn,address,number)
+                cs.customerEdit(newCustomer)
+
 
     def warningMessagePrint(self,customer):
         print("\n")
@@ -154,6 +201,7 @@ class SalesmanUi:
                 self.afterCustomerIsFoundMenu(customer)
             else:
                 self.warningMessageMenu(customer)
+        
 
     def createCustomer(self):
         print("-----------Creating customer account-----------")
@@ -163,19 +211,17 @@ class SalesmanUi:
         ssn = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
         number = cs.getSumOfAllCustomers()
+    
         return name,age,ssn,address,number
-
-    def countingCustomers(self):
-        listOfSsn = self.__customerService.countingCustomers()
-        return len(listOfSsn)
 
     # Displays options that the user has.
     def findCustomerMenuPrint(self):
-        print("0. <-- Go back")
+        print("\n0. <-- Go back")
         print("1. Search for a customer")
         print("2. Show all customers")
 
     def displayCustomerHeaderPrint(self):
+        print("\n")
         print("{:15} {:15} {:15} {:15} {:15}".format("Name", "Age", "SSN", "Address", "Number"))
         print("{:15} {:15} {:15} {:15} {:15}".format("---------------",\
         "---------------","---------------", "---------------", "---------------"))
@@ -184,14 +230,10 @@ class SalesmanUi:
         self.displayCustomerHeaderPrint()
         for customer in customers:
             print(customer)
-
+    
     
     def searchCustomerHeaderPrint(self):
         print("--------------------------------------------Search for customer-------------------------------------------")
-
-    def invalidActionPrint(self):
-        print("Invalid Action !")
-
 
     
     

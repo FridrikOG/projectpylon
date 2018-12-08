@@ -94,5 +94,49 @@ class CustomerRepository:
             for customer in listOfCustomers:
                 customerFile.write(f'{customer}\n')
 
-    def customerEdit(self):
-        pass
+    ''' -------------------- Customer editing functions -------------------- '''
+
+    def customerEdit(self,newCustomer):
+        with open('./data/customers.csv', 'r') as customerFile:
+            csvReader = csv.DictReader(customerFile)
+            customerNumber = newCustomer.getNumber()
+            self.__customers = []
+            for line in csvReader:
+                name = line['name']
+                age = line['age']
+                ssn = line['ssn']
+                address = line['address']
+                number = line['number']
+                if number != customerNumber and number < customerNumber:
+                    self.__customers.append(name+','+age+','+ssn+','+address+','+number)
+                elif number == customerNumber:
+                    newName = newCustomer.getName()
+                    newAge = newCustomer.getAge()
+                    newSsn = newCustomer.getSsn()
+                    newAddress = newCustomer.getAddress()
+                    self.__customers.append(newName+','+newAge+','+newSsn+','+newAddress+','+customerNumber)
+                else:
+                    self.__customers.append(name+','+age+','+ssn+','+address+','+number)
+            self.emptyingFile()
+            self.addingCustomers(self.__customers)
+
+
+
+
+
+## Function getAllCustomers that returns dictionary, In this function I open the file and put them in a dictionary.
+# And return it
+
+# Make a function writeToCustomers that takes a dictionary and writes it to the CVS file. 
+
+        
+
+
+
+        
+
+
+
+
+
+
