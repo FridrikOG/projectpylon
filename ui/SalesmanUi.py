@@ -40,6 +40,8 @@ class SalesmanUi:
                 name,age,ssn,address,number = self.createCustomer()
                 newCustomer = Customer(name,age,ssn,address,number)
                 self.__customerService.addCustomer(newCustomer)
+                print("Customer has been created!")
+                action = input("0. <-- Go back")
 
             elif action == '5':
                 self.findCustomerMenu()
@@ -122,6 +124,8 @@ class SalesmanUi:
         elif findCustomerAction == '2':
             customers = self.__customerService.getAllCustomers()
             self.displayAllCustomersPrint(customers)
+            print("0. <-- Go back")
+            action = input("Choose action: ")
             self.findCustomerMenu()
 
 
