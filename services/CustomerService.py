@@ -58,7 +58,7 @@ class CustomerService:
         check = False
         newName = ''
         while not check:
-            fullName = input('Step 1/4 - Enter name: ').strip().title().split()
+            fullName = input('Step 1/3 - Enter name: ').strip().title().split()
             for name in fullName:
                 if name not in string.punctuation and name.isalpha():
                     newName += name + ' '
@@ -92,7 +92,7 @@ class CustomerService:
         booleanCheck = False
         while len(str(ssn)) != 10 or not booleanCheck:
             try:
-                ssn = int(input("Step 3/4 - Enter an SSN of 10 numbers: "))
+                ssn = int(input("Step 2/3 - Enter an SSN of 10 numbers: "))
                 age = self.inputAgeCheck(ssn)
                 if age < 21:
                     print("Customer has to be above the age of 21")
@@ -106,5 +106,5 @@ class CustomerService:
 
 # Input check for the address of the customer
     def inputAddressCheck(self):
-        address = input("Step 4/4 - Enter address: ").capitalize()
+        address = input("Step 3/3 - Enter address: ").capitalize()
         return address
