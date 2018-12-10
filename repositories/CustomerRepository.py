@@ -109,7 +109,7 @@ class CustomerRepository:
                 else:
                     self.__customers.append(name+','+age+','+ssn+','+address+','+number)
             self.emptyingFile(customerData)
-            self.addingCustomers(self.__customers)
+            self.addingCustomers(self.__customers,customerData)
 
 
    # ''' -------------------- Checking data input -------------------- '''
