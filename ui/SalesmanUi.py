@@ -69,18 +69,17 @@ class SalesmanUi:
                 action = self.pressAnythingToContinue()
 
             elif action == 'q':
-                print(Colors.GREEN + "\nHave a nice day!"+ Colors.END)
-                print(Colors.GREEN + "Exiting program.." + Colors.END)
+                self.exitPrint()
                 exit()
 
     def mainMenuPrint(self):
         print(Colors.BLUE + "___  ___     _       ___  ___")
         print("|  \/  |__ _(_)_ _   |  \/  |___ _ _ _  _ ")
         print("| |\/| / _` | | ' \  | |\/| / -_) ' \ || |")
-        print(Colors.WHITE + "|_|  |_\__,_|_|_||_| |_|  |_\___|_||_\_,_|")
-        print("\nPath: Menu/" + Colors.END)
+        print(Colors.WHITE + "|_|  |_\__,_|_|_||_| |_|  |_\___|_||_\_,_|" + Colors.END)
+        print(Colors.WHITE + "\nPath: Menu/" + Colors.END)
         print(Colors.BLUE + "You can do the following:" + Colors.END)
-        print("1.  List all available cars")
+        print(Colors.WHITE + "1.  List all available cars")
         print("2.  List all unavailable cars")
         print("3.  Register customer.")
         print("4.  Create car reservation.")
@@ -89,7 +88,7 @@ class SalesmanUi:
         print("7.  Show list of orders.")
         print("8.  Return a car.")
         print("9.  Edit order.")
-        print("10. Register car")
+        print("10. Register car" + Colors.END)
         print(Colors.BLUE + "Press q to quit\n" + Colors.END)
     
 
@@ -106,7 +105,31 @@ class SalesmanUi:
         return action
 
     def actionsPrint(self):
-        print(Colors.BLUE + "Actions: " + Colors.END)
+        print("\n" + Colors.BLUE + "Actions: " + Colors.END)
+
+    def customerFound(self):
+        print(Colors.GREEN + "Customer found!" + Colors.END)
+
+    def customerNotFound(self):
+        print(Colors.RED + "Customer not found!" + Colors.END)
+
+    def searchTermInput(self):
+        searchTerm = input(Colors.BLUE + "Enter SSN or Customer number to find: " + Colors.END)
+        return searchTerm
+
+    def exitPrint(self):
+        print(Colors.GREEN + "\nHave a nice day!"+ Colors.END)
+        print(Colors.GREEN + "Exiting program.." + Colors.END)
+
+    def allCustomersHeaderPrint(self):
+        print(Colors.GREEN +
+        "----------------------------------All Customers----------------------------------\n"
+         + Colors.END)
+
+    def allDeletedCustomerHeaderPrint(self):
+        print(Colors.RED +
+        "------------------------------All Deleted Customers------------------------------\n"
+         + Colors.END)
 
 
 #''' -------------------- Customer Functions -------------------- '''
@@ -120,46 +143,59 @@ class SalesmanUi:
             self.mainMenu()
     #Finding customer
         elif action == '1':
+            self.spaces()
             self.searchCustomerHeaderPrint()
-            searchTerm = input("Input SSN or Customernumber to find: ")
+            searchTerm = self.searchTermInput()
             customer = self.__customerService.findCustomer(searchTerm)
             if customer == None:
-                print()
-                print(Colors.RED + "Customer not found!" + Colors.END)
+                self.spaces()
+                self.customerNotFound()
+                self.pressAnythingToContinue()
                 self.findCustomerMenu()
             else:
+                self.spaces()
+                self.customerFound()
                 self.displayCustomerHeaderPrint() #This displays the customer
                 print(customer)
-                self.afterCustomerIsFoundPrint()
                 self.afterCustomerIsFoundMenu(customer)
     #show all customers
         elif action == '2':
+            self.spaces()
+            self.allCustomersHeaderPrint()
             customers = self.__customerService.getAllCustomers()
             self.displayAllCustomersPrint(customers)
             action = self.pressAnythingToContinue()
             self.findCustomerMenu()
 
         elif action == '3':
+            self.spaces()
+            self.allDeletedCustomerHeaderPrint()
             customers = self.__customerService.getAllDeletedCustomers()
             self.displayAllCustomersPrint(customers)
+            action = self.pressAnythingToContinue()
             self.findCustomerMenu()
 
         elif action == '4':
-            self.searchCustomerHeaderPrint()
-            searchTerm = input("Input SSN or Customer number to find: ")
+            self.spaces()
+            self.searchCustomer()
+            searchTerm = self.searchTermInput()
             customer = self.__customerService.findDeletedCustomer(searchTerm)
             if customer == None:
-                print("\nCustomer not found!")
+                self.spaces()
+                self.customerNotFound()
+                self.pressAnythingToContinue()
                 self.findCustomerMenu()
+            
             else:
+                self.spaces()
+                self.customerFound()
                 self.displayCustomerHeaderPrint() #This displays the customer
                 print(customer)
-                self.afterCustomerIsFoundPrint()
                 self.afterDeletedCustomerIsFoundMenu(customer)
 
     def afterDeletedCustomerIsFoundMenu(self,customer):
         self.afterDeletedCustomerIsFoundPrint()
-        action = input("Choose action** needs to be a function call: ")
+        action = self.chooseAction()
         if action == '0':
             self.findCustomerMenu()
         elif action == '1':
@@ -168,6 +204,7 @@ class SalesmanUi:
         
 
     def afterDeletedCustomerIsFoundPrint(self):
+        self.actionsPrint()
         print("0. Go back")
         print("1. Reinstate selected customer")
 
@@ -177,9 +214,9 @@ class SalesmanUi:
         print("0. Go back")
         print("1. Edit customer info")
         print("2. Delete customer")
-        print("3. ")
 
     def afterCustomerIsFoundMenu(self, customer):
+        self.afterCustomerIsFoundPrint()
         action = self.chooseAction()
         if action == '0':
             self.findCustomerMenu()
@@ -293,6 +330,7 @@ class SalesmanUi:
 
     # Displays options that the user has.
     def findCustomerMenuPrint(self):
+        print(Colors.WHITE + "Path: Menu/Find_customer/" + Colors.END)
         self.actionsPrint()
         print("0. <-- Go back")
         print("1. Search for a customer")
@@ -312,7 +350,9 @@ class SalesmanUi:
     
     
     def searchCustomerHeaderPrint(self):
-        print("--------------------------------------------Search for customer-------------------------------------------")
+        print(Colors.YELLOW + 
+        "--------------------------------------------Search for customer-------------------------------------------"
+        + Colors.END)
 
     
     
@@ -514,11 +554,11 @@ class SalesmanUi:
     def areYouSurePrint(self):
         print("\nAre you sure?")
         print("1. Yes")
-        print("2. Go back")
+        print("2. No, go back")
 
 
     def finalStepOrderPrint(self):
-        print("\nActions")
+        self.actionsPrint()
         print("1. Save and complete order")
         print("2. Cancel order")
 
@@ -542,17 +582,18 @@ class SalesmanUi:
 
     def createOrder(self):
         #Order Number
-        print("--------------------- Find customer for car rental ---------------------")
-        searchTerm = input("Enter customer SSN: ")
+        self.searchCustomerForCarRentalHeaderPrint()
+        searchTerm = self.searchTermInput()
         try:
             customer = self.__customerService.findCustomer(searchTerm)
             name = customer.getName()
-            SSN = customer.getSsn()
+            ssn = customer.getSsn()
+            self.customerFound()
             self.displayCustomerHeaderPrint()
             print(customer)
             self.rentOutToCustomerMenu()
         except:
-            print("Customer not found")
+            self.customerNotFound()
             self.customerNotFoundMenu()
         nothing, orderNumber = self.__orderService.getAllOrders()
         rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate()
@@ -599,3 +640,6 @@ class SalesmanUi:
         if insurance != 0:
             print("Insurance: {} ISK".format(insurance))
             print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost()))
+
+    def searchCustomerForCarRentalHeaderPrint(self):
+        print("--------------------- Find customer for car rental ---------------------")

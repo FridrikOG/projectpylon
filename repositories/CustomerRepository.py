@@ -8,17 +8,17 @@ class CustomerRepository:
         self.__ssnList = []
         self.__deletedCustomers = []
 
-    def addCustomer(self,customer):
-        with open('./data/customers.csv','a',) as customerFile:
+    def addCustomer(self,customer,customerFile):
+        with open(customerFile,'a',) as customerFile:
             name = customer.getName()
-            age = customer.getage()
+            age = customer.getAge()
             ssn = customer.getSsn()
             address = customer.getAddress()
             number = customer.getNumber()
             customerFile.write(f'{name},{age},{ssn},{address},{number}\n')
 
-    def getAllCustomers(self, dataPosition):
-        with open(dataPosition, 'r') as customerFile:
+    def getAllCustomers(self, customerFile):
+        with open(customerFile, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             self.__customers = []
             for line in csvReader:
@@ -31,8 +31,8 @@ class CustomerRepository:
                     self.__customers.append(newCustomer)
         return self.__customers
 
-    def findCustomer(self, searchTerm,dataPosition):
-        with open(dataPosition, 'r') as customerFile:
+    def findCustomer(self, searchTerm,customerFile):
+        with open(customerFile, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             for line in csvReader:
                     name = line['name']
@@ -44,8 +44,8 @@ class CustomerRepository:
                     if searchTerm == number or searchTerm == ssn:
                         return newCustomer
 
-    def countingCustomers(self, dataPosition):
-        with open(dataPosition, 'r') as customerFile:
+    def countingCustomers(self, customerFile):
+        with open(customerFile, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             self.__ssnList = []
             for line in csvReader:
@@ -87,8 +87,8 @@ class CustomerRepository:
 
    # ''' -------------------- Customer editing functions -------------------- '''
 
-    def customerEdit(self,newCustomer):
-        with open('./data/customers.csv', 'r') as customerFile:
+    def customerEdit(self,newCustomer,customerFile):
+        with open(customerFile, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             customerNumber = newCustomer.getNumber()
             self.__customers = []

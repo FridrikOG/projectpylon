@@ -5,46 +5,37 @@ import string
 class CustomerService:
     def __init__(self):
         self.__customerRepo = CustomerRepository()
+        self.__CUSTFILE = './data/customers.csv'
+        self.__CUSTDELFILE = './data/customersDeleted.csv'
 
     def addCustomer(self, customer):
-        if self.isValidCustomer(customer):
-            self.__customerRepo.addCustomer(customer)
+        self.__customerRepo.addCustomer(customer,self.__CUSTFILE)
     
-    def isValidCustomer(self, customer):
-        #here should be some code to 
-        #validate the video
-        return True
 #This function returns a list of all customers
     def getAllCustomers(self):
-        dataPosition = './data/customers.csv'
-        return self.__customerRepo.getAllCustomers(dataPosition)
+        return self.__customerRepo.getAllCustomers(self.__CUSTFILE)
 #This function returns a list of all deleted customers
     def getAllDeletedCustomers(self):
-        dataPosition = './data/customersDeleted.csv'
-        return self.__customerRepo.getAllCustomers(dataPosition)
+        return self.__customerRepo.getAllCustomers(self.__CUSTDELFILE)
 
     def findCustomer(self, searchTerm):
-        dataPosition = './data/customers.csv'
-        theFoundCustomer = self.__customerRepo.findCustomer(searchTerm,dataPosition)
+        theFoundCustomer = self.__customerRepo.findCustomer(searchTerm,self.__CUSTFILE)
         if theFoundCustomer == None:
             return None
         else:
             return theFoundCustomer
     def findDeletedCustomer(self, searchTerm):
-        dataPosition = './data/customersDeleted.csv'
-        theFoundCustomer = self.__customerRepo.findCustomer(searchTerm, dataPosition)
+        theFoundCustomer = self.__customerRepo.findCustomer(searchTerm, self.__CUSTDELFILE)
         if theFoundCustomer == None:
             return None
         else:
             return theFoundCustomer        
 #Counts all the customers
     def countingCustomers(self):
-        dataPosition = './data/customers.csv'
-        return self.__customerRepo.countingCustomers(dataPosition)
+        return self.__customerRepo.countingCustomers(self.__CUSTFILE)
 #Counts all the deleted customers
     def countingDeletedCustomers(self):
-        dataPosition = './data/customersDeleted.csv'
-        return self.__customerRepo.countingCustomers(dataPosition)
+        return self.__customerRepo.countingCustomers(self.__CUSTDELFILE)
 #This function takes the sum of both deleted and current registered customers and returns a total to keep count.
     def getSumOfAllCustomers(self):
         ADDINGONECUSTOMER = 1
@@ -52,24 +43,19 @@ class CustomerService:
         return sumOfAllCustomers
     
     def deletingCustomer(self,customerNumber):
-        dataAdd = './data/customersDeleted.csv'
-        dataRemove = './data/customers.csv'
-        return self.__customerRepo.removingCustomer(customerNumber,dataAdd,dataRemove)
+        return self.__customerRepo.removingCustomer(customerNumber,self.__CUSTDELFILE,self.__CUSTFILE)
     def restoringCustomer(self,customerNumber):
-        dataAdd = './data/customers.csv'
-        dataRemove = './data/customersDeleted.csv'
-        return self.__customerRepo.removingCustomer(customerNumber,dataAdd,dataRemove)
+        return self.__customerRepo.removingCustomer(customerNumber,self.__CUSTFILE,self.__CUSTDELFILE)
 
     def customerEdit(self,newCustomer):
-        self.__customerRepo.customerEdit(newCustomer)
+        self.__customerRepo.customerEdit(newCustomer,self.__CUSTFILE)
     
 # Input check for the name of the customer
     def inputNameCheck(self):
         check = False
         newName = ''
         while not check:
-            fullName = input(' - Enter name: ')
-            fullName = fullName.strip().title().split()
+            fullName = input('Step 1/4 - Enter name: ').strip().title().split()
             for name in fullName:
                 if name not in string.punctuation and name.isalpha():
                     newName += name + ' '
