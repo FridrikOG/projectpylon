@@ -55,6 +55,19 @@ class OrderService:
                 print("\nplease input valid date\n")
         return finalDateTime
 
+    def checkCarTypeSelection(self):
+        while True:
+            try:
+                action = input("Select car type for rental: ")
+                int(action)
+                if 0 < action < 6:
+                    break
+                else:
+                    self.mainMenu()
+            except:
+                print("Please choose from available options")
+
+
     # def getNewOrderNumber(self):
     #     return self.__orderRepo.getHighestOrderNumber()
 

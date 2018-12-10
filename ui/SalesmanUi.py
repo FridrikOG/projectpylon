@@ -54,7 +54,7 @@ class SalesmanUi:
                 pass
             
             elif action == '7':#####WORKING ON THIS
-                orders, nothing = self.S.getAllOrders()
+                orders, nothing = self.getAllOrders()
                 self.displayAllOrders(orders)
                 #print all orders and options
 
@@ -390,7 +390,8 @@ class SalesmanUi:
 
     def selectCarType(self):
         self.selectCarTypePrintMenu()
-        action = input('Select car type for rental: ')
+
+        action = self.__orderService.checkCarTypeSelection()
         rentCost, carType = self.getCarTypeVariables(action)
 
         return rentCost, carType
