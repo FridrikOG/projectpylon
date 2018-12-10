@@ -1,6 +1,7 @@
 from repositories.CustomerRepository import CustomerRepository
 import string
 
+
 class CustomerService:
     def __init__(self):
         self.__customerRepo = CustomerRepository()
@@ -13,37 +14,55 @@ class CustomerService:
         #here should be some code to 
         #validate the video
         return True
-
+#This function returns a list of all customers
     def getAllCustomers(self):
-        return self.__customerRepo.getAllCustomers()
+        dataPosition = './data/customers.csv'
+        return self.__customerRepo.getAllCustomers(dataPosition)
+#This function returns a list of all deleted customers
+    def getAllDeletedCustomers(self):
+        dataPosition = './data/customersDeleted.csv'
+        return self.__customerRepo.getAllCustomers(dataPosition)
 
     def findCustomer(self, searchTerm):
-        theFoundCustomer = self.__customerRepo.findCustomer(searchTerm)
+        dataPosition = './data/customers.csv'
+        theFoundCustomer = self.__customerRepo.findCustomer(searchTerm,dataPosition)
         if theFoundCustomer == None:
             return None
         else:
             return theFoundCustomer
-        
+    def findDeletedCustomer(self, searchTerm):
+        dataPosition = './data/customersDeleted.csv'
+        theFoundCustomer = self.__customerRepo.findCustomer(searchTerm, dataPosition)
+        if theFoundCustomer == None:
+            return None
+        else:
+            return theFoundCustomer        
+#Counts all the customers
     def countingCustomers(self):
-        return self.__customerRepo.countingCustomers()
-    
+        dataPosition = './data/customers.csv'
+        return self.__customerRepo.countingCustomers(dataPosition)
+#Counts all the deleted customers
     def countingDeletedCustomers(self):
-        return self.__customerRepo.countingDeletedCustomers()
-    
-
+        dataPosition = './data/customersDeleted.csv'
+        return self.__customerRepo.countingCustomers(dataPosition)
+#This function takes the sum of both deleted and current registered customers and returns a total to keep count.
     def getSumOfAllCustomers(self):
         ADDINGONECUSTOMER = 1
         sumOfAllCustomers = len(self.countingDeletedCustomers()) + len(self.countingCustomers()) + ADDINGONECUSTOMER
         return sumOfAllCustomers
-
     
     def deletingCustomer(self,customerNumber):
-        return self.__customerRepo.deletingCustomer(customerNumber)
+        dataAdd = './data/customersDeleted.csv'
+        dataRemove = './data/customers.csv'
+        return self.__customerRepo.removingCustomer(customerNumber,dataAdd,dataRemove)
+    def restoringCustomer(self,customerNumber):
+        dataAdd = './data/customers.csv'
+        dataRemove = './data/customersDeleted.csv'
+        return self.__customerRepo.removingCustomer(customerNumber,dataAdd,dataRemove)
 
     def customerEdit(self,newCustomer):
         self.__customerRepo.customerEdit(newCustomer)
-
-
+    
 # Input check for the name of the customer
     def inputNameCheck(self):
         check = False

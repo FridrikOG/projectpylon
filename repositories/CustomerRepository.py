@@ -11,14 +11,14 @@ class CustomerRepository:
     def addCustomer(self,customer):
         with open('./data/customers.csv','a',) as customerFile:
             name = customer.getName()
-            age = customer.getAge()
+            age = customer.getage()
             ssn = customer.getSsn()
             address = customer.getAddress()
             number = customer.getNumber()
             customerFile.write(f'{name},{age},{ssn},{address},{number}\n')
 
-    def getAllCustomers(self):
-        with open('./data/customers.csv', 'r') as customerFile:
+    def getAllCustomers(self, dataPosition):
+        with open(dataPosition, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             self.__customers = []
             for line in csvReader:
@@ -31,8 +31,8 @@ class CustomerRepository:
                     self.__customers.append(newCustomer)
         return self.__customers
 
-    def findCustomer(self, searchTerm):
-        with open('./data/customers.csv', 'r') as customerFile:
+    def findCustomer(self, searchTerm,dataPosition):
+        with open(dataPosition, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             for line in csvReader:
                     name = line['name']
@@ -43,28 +43,18 @@ class CustomerRepository:
                     newCustomer = Customer(name, age, ssn, address, number)
                     if searchTerm == number or searchTerm == ssn:
                         return newCustomer
-    
 
-    def countingCustomers(self):
-        with open('./data/customers.csv', 'r') as customerFile:
+    def countingCustomers(self, dataPosition):
+        with open(dataPosition, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             self.__ssnList = []
             for line in csvReader:
                 ssn = line['ssn']
                 self.__ssnList.append(ssn)
             return self.__ssnList
-
-    def countingDeletedCustomers(self):
-        with open('./data/customerDeleted.csv', 'r') as customerFile:
-            csvReader = csv.DictReader(customerFile)
-            self.__ssnList = []
-            for line in csvReader:
-                ssn = line['ssn']
-                self.__ssnList.append(ssn)
-            return self.__ssnList    
     
-    def deletingCustomer(self,customerNumber):
-        with open('./data/customers.csv', 'r') as customerFile:
+    def removingCustomer(self,customerNumber,dataAdd, dataRemove):
+        with open(dataRemove, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             self.__customers = []
             self.__deletedCustomers = []
@@ -79,23 +69,23 @@ class CustomerRepository:
                 else:
                     self.__deletedCustomers.append(name+','+age+','+ssn+','+address+','+number)
 
-            self.emptyingFile()
-            self.addingCustomers(self.__customers)
-            self.addingDeletedCustomers(self.__deletedCustomers)
+            self.emptyingFile(dataRemove)
+            self.addingCustomers(self.__customers,dataRemove)
+            self.addingDeletedCustomers(self.__deletedCustomers,dataAdd)
 
-    def emptyingFile(self):
-        with open('./data/customers.csv', 'w') as customerFile:
+    def emptyingFile(self,dataRemove):
+        with open(dataRemove, 'w') as customerFile:
             customerFile.write('name,age,ssn,address,number\n')
-    def addingCustomers(self,listOfCustomers):
-        with open('./data/customers.csv', 'a') as customerFile:
+    def addingCustomers(self,listOfCustomers,dataRemove):
+        with open(dataRemove, 'a') as customerFile:
             for customer in listOfCustomers:
                 customerFile.write(f'{customer}\n')
-    def addingDeletedCustomers(self,listOfCustomers):
-        with open('./data/customerDeleted.csv', 'a') as customerFile:
+    def addingDeletedCustomers(self,listOfCustomers,dataAdd):
+        with open(dataAdd, 'a') as customerFile:
             for customer in listOfCustomers:
                 customerFile.write(f'{customer}\n')
 
-    ''' -------------------- Customer editing functions -------------------- '''
+   # ''' -------------------- Customer editing functions -------------------- '''
 
     def customerEdit(self,newCustomer):
         with open('./data/customers.csv', 'r') as customerFile:
@@ -112,17 +102,17 @@ class CustomerRepository:
                     self.__customers.append(name+','+age+','+ssn+','+address+','+number)
                 elif number == customerNumber:
                     newName = newCustomer.getName()
-                    newAge = newCustomer.getAge()
+                    newage = newCustomer.getage()
                     newSsn = newCustomer.getSsn()
                     newAddress = newCustomer.getAddress()
-                    self.__customers.append(newName+','+newAge+','+newSsn+','+newAddress+','+customerNumber)
+                    self.__customers.append(newName+','+newage+','+newSsn+','+newAddress+','+customerNumber)
                 else:
                     self.__customers.append(name+','+age+','+ssn+','+address+','+number)
             self.emptyingFile()
             self.addingCustomers(self.__customers)
 
 
-    ''' -------------------- Checking data input -------------------- '''
+   # ''' -------------------- Checking data input -------------------- '''
     def duplicateSsnCheck(self,newSsn):
         with open('./data/customers.csv', 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)

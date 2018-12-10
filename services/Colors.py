@@ -1,10 +1,8 @@
 class Colors:
-    def __init__(self):
-        self.__BLACK = BLACK
-
-
-    def getCars(self, action, typeAction,dateAvailable):
-        return self.__carRepo.getCars(action, typeAction,dateAvailable)
-
-    def addCar(self, newCar):
-        self.__carRepo.addCar(newCar)
+    GREEN = '\033[92m'
+    RED = '\033[91m'
+    BLUE = '\033[94m'
+    END = '\033[0m'
+    WHITE = '\033[97m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
