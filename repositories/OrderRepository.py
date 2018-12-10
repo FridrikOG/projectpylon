@@ -18,7 +18,6 @@ class OrderRepository:
         with open('./data/orders.csv', 'r') as orderFile:
             csvReader = csv.DictReader(orderFile, delimiter=',')
 #orderNumber,customer,carNumber,timeOfOrder,startDate,endDate,rentCost
-            HIGHEST = 0
             for line in csvReader:#Problems <-----
                 orderNumber= line['orderNumber']
                 customer = line['customer']

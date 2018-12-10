@@ -63,7 +63,7 @@ class CarRepository:
                     self.__carLicenseplates.add(licenseplate)
                     newCar = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
 
-                    if rentOutCar < dateAvailable < returnCar:
+                    if rentOutCar < dateAvailable < returnCar or status == 'unavailable':
                         self.__carsUnavailable.append(newCar)  
                         if carType == 'Compact':
                             self.__carsCompactUnavailable.append(newCar)
@@ -122,4 +122,18 @@ class CarRepository:
                         print("License plate already registered!")
                         return False
             return True
-            
+
+   def findCar(self, licenseplate, TimeOfReturn):
+        with open ('./data/cars.csv') as carFile:
+            csvReader = csv.DictReader(carFile)
+            lines = []
+            header = ('type,make,licenseplate,color,passengers,transmission,rentcost,status,rentout,return')
+            for line in csvReader:
+                if line['licenseplate'] == licenseplate:
+                    line['status'] = 'available'
+                    line['return'] = TimeOfReturn#strengur
+                    lines.append(line)
+                else:
+                    lines.append(line)
+            w = csv.DictWriter('./data/cars.csv', 'w', header)
+            w.writerows(lines)

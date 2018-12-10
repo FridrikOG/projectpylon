@@ -14,33 +14,47 @@ class OrderService:
     
 
 
-
-    def checkValidDate(self):
+    def checkValidDate(self, newOrder=False):#SEGJA AÐ SÉ SATT FYRIR NEW ORDER
         print("\nInput time of rental:")
-        
-        while True:
-            rentOutCar = self.InputValidDate()
-            rentOutCarTime = self.getTime(rentOutCar)
-            if rentOutCarTime > datetime.now():
-                break
-            else: 
-                print('\nPlease insert valid start of rental time\n')
-                
-        while True:
-            print("\nInput time of return:")
-            returnCar = self.InputValidDate()
-            returnCarTime = self.getTime(returnCar)
-            if returnCarTime > rentOutCarTime:
-                break
-            else:
-                print('Please insert valid end of rental time')
+        if newOrder == True:
+            while True:
+                rentOutCar = self.InputValidDate()
+                rentOutCarTime = self.getTime(rentOutCar)
+                if rentOutCarTime > datetime.now():
+                    break
+                else: 
+                    print('\nPlease insert valid start of rental time\n')
+                    
+            while True:
+                print("\nInput time of return:")
+                returnCar = self.InputValidDate()
+                returnCarTime = self.getTime(returnCar)
+                if returnCarTime > rentOutCarTime:
+                    return rentOutCar, returnCar, rentOutCarTime, returnCarTime
+                else:
+                    print('Please insert valid end of rental time')
+        #ef ekki ný pöntun
+        else:
+            while True:
+                print("\nInput time of return:")
+                returnCar = self.InputValidDate()
+                returnCarTime = self.getTime(returnCar)
+                if returnCarTime.date >= datetime.now().date:
+                    break
+                else:
+                    print('Please insert valid end of rental time')
+                    return returnCar
 
-        return rentOutCar, returnCar, rentOutCarTime, returnCarTime
+
+        
         
 
     def getTime(self, date):
-        day, month, year, hour, minutes = map(int, date.split('-'))
-        return datetime(year, month, day, hour, minutes)
+        try:
+            day, month, year, hour, minutes = map(int, date.split('-'))
+            return datetime(year, month, day, hour, minutes)
+        except ValueError:
+            print("Not a valid time")
 
     def InputValidDate(self):
         while True:
@@ -52,20 +66,19 @@ class OrderService:
                 finalDateTime = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
                 break
             except:
-                print("\nplease input valid date\n")
+                print("\nplease input a valid date\n")
         return finalDateTime
 
     def checkCarTypeSelection(self):
         while True:
             try:
-                action = input("Select car type for rental: ")
-                int(action)
-                if 0 < action < 6:
-                    break
-                else:
-                    self.mainMenu()
+                action = input("\nSelect car type for rental: ")
+                checkint = int(action)
+                if '0' <= action <= '5':
+                    return action
             except:
-                print("Please choose from available options")
+                print("\nPlease choose from available options")
+
 
 
     # def getNewOrderNumber(self):

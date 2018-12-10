@@ -61,14 +61,28 @@ class CarService:
         return transmissionInput
 
 
-    def checkLicenseplate(self):
+    def checkLicenseplate(self, newCar=True):
         licensePlate = ''
         booleanCheck = False
         while len(licensePlate) != 6 or not booleanCheck:
-            licensePlate = input("License plate (F.x. LL-L00): ")
-            if len(licensePlate) == 6:
+            licensePlate = input("License plate (F.x. LL-L00): ").upper()
+            if len(licensePlate) == 6 and newCar == True:
                 booleanCheck = self.__carRepo.duplicateLicensePlateCheck(str(licensePlate))
+            elif len(licensePlate) == 6:
+                booleanCheck = True
+                pass
             else:
                 print("License plate has to match the format")
 
         return licensePlate
+    
+  
+    def findCar(self, licenseplate, TimeOfOrder):
+        theFoundLicenseplate = self.__carRepo.findCar(licenseplate, TimeOfOrder)
+        if theFoundLicenseplate == None:
+            return None
+        else:
+            return theFoundLicenseplate
+
+    def carEdit(self, newCar):
+        self.__carRepo.carEdit(newCar)
