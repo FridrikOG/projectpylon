@@ -45,6 +45,7 @@ class CustomerService:
     
     def deletingCustomer(self,customerNumber):
         return self.__customerRepo.removingCustomer(customerNumber,self.__CUSTDELFILE,self.__CUSTFILE)
+        
     def restoringCustomer(self,customerNumber):
         return self.__customerRepo.removingCustomer(customerNumber,self.__CUSTFILE,self.__CUSTDELFILE)
 

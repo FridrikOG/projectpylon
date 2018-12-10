@@ -5,7 +5,7 @@ from models.Customer import Customer
 from models.Order import Order
 from services.OrderService import OrderService
 from datetime import datetime, timedelta
-from services.Colors import Colors
+from models.Colors import Colors
 
 
 
@@ -25,6 +25,7 @@ class SalesmanUi:
             action = self.chooseAction()
 
             if action == '1' or action == '2':
+                self.spaces()
                 print(Colors.WHITE + "\nPath: Menu/Available_Cars/" + Colors.END)
                 typeAction = ''
                 dateAvailable = datetime.now()
@@ -37,6 +38,7 @@ class SalesmanUi:
 
 
             elif action == '3':
+                self.spaces()
                 print(Colors.WHITE + "\nPath: Menu/Creating_Customer/\n" + Colors.END)
                 name,age,ssn,address,number = self.createCustomer()
                 newCustomer = Customer(name,age,ssn,address,number)
@@ -45,9 +47,11 @@ class SalesmanUi:
                 action = self.pressAnythingToContinue()
 
             elif action == '5':
+                self.spaces()
                 self.findCustomerMenu()
 
             elif action == '4':
+                self.spaces()
                 self.createOrder()
 
             elif action == '6':####WORKING ON THIS
@@ -55,20 +59,24 @@ class SalesmanUi:
                 pass
             
             elif action == '7':#####WORKING ON THIS
+                self.spaces()
                 orders, nothing = self.getAllOrders()
                 self.displayAllOrders(orders)
                 #print all orders and options
 
             elif action == '10':
+                self.spaces()
                 carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar = self.createCar()
                 newCar = Car(carType,make,licenseplate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
                 self.__carService.addCar(newCar)
 
             elif action == '11':
+                self.spaces()
                 print(open('./data/pricelist.txt').read())
                 action = self.pressAnythingToContinue()
 
             elif action == 'q':
+                self.spaces()
                 self.exitPrint()
                 exit()
 
@@ -319,8 +327,7 @@ class SalesmanUi:
                 customerNumber = customer.getNumber()
                 self.__customerService.deletingCustomer(customerNumber)
                 self.spaces()
-                theCustomer = customer.getName()
-                print(Colors.RED+"Customer "+Colors.GREEN+"'{}'".format(theCustomer)+Colors.RED+" Deleted."+Colors.END)
+                print(Colors.RED+"Customer "+Colors.GREEN+f"'{customer.getName()}'"+Colors.RED+" Deleted."+Colors.END)
                 self.pressAnythingToContinue()
                 self.spaces()
                 self.afterCustomerIsFoundMenu(customer)
@@ -618,7 +625,7 @@ class SalesmanUi:
         stringTimeOforder, timeOfOrder = self.getTimeOfOrder()
         # Print out order
         # self.displayAllOrdersHeaderPrint()
-        order = Order(orderNumber, name, carType, stringTimeOforder, rentOutCar, returnCar, totalCost, SSN)
+        order = Order(orderNumber, name, carType, stringTimeOforder, rentOutCar, returnCar, totalCost, ssn)
         self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)  
         self.finalStepOrder(order)
         return 
@@ -636,7 +643,7 @@ class SalesmanUi:
 
 
 
- def displayAllOrdersHeaderPrint(self):
+    def displayAllOrdersHeaderPrint(self):
         LINE = '---------------'
         print("\n{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:15}".format('Order number', 'Customer', 'SSN', 'Car Type',\
         'Time of order', 'Start of order','End of order','Rent cost'))
