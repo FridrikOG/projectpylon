@@ -119,7 +119,6 @@ class CustomerRepository:
             for line in csvReader:
                     ssn = line['ssn']
                     if newSsn == ssn:
-                        print("SSN already exists!")
                         return False
             return True
 
