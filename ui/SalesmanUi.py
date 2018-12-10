@@ -77,7 +77,7 @@ class SalesmanUi:
         print("|  \/  |__ _(_)_ _   |  \/  |___ _ _ _  _ ")
         print("| |\/| / _` | | ' \  | |\/| / -_) ' \ || |")
         print(Colors.WHITE + "|_|  |_\__,_|_|_||_| |_|  |_\___|_||_\_,_|")
-        print("\nPath: Menu/" + Colors.END)
+        print("\nPath: Menu/\n" + Colors.END)
         print(Colors.BLUE + "You can do the following:" + Colors.END)
         print(Colors.WHITE + "1.  List all available cars")
         print("2.  List all unavailable cars")
@@ -92,7 +92,7 @@ class SalesmanUi:
         print(Colors.BLUE + "Press q to quit\n" + Colors.END)
     
 
-    '''Functions for repetitive code'''
+    '''----------Functions for repetitive code-----------'''
     def spaces(self):
         print('\n'*43)
 
@@ -154,11 +154,13 @@ class SalesmanUi:
             customer = self.__customerService.findCustomer(searchTerm)
             if customer == None:
                 self.spaces()
+                print(Colors.WHITE+"Path: Menu/Find_Customer/Not_Found/\n"+Colors.END)
                 self.customerNotFound()
                 self.pressAnythingToContinue()
                 self.findCustomerMenu()
             else:
                 self.spaces()
+                print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/\n"+Colors.END)
                 self.customerFound()
                 self.displayCustomerHeaderPrint() #This displays the customer
                 print(customer)
@@ -184,6 +186,7 @@ class SalesmanUi:
 
         elif action == '4':
             self.spaces()
+            print(Colors.WHITE+"Path: Menu/Find_Customer/Search_Deleted/\n"+Colors.END)
             self.searchCustomerHeaderPrint()
             searchTerm = self.searchTermInput()
             customer = self.__customerService.findDeletedCustomer(searchTerm)
@@ -217,6 +220,7 @@ class SalesmanUi:
 
 
     def afterCustomerIsFoundPrint(self):
+        print("Path")
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back")
         print("1. Edit customer info")
@@ -299,7 +303,8 @@ class SalesmanUi:
 
 
     def warningMessagePrint(self,customer):
-        print(Colors.BLUE + "\nSelected customer: " + Colors.END)
+        print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Deleted_Selected_Customer/"+Colors.END)
+        print(Colors.GREEN + "\nSelected customer: " + Colors.END)
         self.displayCustomerHeaderPrint()
         print(customer)
         print(Colors.RED + "\nWarning: " + Colors.BLUE + "Are you sure you want to delete this customer?" + Colors.END)
@@ -314,7 +319,8 @@ class SalesmanUi:
                 customerNumber = customer.getNumber()
                 self.__customerService.deletingCustomer(customerNumber)
                 self.spaces()
-                print(Colors.RED+"Customer Deleted."+Colors.END)
+                theCustomer = customer.getName()
+                print(Colors.RED+"Customer "+Colors.GREEN+"'{}'".format(theCustomer)+Colors.RED+" Deleted."+Colors.END)
                 self.pressAnythingToContinue()
                 self.spaces()
                 self.afterCustomerIsFoundMenu(customer)
@@ -329,26 +335,20 @@ class SalesmanUi:
         self.creatingCustomerPrintHeader()
         cs = CustomerService()
         name = cs.inputNameCheck()
-        age = cs.inputAgeCheck()
-        ssn = cs.inputSsnCheck()
+        ssn, age = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
         number = cs.getSumOfAllCustomers()
-    
         return name,age,ssn,address,number
 
     # Displays options that the user has.
     def findCustomerMenuPrint(self):
-        print(Colors.WHITE + 
-        "Path: Menu/Find_Customer/" 
-        + Colors.END)
+        print(Colors.WHITE+"Path: Menu/Find_Customer/"+Colors.END)
         self.actionsPrint()
-        print(Colors.WHITE + 
-        "0. <-- Go back")
+        print(Colors.WHITE + "0. <-- Go back")
         print("1. Search for a customer")
         print("2. Show all customers")
         print("3. Show all deleted customers")
-        print("4. Search for deleted customer"
-        + Colors.END)
+        print("4. Search for deleted customer"+Colors.END)
 
     def displayCustomerHeaderPrint(self):
         print("{:15} {:15} {:15} {:15} {:15}".format("Name", "Age", "SSN", "Address", "Number"))

@@ -1,5 +1,6 @@
 from repositories.CustomerRepository import CustomerRepository
 import string
+from datetime import datetime, timedelta
 
 
 class CustomerService:
@@ -67,14 +68,21 @@ class CustomerService:
         return newName
 
 # Input check for the age of the customer
-    def inputAgeCheck(self):
-        age = -1
-        while age < 18 or age > 80:
-            try:
-                age = int(input("Step 2/4 - Enter the age of the customer: "))
-            except:
-                print("Age has to be a number between 18 and 80 ")
-        return str(age)
+    def inputAgeCheck(self,ssn):
+        year = datetime.now().year
+        ssn = str(ssn)
+        ssn = ssn[4:6]
+        ssn = int(ssn)
+        year = str(year)
+        year = year[2:4]
+        year = int(year)
+        if ssn >= year:
+            year += 100
+            ageOfCustomer = year - ssn
+        else:
+            ageOfCustomer = year - ssn
+        return ageOfCustomer
+                
     
 # Input check for the ssn of the customer
     def inputSsnCheck(self):
@@ -83,12 +91,16 @@ class CustomerService:
         while len(str(ssn)) != 10 or not booleanCheck:
             try:
                 ssn = int(input("Step 3/4 - Enter an SSN of 10 numbers: "))
-                booleanCheck = self.__customerRepo.duplicateSsnCheck(str(ssn))
-                if booleanCheck == False:
-                    print("SSN already exists!")
+                age = self.inputAgeCheck(ssn)
+                if age < 21:
+                    print("Customer has to be above the age of 21")
+                else:  
+                    booleanCheck = self.__customerRepo.duplicateSsnCheck(str(ssn))
+                    if booleanCheck == False:
+                        print("SSN already exists!")
             except ValueError:
                 print("Please enter only 10 integers")
-        return str(ssn)
+        return str(ssn), age
 
 # Input check for the address of the customer
     def inputAddressCheck(self):
