@@ -856,15 +856,20 @@ class SalesmanUi:
         print("{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE, LINE))
 
     def displayOrderInfo(self,order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
+# THIS LOOKS HORRIBLE, FIX LATER
         print(Colors.BLUE+"\n-------------------------------------------------- Order Info --------------------------------------------------\n")
-        print("Order Number: {}".format(order.getOrderNumber())+Colors.END)
-        print(Colors.WHITE+"{} | {}".format(order.getCustomer(), order.getSSN())+Colors.END)
-        print(Colors.WHITE+"Car type rented: {} | from: {} To: {} | Date rented: {}".format(order.getCarType(), rentOutCarTime, \
-        returnCarTime, timeOfOrder)+Colors.END)
-        print(Colors.WHITE+"\nCost of {} days without VAT: {} ISK".format(totalDaysRented, carCost)+Colors.END)
+        print("Order Number: {}\n".format(order.getOrderNumber())+Colors.END)
+        print(Colors.BLUE+"{:20} {:20}".format('Name','Social-Security-Number'))
+        print("---------------------------------------------------"+Colors.END)
+        print(Colors.WHITE+"{:20} {:20}".format(order.getCustomer(), order.getSSN())+Colors.END)
+        print(Colors.BLUE+"\n{:20} {:20} {:20} {:20}".format('Car type','From','To','Date rented'))
+        print("{:20} {:20} {:20} {:20}".format('-------------------','-------------------','-------------------','-------------------')+Colors.END)
+        print("{:20} {:20} {:20} {:20}".format(order.getCarType(),str(rentOutCarTime),str(returnCarTime), str(timeOfOrder))+Colors.END)
+        print(Colors.BLUE+"\nCost of"+Colors.WHITE,str(totalDaysRented),Colors.BLUE+"days without VAT: "+Colors.WHITE,str(carCost),"ISK"+Colors.END)
         if insurance != 0:
-            print(Colors.WHITE+"Extra insurance: {} ISK".format(insurance))
-            print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost())+Colors.END)
+            print(Colors.BLUE+"Extra insurance: "+Colors.WHITE,str(insurance),"ISK"+Colors.END)
+            # print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost()))
+            print(Colors.BLUE+"\nTotal cost of "+Colors.WHITE,str(totalDaysRented),Colors.BLUE+"days without VAT: "+Colors.WHITE,str(order.getRentCost())," ISK")
 
     def searchCustomerForCarRentalHeaderPrint(self):
         print(Colors.BLUE+"--------------------- Find customer for car rental ---------------------"+Colors.END)
