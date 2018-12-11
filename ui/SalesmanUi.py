@@ -829,6 +829,8 @@ class SalesmanUi:
         self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)  
         creditCard = self.creditCardInfo()
         self.finalStepOrder(order)
+        #Choose payment
+        self.choosePayment(carCost, creditCard)
         # Print receipt
         self.showReceipt(order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
 
@@ -915,12 +917,31 @@ class SalesmanUi:
         # Print out order
         order = Order(orderNumber, name, carType, stringTimeOforder, rentOutCar, returnCar, totalCost, ssn)
         self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder) 
+        # credit card information
         creditCard = self.creditCardInfo() 
         self.finalStepOrder(order)
         # Edit the car:
         self.__carService.editCar(carType,make,licensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
+        #Choose payment
+        self.choosePayment(carCost, creditCard)
         # Print receipt
         self.showReceipt(order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
+
+    def choosePaymentPrint(self):
+        print("\nChoose payment method")
+        print("1. Credit card")
+        print("2. Cash")
+
+    def choosePayment(self, carCost, creditCard):
+        self.choosePaymentPrint()
+        action = self.chooseAction()
+        if action == '1':
+            print("Payment will be charged on the following credit card {} for {} ISK".format(creditCard, carCost))
+            self.pressAnyKeyToContinue()
+        if action == '2':
+            print("Payment to be paid: {} ISK".format(carCost))
+            self.pressAnyKeyToContinue()
+        
 
 
     def creditCardInfo(self):
@@ -952,9 +973,6 @@ class SalesmanUi:
             #get order info
             orderNumber, orderInfo = self.__orderService.checkOrderNumber()#check for illegitimacy##might be stuck in loop
             #prints order info
-            
-
-            
             #variables for rent cost
             originalRentOutCarTime = self.__orderService.createDate(orderInfo.getStartDate())
             originalReturnCarTime = self.__orderService.createDate(orderInfo.getEndDate())

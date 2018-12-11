@@ -26,10 +26,9 @@ class OrderService:
                         splitList.append(x)
                         len(splitList) == 4
                     len(creditList) == 4
-                return False
+                return creditCard
             except:
                 print("\nPlease insert a valid credit card")
-        return creditCard
 
 
     def createDate(self, rentDate):
