@@ -22,8 +22,10 @@ class CustomerRepository:
     def getAllCustomers(self, customerFile):
         with open(customerFile, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
+# SortedCsvReader sorts customers by number, so when displaying all customers, it is sorted by the customers number.
+            sortedCsvReader = sorted(csvReader, key=lambda row:(row['number']), reverse=False)
             self.__customers = []
-            for line in csvReader:
+            for line in sortedCsvReader:
                     name = line['name']
                     age = line['age']
                     ssn = line['ssn']
