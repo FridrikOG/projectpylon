@@ -109,6 +109,6 @@ class CustomerService:
 
 # Input check for the address of the customer
 
-def inputAddressCheck(self):
-    address = input("Step 3/3 - Enter address: ").capitalize()
-    return address
+    def inputAddressCheck(self):
+        address = input("Step 3/3 - Enter address: ").capitalize()
+        return address
