@@ -105,7 +105,7 @@ class CustomerService:
                         print("SSN already exists!")
             except ValueError:
                 print("Please enter only 10 integers")
-        return str(ssn), age
+        return str(ssn),str(age)
 
 # Input check for the address of the customer
 
