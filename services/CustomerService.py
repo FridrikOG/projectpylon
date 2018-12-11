@@ -8,6 +8,7 @@ class CustomerService:
         self.__customerRepo = CustomerRepository()
         self.__CUSTFILE = './data/customers.csv'
         self.__CUSTDELFILE = './data/customersDeleted.csv'
+        self.__ADDINGONECUSTOMER = 1
 
 
     def addCustomer(self, customer):
@@ -40,8 +41,8 @@ class CustomerService:
         return self.__customerRepo.countingCustomers(self.__CUSTDELFILE)
 #This function takes the sum of both deleted and current registered customers and returns a total to keep count.
     def getSumOfAllCustomers(self):
-        ADDINGONECUSTOMER = 1
-        sumOfAllCustomers = len(self.countingDeletedCustomers()) + len(self.countingCustomers()) + ADDINGONECUSTOMER
+        
+        sumOfAllCustomers = len(self.countingDeletedCustomers()) + len(self.countingCustomers()) + self.__ADDINGONECUSTOMER
         return sumOfAllCustomers
     
     def deletingCustomer(self,customerNumber):
