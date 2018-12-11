@@ -321,11 +321,13 @@ class SalesmanUi:
         self.editCustomerInfoPrint()
         cs = CustomerService()
         action = self.chooseAction()
+        self.spaces()
         if action =='0':
             self.afterCustomerIsFoundMenu(customer)
 # Edit customer name
         elif action =='1':
-            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Name/")
+            print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Name/\n"+Colors.END)
+            print(Colors.BLUE+"Editing customers name:"+Colors.END)
             name = cs.inputNameCheck()
             age = customer.getAge()
             ssn = customer.getSsn()
@@ -333,22 +335,28 @@ class SalesmanUi:
             number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
-            print(Colors.GREEN+"\nCustomer name has been changed to " +Colors.YELLOW+f"'{customer.getName()}'"+Colors.END)
+            print(Colors.GREEN+"\nCustomer name has been changed from "\
+            +Colors.YELLOW+f"'{customer.getName()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{name}'"+Colors.END)
             self.pressAnyKeyToContinue()
+            self.editCustomerInfo(customer)
 #Edit customer ssn
         elif action =='2':
-            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Ssn/")
+            print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Ssn/\n"+Colors.END)
+            print(Colors.BLUE+"Editing customers ssn:"+Colors.END)
             name = customer.getName()
             ssn,age = cs.inputSsnCheck()
             address = customer.getAddress()
             number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
-            print(Colors.GREEN+"\nCustomer ssn has been changed to " +Colors.YELLOW+f"'{customer.getSsn()}'"+Colors.END)
+            print(Colors.GREEN+"\nCustomer address has been changed from "\
+            +Colors.YELLOW+f"'{customer.getSsn()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{ssn}'"+Colors.END)
             self.pressAnyKeyToContinue()
+            self.editCustomerInfo(customer)
 #Edit customer address
         elif action =='3':
-            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Address/")
+            print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Address/\n"+Colors.END)
+            print(Colors.BLUE+"Editing customers address:"+Colors.END)
             name = customer.getName()
             age = customer.getAge()
             ssn = customer.getSsn()
@@ -356,12 +364,15 @@ class SalesmanUi:
             number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
-            print(Colors.GREEN+"\nCustomer address has been changed to " +Colors.YELLOW+f"'{newCustomer.getAddress()}'"+Colors.END)
+            print(Colors.GREEN+"\nCustomer address has been changed from "\
+            +Colors.YELLOW+f"'{customer.getAddress()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{address}'"+Colors.END)
             self.pressAnyKeyToContinue()
+            self.editCustomerInfo(customer)
 
 #Edit all customer information
         elif action == '4':
-            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/All_Customer_Info/")
+            print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/All_Customer_Info/\n"+Colors.END)
+            print(Colors.BLUE+"Editing customers name, ssn and address:"+Colors.END)
             cs = CustomerService()
             name = cs.inputNameCheck()
             ssn,age = cs.inputSsnCheck()
@@ -369,11 +380,17 @@ class SalesmanUi:
             number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
-            print(Colors.GREEN+"\nCustomer name has been changed to " +Colors.YELLOW+f"'{customer.getName()}'"+Colors.END)
-            print(Colors.GREEN+"\nCustomer ssn has been changed to " +Colors.YELLOW+f"'{customer.getSsn()}'"+Colors.END)
-            print(Colors.GREEN+"\nCustomer address has been changed to " +Colors.YELLOW+f"'{customer.getAddress()}'"+Colors.END)
+# Name changed
+            print(Colors.GREEN+"\nCustomer address has been changed from "\
+            +Colors.YELLOW+f"'{customer.getName()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{name}'"+Colors.END)
+# Ssn changed
+            print(Colors.GREEN+"\nCustomer address has been changed from "\
+            +Colors.YELLOW+f"'{customer.getSsn()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{ssn}'"+Colors.END)
+# Address changed
+            print(Colors.GREEN+"\nCustomer address has been changed from "\
+            +Colors.YELLOW+f"'{customer.getAddress()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{address}'"+Colors.END)
             self.pressAnyKeyToContinue()
-
+            self.editCustomerInfo(customer)
         else:
             self.invalidAction(action)
             self.pressAnyKeyToContinue()
@@ -457,7 +474,7 @@ class SalesmanUi:
 
 # Print function that displays users action choice.
     def editCustomerInfoPrint(self):
-        print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/")
+        print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/"+Colors.END)
         self.actionsPrint()
         print(Colors.WHITE+"0. <-- Go back")
         print("1. Edit customer name")
