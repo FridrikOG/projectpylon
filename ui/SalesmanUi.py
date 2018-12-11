@@ -64,8 +64,9 @@ class SalesmanUi:
             
             elif action == '7':#####WORKING ON THIS
                 self.spaces()
-                orders, nothing = self.getAllOrders()
+                orders, nothing = self.__orderService.getAllOrders()
                 self.displayAllOrders(orders)
+                self.pressAnyKeyToContinue()
                 #print all orders and options
 
             elif action == '8':
@@ -277,7 +278,7 @@ class SalesmanUi:
                 customerNumber = customer.getNumber()
                 self.__customerService.restoringCustomer(customerNumber)
                 self.spaces()
-                print(Colors.GREEN+"Customer "+Colors.YELLOW+f"'{customer.getName()}'"+Colors.GREEN+" Reinstated."+Colors.END)  # Customer reinstated
+                print(Colors.GREEN+"Customer "+Colors.WHITE+f"'{customer.getName()}'"+Colors.GREEN+" has been reinstated."+Colors.END)  # Customer reinstated
                 self.pressAnyKeyToContinue()
                 self.spaces()
                 self.findCustomerMenu()
@@ -322,6 +323,11 @@ class SalesmanUi:
         cs = CustomerService()
         action = self.chooseAction()
         self.spaces()
+        name = customer.getName()
+        age = customer.getAge()
+        ssn = customer.getSsn()
+        address = customer.getAddress()
+        number = customer.getNumber()
         if action =='0':
             self.afterCustomerIsFoundMenu(customer)
 # Edit customer name
@@ -329,43 +335,32 @@ class SalesmanUi:
             print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Name/\n"+Colors.END)
             print(Colors.BLUE+"Editing customers name:"+Colors.END)
             name = cs.inputNameCheck()
-            age = customer.getAge()
-            ssn = customer.getSsn()
-            address = customer.getAddress()
-            number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
             print(Colors.GREEN+"\nCustomer name has been changed from "\
-            +Colors.YELLOW+f"'{customer.getName()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{name}'"+Colors.END)
+            +Colors.WHITE+f"'{customer.getName()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{name}'"+Colors.END)
             self.pressAnyKeyToContinue()
             self.editCustomerInfo(customer)
 #Edit customer ssn
         elif action =='2':
             print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Ssn/\n"+Colors.END)
             print(Colors.BLUE+"Editing customers ssn:"+Colors.END)
-            name = customer.getName()
             ssn,age = cs.inputSsnCheck()
-            address = customer.getAddress()
-            number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
             print(Colors.GREEN+"\nCustomer address has been changed from "\
-            +Colors.YELLOW+f"'{customer.getSsn()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{ssn}'"+Colors.END)
+            +Colors.WHITE+f"'{customer.getSsn()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{ssn}'"+Colors.END)
             self.pressAnyKeyToContinue()
             self.editCustomerInfo(customer)
 #Edit customer address
         elif action =='3':
             print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Address/\n"+Colors.END)
             print(Colors.BLUE+"Editing customers address:"+Colors.END)
-            name = customer.getName()
-            age = customer.getAge()
-            ssn = customer.getSsn()
             address = cs.inputAddressCheck()
-            number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
             print(Colors.GREEN+"\nCustomer address has been changed from "\
-            +Colors.YELLOW+f"'{customer.getAddress()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{address}'"+Colors.END)
+            +Colors.WHITE+f"'{customer.getAddress()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{address}'"+Colors.END)
             self.pressAnyKeyToContinue()
             self.editCustomerInfo(customer)
 
@@ -377,18 +372,17 @@ class SalesmanUi:
             name = cs.inputNameCheck()
             ssn,age = cs.inputSsnCheck()
             address = cs.inputAddressCheck()
-            number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
 # Name changed
             print(Colors.GREEN+"\nCustomer address has been changed from "\
-            +Colors.YELLOW+f"'{customer.getName()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{name}'"+Colors.END)
+            +Colors.WHITE+f"'{customer.getName()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{name}'"+Colors.END)
 # Ssn changed
             print(Colors.GREEN+"\nCustomer address has been changed from "\
-            +Colors.YELLOW+f"'{customer.getSsn()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{ssn}'"+Colors.END)
+            +Colors.WHITE+f"'{customer.getSsn()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{ssn}'"+Colors.END)
 # Address changed
             print(Colors.GREEN+"\nCustomer address has been changed from "\
-            +Colors.YELLOW+f"'{customer.getAddress()}'"+Colors.END+Colors.GREEN+" to "+Colors.YELLOW+f"'{address}'"+Colors.END)
+            +Colors.WHITE+f"'{customer.getAddress()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{address}'"+Colors.END)
             self.pressAnyKeyToContinue()
             self.editCustomerInfo(customer)
         else:
@@ -406,7 +400,7 @@ class SalesmanUi:
                 customerNumber = customer.getNumber()
                 self.__customerService.deletingCustomer(customerNumber)
                 self.spaces()
-                print(Colors.RED+"Customer "+Colors.YELLOW+f"'{customer.getName()}'"+Colors.RED+" Deleted."+Colors.END) # Customer Deleted
+                print(Colors.RED+"Customer "+Colors.WHITE+f"'{customer.getName()}'"+Colors.RED+" has been deleted."+Colors.END) # Customer Deleted
                 self.pressAnyKeyToContinue()
                 self.spaces()
                 self.findCustomerMenu()
@@ -771,7 +765,7 @@ class SalesmanUi:
             #menu? 
 
     def returnCarPrint(self):
-        print("Car has successfully been returned")
+        print(Colors.GREEN+"Car has successfully been returned"+Colors.END)
 
     def returnCarAdditionalPricePrint(self,price):
         print("Additional price to be paid for late delivery: {} ISK".format(price))

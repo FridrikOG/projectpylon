@@ -95,6 +95,7 @@ class CustomerRepository:
             for customer in listOfCustomers:
                 customerFile.write(f'{customer}\n')
 
+
 # Edits the customers information, with help from the previous functions.
     def customerEdit(self,newCustomer,fileDir):
         with open(fileDir, 'r') as customerFile:
@@ -117,8 +118,38 @@ class CustomerRepository:
                     self.__customers.append(newName+','+newage+','+newSsn+','+newAddress+','+customerNumber)
                 else:
                     self.__customers.append(name+','+age+','+ssn+','+address+','+number)
-            self.emptyingFile(fileDir)
-            self.addingCustomers(self.__customers,fileDir)
+            self.editingRepulation(self.__customers,fileDir)
+
+    def editingRepopulation(self,customerList,dataRemove):
+            with open(dataRemove, 'w') as customerFile:
+                customerFile.write('name,age,ssn,address,number\n')
+                for customer in customerList:
+                    customerFile.write(f'{customer}\n')
+
+
+# Edits the customers information, with help from the previous functions.
+    def customerEdit(self,newCustomer,fileDir):
+        with open(fileDir, 'r') as customerFile:
+            csvReader = csv.DictReader(customerFile)
+            customerNumber = newCustomer.getNumber()
+            self.__customers = []
+            for line in csvReader:
+                name = line['name']
+                age = line['age']
+                ssn = line['ssn']
+                address = line['address']
+                number = line['number']
+                if number != customerNumber and number < customerNumber:
+                    self.__customers.append(name+','+age+','+ssn+','+address+','+number)
+                elif number == customerNumber:
+                    newName = newCustomer.getName()
+                    newage = newCustomer.getAge()
+                    newSsn = newCustomer.getSsn()
+                    newAddress = newCustomer.getAddress()
+                    self.__customers.append(newName+','+newage+','+newSsn+','+newAddress+','+customerNumber)
+                else:
+                    self.__customers.append(name+','+age+','+ssn+','+address+','+number)
+            self.editingRepopulation(self.__customers,fileDir)
 
 
 # Checks if the ssn already exists in the system when creating a new customer or
