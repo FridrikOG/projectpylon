@@ -557,7 +557,7 @@ class SalesmanUi:
         rentOutCar, unusedValue = self.getTimeOfOrder()
         returnCar = rentOutCar
         newCar = Car(carType,make,liecensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
-        print("\nCar successfully created!")
+        print(Colors.GREEN+"\nCar successfully created!"+Colors.END)
         self.printCarHeader()
         print(newCar)
 
@@ -646,7 +646,6 @@ class SalesmanUi:
             self.rentOutToCustomerMenu()
 
     def selectCarType(self):
-        self.spaces()
         self.selectCarTypePrintMenu()
 
         action = self.__orderService.checkCarTypeSelection()
@@ -655,6 +654,7 @@ class SalesmanUi:
         return rentCost, carType
 
     def getCostOfOrder(self, rentOutCarTime, returnCarTime, rentCost):
+        self.spaces()
         daysRented = returnCarTime - rentOutCarTime
         if daysRented.seconds > 00:
             daysRentedCount = daysRented + timedelta(days = 1)
@@ -671,9 +671,9 @@ class SalesmanUi:
         return totalCost, totalDaysRented
 
     def addInsurance(self, cost):
-        self.spaces()
         self.addInsurancePrint()
         action = self.chooseAction()
+        self.spaces()
         insurance = 0
         if action == '1':
             totalCost = cost * 1.05
@@ -710,7 +710,6 @@ class SalesmanUi:
             self.areYouSure()
 
     def finalStepOrder(self, order):
-        self.spaces()
         self.finalStepOrderPrint()
         action = self.chooseAction()
         if action == '1':
@@ -729,7 +728,7 @@ class SalesmanUi:
         else:
             self.invalidAction(action)
             self.pressAnyKeyToContinue()
-            self.finalStepOrder()
+            self.finalStepOrder(order)
 
     def createOrder(self):
         self.spaces()
@@ -744,13 +743,13 @@ class SalesmanUi:
             self.customerFound()
             self.displayCustomerHeaderPrint()
             print(customer)
-            self.pressAnyKeyToContinue()
             self.rentOutToCustomerMenu()
         except:
             self.customerNotFound()
             self.customerNotFoundMenu()
         nothing, orderNumber = self.__orderService.getAllOrders()
         rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate(True)
+        self.pressAnyKeyToContinue
         rentCost, carType = self.selectCarType()
         #calculate direct costs
         carCost, totalDaysRented = self.getCostOfOrder(rentOutCarTime, returnCarTime, rentCost)
