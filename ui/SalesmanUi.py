@@ -82,9 +82,12 @@ class SalesmanUi:
                 self.spaces()
                 newCar = self.createCar()
                 self.__carService.addCar(newCar)
+# Edit a car
+            elif action == '12':
+                pass
 
 # Prints out the pricelist for cars.
-            elif action == '12':
+            elif action == '13':
                 self.spaces()
                 print(open('./data/pricelist.txt').read())
                 action = self.pressAnyKeyToContinue()
@@ -119,7 +122,8 @@ class SalesmanUi:
         print("9.  Rent out a car")
         print("10. Return a car")
         print("11. Register car")
-        print("12. Prints out pricelist for cars."+Colors.END)
+        print("12. Edit a car")
+        print("13. Pricelist for cars."+Colors.END)
         print(Colors.BLUE+"Press q to quit\n"+Colors.END)
     
 
@@ -741,7 +745,7 @@ class SalesmanUi:
 
     def createOrder(self):
         self.spaces()
-        print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/" + Colors.END)
+        print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Searching_Customer/" + Colors.END)
         #Order Number
         self.searchCustomerForCarRentalHeaderPrint()
         searchTerm = self.searchTermInput()
@@ -749,12 +753,14 @@ class SalesmanUi:
             customer = self.__customerService.findCustomer(searchTerm)
             name = customer.getName()
             ssn = customer.getSsn()
-            print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Customer_Found/" + Colors.END)
+            self.spaces()
+            print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Customer_Found/\n" + Colors.END)
             self.customerFound()
             self.displayCustomerHeaderPrint()
             print(Colors.WHITE+(str(customer))+Colors.END)
             self.rentOutToCustomerMenu()
         except:
+            print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Customer_Not_Found/" + Colors.END)
             self.customerNotFound()
             self.customerNotFoundMenu()
         nothing, orderNumber = self.__orderService.getAllOrders()

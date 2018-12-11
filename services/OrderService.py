@@ -1,5 +1,6 @@
 from repositories.OrderRepository import OrderRepository
 from datetime import datetime, timedelta
+from models.Colors import Colors
 
 class OrderService:
     
@@ -20,16 +21,16 @@ class OrderService:
 
         if newOrder == True:
             while True:
-                print("\nInput time of rental:")
+                print(Colors.BLUE+"\nInput time of rental:"+Colors.END)
                 rentOutCar = self.InputValidDate()
                 rentOutCarTime = self.getTime(rentOutCar)
                 if rentOutCarTime > datetime.now():
                     break
                 else: 
-                    print('\nPlease insert valid start of rental time\n')
+                    print(Colors.WHITE+'\nPlease insert valid start of rental time\n'+Colors.END)
                     
             while True:
-                print("\nInput time of return:")
+                print(Colors.BLUE+"\nInput time of return:"+Colors.END)
                 returnCar = self.InputValidDate()
                 returnCarTime = self.getTime(returnCar)
                 if returnCarTime > rentOutCarTime:
@@ -39,7 +40,7 @@ class OrderService:
         #ef ekki ný pöntun
         else:
             while True:
-                print("\nInput time of return:")
+                print(Colors.BLUE+"\nInput time of return:"+Colors.END)
                 returnCar = self.InputValidDate()
                 returnCarTime = self.getTime(returnCar)
                 if returnCarTime.day >= datetime.now().day and returnCarTime.month >= datetime.now().month:
@@ -57,30 +58,30 @@ class OrderService:
             day, month, year, hour, minutes = map(int, date.split('-'))
             return datetime(year, month, day, hour, minutes)
         except ValueError:
-            print("Not a valid time")
+            print(Colors.WHITE+"Not a valid time"+Colors.END)
 
     def InputValidDate(self):
         while True:
             try:
-                dateInput = input('1/2 - Input date in this format DD-MM-YYYY: ')
-                timeInput = input('2/2 - Input time in this format HH:MM: ')
+                dateInput = input(Colors.WHITE+'1/2 - Input date in this format DD-MM-YYYY: '+Colors.END)
+                timeInput = input(Colors.WHITE+'2/2 - Input time in this format HH:MM: '+Colors.END)
                 day, month, year = map(int, dateInput.split('-'))
                 hour, minutes = map(int,timeInput.split(':'))
                 finalDateTime = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
                 break
             except:
-                print("\nplease input a valid date\n")
+                print(Colors.WHITE+"\nplease input a valid date\n"+Colors.WHITE)
         return finalDateTime
 
     def checkCarTypeSelection(self):
         while True:
             try:
-                action = input("\nSelect car type for rental: ")
+                action = input(Colors.BLUE+"\nSelect car type for rental: "+Colors.END)
                 checkint = int(action)
                 if '0' <= action <= '5':
                     return action
             except:
-                print("\nPlease choose from available options")
+                print(Colors.WHITE+"\nPlease choose from available options"+Colors.END)
 
 
 
