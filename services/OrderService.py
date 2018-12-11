@@ -13,6 +13,25 @@ class OrderService:
     def addOrder(self, order):
         self.__orderRepo.addOrder(order)
 
+    def creditCardInfo(self):
+        while True:
+            try:
+                print("\nInsert credit card information for insurance in this format XXXX-XXXX-XXXX-XXXX")
+                creditCard = input("Credit card: ")
+                creditList = creditCard.split('-')
+                for split in creditList:
+                    int(split)
+                    splitList = []
+                    for x in split:
+                        splitList.append(x)
+                        len(splitList) == 4
+                    len(creditList) == 4
+                return False
+            except:
+                print("\nPlease insert a valid credit card")
+        return creditCard
+
+
     def createDate(self, rentDate):
         day, month, year, hour, minutes = map(int, rentDate.split('-'))
         return datetime(year, month, day, hour, minutes)
@@ -49,9 +68,31 @@ class OrderService:
                     print('Please insert valid end of rental time')
             return returnCar
 
+    def checkOrderNumber(self):
+        while True:
+            try:
+                orderNumber = input("Enter Order number: ")
+                intOrder = int(orderNumber)
+                self.__orderRepo.checkOrderNumber(orderNumber)
+                orderInfo = self.__orderRepo.findOrder(orderNumber)
+                break
+            except:
+                print("Order number does not exist")
+        return orderNumber, orderInfo
 
-        
-        
+    def editTimeOfRental(self, startOfRental, endOfRental, rentCost, orderNumber):
+        #     #edit order
+        updatedOrder = self.__orderRepo.editOrderVariable('1', orderNumber, startOfRental, endOfRental, rentCost)
+        return updatedOrder
+
+    def editCarType(self, totalCost, carType, orderNumber):
+        updatedCar = self.__orderRepo.editOrderVariable('2', orderNumber, totalCost, carType)
+        return updatedCar
+
+    def cancelOrder(self, orderNumber):
+        canceledOrder = self.__orderRepo.editOrderVariable('3', orderNumber)
+        return canceledOrder
+
 
     def getTime(self, date):
         try:

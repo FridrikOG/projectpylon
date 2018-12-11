@@ -67,50 +67,50 @@ class CarRepository:
                         self.__carsUnavailable.append(newCar)  
                         if carType == 'Compact':
                             self.__carsCompactUnavailable.append(newCar)
-                        if carType == 'Comfort':
+                        elif carType == 'Comfort':
                             self.__carsComfortUnavailable.append(newCar)  
-                        if carType == 'Luxury':
+                        elif carType == 'Luxury':
                             self.__carsLuxuryUnavailable.append(newCar)
-                        if carType == 'CUV':
+                        elif carType == 'CUV':
                             self.__carsCUVUnavailable.append(newCar)  
-                        if carType == 'Highland':
+                        elif carType == 'Highland':
                             self.__carsHighlandUnavailable.append(newCar) 
                     else:
                         self.__carsAvailable.append(newCar)  
                         if carType == 'Compact':
                             self.__carsCompactAvailable.append(newCar)
-                        if carType == 'Comfort':
+                        elif carType == 'Comfort':
                             self.__carsComfortAvailable.append(newCar)  
-                        if carType == 'Luxury':
+                        elif carType == 'Luxury':
                             self.__carsLuxuryAvailable.append(newCar)
-                        if carType == 'CUV':
+                        elif carType == 'CUV':
                             self.__carsCUVAvailable.append(newCar)  
-                        if carType == 'Highland':
+                        elif carType == 'Highland':
                             self.__carsHighlandAvailable.append(newCar)               
                        
             if action == '1' and typeAction == '':
                 return self.__carsAvailable
-            if action == '1' and typeAction == 'compact':
+            elif action == '1' and typeAction == 'compact':
                 return self.__carsCompactAvailable
-            if action == '1' and typeAction == 'comfort':
+            elif action == '1' and typeAction == 'comfort':
                 return self.__carsComfortAvailable
-            if action == '1' and typeAction == 'luxury':
+            elif action == '1' and typeAction == 'luxury':
                 return self.__carsLuxuryAvailable
-            if action == '1' and typeAction == 'highland':
+            elif action == '1' and typeAction == 'highland':
                 return self.__carsHighlandAvailable
-            if action == '1' and typeAction == 'CUV':
+            elif action == '1' and typeAction == 'CUV':
                 return self.__carsCUVAvailable
-            if action == '2' and typeAction == '':
+            elif action == '2' and typeAction == '':
                 return self.__carsUnavailable
-            if action == '2' and typeAction == 'compact':
+            elif action == '2' and typeAction == 'compact':
                 return self.__carsCompactUnavailable
-            if action == '2' and typeAction == 'comfort':
+            elif action == '2' and typeAction == 'comfort':
                 return self.__carsComfortUnavailable
-            if action == '2' and typeAction == 'luxury':
+            elif action == '2' and typeAction == 'luxury':
                 return self.__carsLuxuryUnavailable
-            if action == '2' and typeAction == 'highland':
+            elif action == '2' and typeAction == 'highland':
                 return self.__carsHighlandUnavailable
-            if action == '2' and typeAction == 'CUV':
+            elif action == '2' and typeAction == 'CUV':
                 return self.__carsCUVUnavailable
 
     def duplicateLicensePlateCheck(self, newLicensePlate):
@@ -152,4 +152,53 @@ class CarRepository:
             writer.writeheader()
             writer.writerows(lines)
             
+        return returnCarInfo
+
+    def LicensePlateCheck(self, newLicensePlate):
+        with open('./data/cars.csv', 'r') as customerFile:
+            csvReader = csv.DictReader(customerFile)
+            for line in csvReader:
+                    licensePlate = line['licenseplate']
+                    if newLicensePlate == licensePlate:
+                        carType = line['type']
+                        make = line['make']
+                        color = line['color']
+                        passengers = line['passengers']
+                        transmission = line['transmission']
+                        rentcost = line['rentcost']
+                        status = line['status']
+                        rentOutCar = self.createDate(line['rentout'])
+                        returnCar = self.createDate(line['return'])
+                        returnCarInfo = Car(carType, make,licensePlate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
+                        return returnCarInfo
+            return True
+
+    def editCar(self, carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar):
+        with open ('./data/cars.csv') as carFile:
+            header = ('type','make','licenseplate','color','passengers','transmission','rentcost','status','rentout','return')
+            csvReader = csv.DictReader(carFile, header)
+            next(carFile, None)
+            lines = []
+            for line in csvReader:
+                if line['licenseplate'] == licenseplate:
+                    # Edit car info.
+                    line['status'] = status
+                    line['type'] = carType
+                    line['make'] = make
+                    line['color'] = color
+                    line['passengers'] = passengers
+                    line['transmission'] = transmission 
+                    line['rentcost'] = rentcost
+                    line['rentout'] = rentOutCar
+                    line['return'] = returnCar
+                    lines.append(line)
+                    returnCarInfo = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
+
+                else:
+                    lines.append(line)
+        with open('./data/cars.csv', 'w') as carFile:
+            writer = csv.DictWriter(carFile, fieldnames=header)
+            writer.writeheader()
+            writer.writerows(lines)
+
         return returnCarInfo

@@ -34,7 +34,6 @@ class CarService:
                 print("Please only insert integer values\n")
         return str(carTypeInput)
 
-
     def checkPassengers(self):
         while True:
             try:
@@ -44,8 +43,6 @@ class CarService:
                 print("\nPlease only insert integer values\n")
         return passengers
         
-
-
     def checkTransmission(self):
         print("Transmission:\n1. Auto\n2. Manual\n")
 
@@ -60,7 +57,6 @@ class CarService:
                 print("Please only insert integer values\n")
         return transmissionInput
 
-
     def checkLicenseplate(self, newCar=True):
         licensePlate = ''
         booleanCheck = False
@@ -74,9 +70,7 @@ class CarService:
                 booleanCheck = True
             else:
                 print("License plate has to match the format")
-
         return licensePlate
-    
   
     def findCar(self, licenseplate, TimeOfOrder):
         theFoundLicenseplate = self.__carRepo.findCar(licenseplate, TimeOfOrder)
@@ -85,5 +79,8 @@ class CarService:
         else:
             return theFoundLicenseplate
 
-    def carEdit(self, newCar):
-        self.__carRepo.carEdit(newCar)
+    def licensePlateCheck(self, licensePlate):
+        return self.__carRepo.LicensePlateCheck(licensePlate)
+    
+    def editCar(self, carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar):
+        return self.__carRepo.editCar(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
