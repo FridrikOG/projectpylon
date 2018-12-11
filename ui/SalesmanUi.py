@@ -318,11 +318,12 @@ class SalesmanUi:
 # The menu for editing the customer information, Number stays the same
     def editCustomerInfo(self,customer):
         self.spaces()
-        self.editCustomerInfoMenu()
+        self.editCustomerInfoPrint()
         cs = CustomerService()
         action = self.chooseAction()
 # Edit customer name
         if action =='1':
+            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Name")
             name = cs.inputNameCheck()
             age = customer.getAge()
             ssn = customer.getSsn()
@@ -330,17 +331,9 @@ class SalesmanUi:
             number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
-#Edit customer age
-        if action =='2':
-            name = customer.getName()
-            age = cs.inputAgeCheck()
-            ssn = customer.getSsn()
-            address = customer.getAddress()
-            number = customer.getNumber()
-            newCustomer = Customer(name,age,ssn,address,number)
-            cs.customerEdit(newCustomer)
 #Edit customer ssn
-        if action =='3':
+        if action =='2':
+            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Ssn/")
             name = customer.getName()
             age = customer.getAge()
             ssn = cs.inputSsnCheck()
@@ -349,8 +342,8 @@ class SalesmanUi:
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
 #Edit customer address
-        if action =='4':
-            
+        if action =='3':
+            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Address/")
             name = customer.getName()
             age = age = customer.getAge()
             ssn = customer.getSsn()
@@ -361,7 +354,7 @@ class SalesmanUi:
 
 
 #Edit all customer information
-        if action == '5':
+        if action == '4':
             cs = CustomerService()
             name = cs.inputNameCheck()
             age = cs.inputAgeCheck()
@@ -445,15 +438,15 @@ class SalesmanUi:
         print("1. Reinstate selected customer"+Colors.END)
 
 # 
-    def afterCustomerIsFoundPrint(self):                                                           # VANTAR PATH
-        print("Path")
+    def afterCustomerIsFoundPrint(self):
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back")
         print("1. Edit customer info")
         print("2. Delete customer"+Colors.END)
 
 # Print function that displays users action choice.
-    def editCustomerInfoMenu(self):                                                                # VANTAR PATH
+    def editCustomerInfoPrint(self):
+        print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/")
         self.actionsPrint()
         print(Colors.WHITE+"0. <-- Go back")
         print("1. Edit customer name")
