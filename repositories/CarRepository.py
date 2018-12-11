@@ -123,17 +123,34 @@ class CarRepository:
                         return False
             return True
 
-    def findCar(self, licenseplate, TimeOfReturn):
+    def findCar(self, licenseplate, timeOfReturn):
         with open ('./data/cars.csv') as carFile:
-            csvReader = csv.DictReader(carFile)
+            header = ('type','make','licenseplate','color','passengers','transmission','rentcost','status','rentout','return')
+            csvReader = csv.DictReader(carFile, header)
+            next(carFile, None)
             lines = []
-            header = ('type,make,licenseplate,color,passengers,transmission,rentcost,status,rentout,return')
             for line in csvReader:
                 if line['licenseplate'] == licenseplate:
+                    # Return car befor changes
+                    carType = line['type']
+                    make = line['make']
+                    color = line['color']
+                    passengers = line['passengers']
+                    transmission = line['transmission']
+                    rentcost = line['rentcost']
+                    status = line['status']
+                    rentOutCar = self.createDate(line['rentout'])
+                    returnCar = self.createDate(line['return'])
+                    returnCarInfo = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
+                    # Change car status
                     line['status'] = 'available'
-                    line['return'] = TimeOfReturn#strengur
+                    line['return'] = timeOfReturn #strengur
                     lines.append(line)
                 else:
                     lines.append(line)
-            w = csv.DictWriter('./data/cars.csv', 'w', header)
-            w.writerows(lines)
+        with open('./data/cars.csv', 'w') as carFile:
+            writer = csv.DictWriter(carFile, fieldnames=header)
+            writer.writeheader()
+            writer.writerows(lines)
+            
+        return returnCarInfo

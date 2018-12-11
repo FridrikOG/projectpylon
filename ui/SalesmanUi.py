@@ -68,6 +68,9 @@ class SalesmanUi:
                 self.displayAllOrders(orders)
                 #print all orders and options
 
+            elif action == '8':
+                self.returnCar()
+
 # Register a car
             elif action == '10':
                 self.spaces()
@@ -727,20 +730,34 @@ class SalesmanUi:
         for order in orders:
             print(order) 
             #menu? 
+
+    def returnCarPrint(self):
+        print("Car has successfully been returned")
+
+    def returnCarAdditionalPricePrint(self,price):
+        print("Additional price to be paid for late delivery: {} ISK".format(price))
+    
+    def returnCarAdditionalPrice(self, returnTimeDifference, searchedCar):
+        hourPrice = int(searchedCar.getRentcost())/24*1.25
+        hours = returnTimeDifference.seconds / 60 / 60
+        price = hours * hourPrice
+        self.returnCarAdditionalPricePrint(int(price))
     
     def returnCar(self):
-        liecensePlate = self.__carService.checkliecensePlate(False)
+        licenseplate = self.__carService.checkLicenseplate(False)
         self.printReturnMenu()
-        action = self.actionsPrint
+        action = input("Choose action: ")#error check
         if action == '0':
             self.returnCar()
         elif action == '1':
-            timeOfReturn = self.__carService.checkValidDate()
-            searchedCar = self.__carService.findCar(liecensePlate, timeOfReturn)
-        else:
-            self.invalidAction(action)
-            self.pressAnythingToContinue()
-            self.returnCar()
+            timeOfReturn = self.__orderService.checkValidDate()
+            timeOfreturnInputTimeFormat = self.__orderService.createDate(timeOfReturn)
+            searchedCar = self.__carService.findCar(licenseplate, timeOfReturn)
+            returnTimeDifference = timeOfreturnInputTimeFormat - searchedCar.getReturnCar()
+
+            if returnTimeDifference.seconds > 0:
+                self.returnCarAdditionalPrice(returnTimeDifference, searchedCar)
+            self.returnCarPrint()
 
     '''--------------------------ORDER PRINT FUNCTIONS--------------------------'''
     def rentOutToCustomerPrintMenu(self):

@@ -11,13 +11,16 @@ class OrderService:
 
     def addOrder(self, order):
         self.__orderRepo.addOrder(order)
-    
 
+    def createDate(self, rentDate):
+        day, month, year, hour, minutes = map(int, rentDate.split('-'))
+        return datetime(year, month, day, hour, minutes)
 
     def checkValidDate(self, newOrder=False):#SEGJA AÐ SÉ SATT FYRIR NEW ORDER
-        print("\nInput time of rental:")
+
         if newOrder == True:
             while True:
+                print("\nInput time of rental:")
                 rentOutCar = self.InputValidDate()
                 rentOutCarTime = self.getTime(rentOutCar)
                 if rentOutCarTime > datetime.now():
@@ -39,11 +42,11 @@ class OrderService:
                 print("\nInput time of return:")
                 returnCar = self.InputValidDate()
                 returnCarTime = self.getTime(returnCar)
-                if returnCarTime.date >= datetime.now().date:
+                if returnCarTime.day >= datetime.now().day and returnCarTime.month >= datetime.now().month:
                     break
                 else:
                     print('Please insert valid end of rental time')
-                    return returnCar
+            return returnCar
 
 
         
