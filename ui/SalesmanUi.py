@@ -323,7 +323,7 @@ class SalesmanUi:
         action = self.chooseAction()
 # Edit customer name
         if action =='1':
-            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Name")
+            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Name/")
             name = cs.inputNameCheck()
             age = customer.getAge()
             ssn = customer.getSsn()
@@ -355,6 +355,7 @@ class SalesmanUi:
 
 #Edit all customer information
         if action == '4':
+            print("Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/")
             cs = CustomerService()
             name = cs.inputNameCheck()
             age = cs.inputAgeCheck()
