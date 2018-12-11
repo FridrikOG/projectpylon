@@ -171,7 +171,7 @@ class SalesmanUi:
         + Colors.END)
 
     def invalidAction(self,action):
-        print(Colors.RED+"\nAction "+Colors.GREEN+f"'{action}'"+Colors.RED+" is not a valid action!"+Colors.END)
+        print(Colors.RED+"\nAction "+Colors.WHITE+f"'{action}'"+Colors.RED+" is not a valid action!"+Colors.END)
         # else:
         # self.invalidAction(action)
         # self.pressAnyKeyToContinue()
@@ -344,7 +344,7 @@ class SalesmanUi:
             number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
-            print(Colors.GREEN+"\nCustomer ssn has been changed to " +Colors.YELLOW+f"'{customer.getSsn()()}'"+Colors.END)
+            print(Colors.GREEN+"\nCustomer ssn has been changed to " +Colors.YELLOW+f"'{customer.getSsn()}'"+Colors.END)
             self.pressAnyKeyToContinue()
 #Edit customer address
         elif action =='3':
@@ -356,7 +356,7 @@ class SalesmanUi:
             number = customer.getNumber()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
-            print(Colors.GREEN+"\nCustomer address has been changed to " +Colors.YELLOW+f"'{customer.getAddress()}'"+Colors.END)
+            print(Colors.GREEN+"\nCustomer address has been changed to " +Colors.YELLOW+f"'{newCustomer.getAddress()}'"+Colors.END)
             self.pressAnyKeyToContinue()
 
 #Edit all customer information
