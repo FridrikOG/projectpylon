@@ -811,16 +811,6 @@ class SalesmanUi:
         print(Colors.WHITE+"0. Go back to main menu")
         print("1. Search again"+Colors.END)
 
-    def rentOutToCustomerPrintMenu(self):
-        self.actionsPrint()
-        print(Colors.WHITE+"0. Go back to main menu")
-        print("1. Select customer"+Colors.END)
-
-    def customerNotFoundPrintMenu(self):
-        self.actionsPrint()
-        print(Colors.WHITE+"0. Go back to main menu")
-        print("1. Search again"+Colors.END)
-
     def selectCarTypePrintMenu(self):
         self.actionsPrint()
         print(Colors.WHITE+"0. <-- Go back")
