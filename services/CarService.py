@@ -68,9 +68,10 @@ class CarService:
             licensePlate = input("License plate (F.x. LL-L00): ").upper()
             if len(licensePlate) == 6 and newCar == True:
                 booleanCheck = self.__carRepo.duplicateLicensePlateCheck(str(licensePlate))
+                if booleanCheck == False:
+                    print("License plate already registered!")
             elif len(licensePlate) == 6:
                 booleanCheck = True
-                pass
             else:
                 print("License plate has to match the format")
 

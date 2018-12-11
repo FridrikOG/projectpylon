@@ -29,8 +29,8 @@ class SalesmanUi:
                 typeAction = ''
                 dateAvailable = datetime.now()
                 if action == '1':
-                    print(Colors.WHITE + "\nPath: Menu/Available_Cars/" + Colors.END)
                     self.allAvailableCars()
+                    print(Colors.WHITE + "\nPath: Menu/Available_Cars/" + Colors.END)
                 elif action == '2':
                     print(Colors.WHITE + "\nPath: Menu/UnAvailable_Cars/" + Colors.END)
                     self.allUnAvilableCars()
@@ -105,13 +105,13 @@ class SalesmanUi:
         print(Colors.BLUE + "You can do the following:" + Colors.END)
         print(Colors.WHITE + "1.  List all available cars")
         print("2.  List all unavailable cars")
-        print("3.  Create car reservation.")
-        print("4.  Register customer.")
-        print("5.  Find a customer.")
-        print("6.  Look up an order.")
-        print("7.  Show list of orders.")
-        print("8.  Return a car.")
-        print("9.  Edit order.")
+        print("3.  Create car reservation")
+        print("4.  Register customer")
+        print("5.  Find a customer")
+        print("6.  Look up an order")
+        print("7.  Show list of orders")
+        print("8.  Return a car")
+        print("9.  Edit order")
         print("10. Register car")
         print("11. Prints out pricelist for cars."+Colors.END)
         print(Colors.BLUE+"Press q to quit\n"+Colors.END)
@@ -136,7 +136,7 @@ class SalesmanUi:
         print(Colors.GREEN + "Customer found!" + Colors.END)
 
     def customerNotFound(self):
-        print(Colors.RED + "Customer not found!" + Colors.END)
+        print(Colors.RED + "\nCustomer not found!" + Colors.END)
 
     def searchTermInput(self):
         searchTerm = input(Colors.BLUE + "Enter SSN or Customer number to find: " + Colors.END)
@@ -499,32 +499,42 @@ class SalesmanUi:
                 self.mainMenu()
             elif action == '1':
                 if typeAction == '1':
+                    print(Colors.WHITE + "\nPath: Menu/Available_Cars/Compact/" + Colors.END)
                     self.allAvailableCars()
                 elif typeAction == '2':
+                    print(Colors.WHITE + "\nPath: Menu/UnAvailable_Cars/Compact/" + Colors.END)
                     self.allUnAvilableCars()
                 action = 'compact'
             elif action == '2':
                 if typeAction == '1':
+                    print(Colors.WHITE + "\nPath: Menu/Available_Cars/Comfort/" + Colors.END)
                     self.allAvailableCars()
                 elif typeAction == '2':
+                    print(Colors.WHITE + "\nPath: Menu/UnAvailable_Cars/Comfort/" + Colors.END)
                     self.allUnAvilableCars()
                 action = 'comfort'
             elif action == '3':
                 if typeAction == '1':
+                    print(Colors.WHITE + "\nPath: Menu/Available_Cars/CUV/" + Colors.END)
                     self.allAvailableCars()
                 elif typeAction == '2':
+                    print(Colors.WHITE + "\nPath: Menu/UnAvailable_Cars/CUV/" + Colors.END)
                     self.allUnAvilableCars()
                 action = 'CUV'
             elif action == '4':
                 if typeAction == '1':
+                    print(Colors.WHITE + "\nPath: Menu/Available_Cars/Highland/" + Colors.END)
                     self.allAvailableCars()
                 elif typeAction == '2':
+                    print(Colors.WHITE + "\nPath: Menu/UnAvailable_Cars/Highland/" + Colors.END)
                     self.allUnAvilableCars()
                 action = 'highland'
             elif action == '5':
                 if typeAction == '1':
+                    print(Colors.WHITE + "\nPath: Menu/Available_Cars/Luxury/" + Colors.END)
                     self.allAvailableCars()
                 elif typeAction == '2':
+                    print(Colors.WHITE + "\nPath: Menu/UnAvailable_Cars/Luxury/" + Colors.END)
                     self.allUnAvilableCars()
                 action = 'luxury'
             else:
@@ -554,7 +564,6 @@ class SalesmanUi:
         print(Colors.GREEN+"\nCar successfully created!"+Colors.END)
         self.printCarHeader()
         print(newCar)
-
         return newCar
 
 
@@ -587,7 +596,7 @@ class SalesmanUi:
     def displayAllCarsPrint(self,cars):
         self.printCarHeader()
         for car in cars:
-            print(car)
+            print(Colors.WHITE+(str(car))+Colors.END)
 
     def findCarTypeMenuPrint(self):
         self.actionsPrint()
@@ -608,14 +617,13 @@ class SalesmanUi:
 
     def printCarHeader(self):
         LINE = '---------------'
-        print("\n{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
-        'Color', 'Passengers','Transmission','Rent Cost'))
-        print("{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE))
+        print(Colors.BLUE+"\n{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
+        'Color', 'Passengers','Transmission','Rent Cost'+Colors.END))
+        print(Colors.BLUE+"{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE)+Colors.END)
 
 
     '''----------------------------------ORDER FUNCTIONS-----------------------------------------------'''
     def customerNotFoundMenu(self):
-        self.spaces()
         self.customerNotFoundPrintMenu()
         action = self.chooseAction()
         if action == '0':

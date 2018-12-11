@@ -119,7 +119,6 @@ class CarRepository:
             for line in csvReader:
                     licensePlate = line['licenseplate']
                     if newLicensePlate == licensePlate:
-                        print("License plate already registered!")
                         return False
             return True
 
