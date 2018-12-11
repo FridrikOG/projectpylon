@@ -9,8 +9,8 @@ class CustomerRepository:
 
 # fileDir = Filedirectory
  # Takes in fileDir and writes into the file information about the customer
-    def addCustomer(self,customer,fileDir):
-        with open(fileDir,'a',) as customerFile:
+    def addCustomer(self,customer,customerFile):
+        with open(customerFile,'a',) as customerFile:
             name = customer.getName()
             age = customer.getAge()
             ssn = customer.getSsn()
@@ -18,9 +18,9 @@ class CustomerRepository:
             number = customer.getNumber()
             customerFile.write(f'{name},{age},{ssn},{address},{number}\n')
 
-# Appends all the customers from 'fileDir' to a list then sends it back where it is printed out
-    def getAllCustomers(self, fileDir):
-        with open(fileDir, 'r') as customerFile:
+# filedir = customers.cvs Appends all the customers from 'fileDir' to a list then sends it back where it is printed out
+    def getAllCustomers(self, customerFile):
+        with open(customerFile, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             self.__customers = []
             for line in csvReader:
@@ -36,8 +36,8 @@ class CustomerRepository:
 
 # Search engine that can search in whatever directory required.
 # Finds a customer in a dir when customerNumber or ssn is inputted
-    def findCustomer(self, searchTerm,fileDir):
-        with open(fileDir, 'r') as customerFile:
+    def findCustomer(self, searchTerm,customerFile):
+        with open(customerFile, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             for line in csvReader:
                     name = line['name']
@@ -51,8 +51,8 @@ class CustomerRepository:
 
 # Counts how many ssn in fileDir.
     # such that a customer recieves his own customerNumber in the system.
-    def countingCustomers(self, fileDir):
-        with open(fileDir, 'r') as customerFile:
+    def countingCustomers(self, customerFile):
+        with open(customerFile, 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             self.__ssnList = []
             for line in csvReader:

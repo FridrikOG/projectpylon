@@ -8,6 +8,7 @@ class CustomerService:
         self.__customerRepo = CustomerRepository()
         self.__CUSTFILE = './data/customers.csv'
         self.__CUSTDELFILE = './data/customersDeleted.csv'
+        self.__ADDINGONECUSTOMER = 1
 
 
     def addCustomer(self, customer):
@@ -40,8 +41,8 @@ class CustomerService:
         return self.__customerRepo.countingCustomers(self.__CUSTDELFILE)
 #This function takes the sum of both deleted and current registered customers and returns a total to keep count.
     def getSumOfAllCustomers(self):
-        ADDINGONECUSTOMER = 1
-        sumOfAllCustomers = len(self.countingDeletedCustomers()) + len(self.countingCustomers()) + ADDINGONECUSTOMER
+        
+        sumOfAllCustomers = len(self.countingDeletedCustomers()) + len(self.countingCustomers()) + self.__ADDINGONECUSTOMER
         return sumOfAllCustomers
     
     def deletingCustomer(self,customerNumber):
@@ -87,12 +88,14 @@ class CustomerService:
                 
     
 # Input check for the ssn of the customer
+# 
+# 
     def inputSsnCheck(self):
         ssn = ''
         booleanCheck = False
         while len(str(ssn)) != 10 or not booleanCheck:
             try:
-                ssn = int(input("Step 2/3 - Enter an SSN of 10 numbers: "))
+                ssn = input("Step 2/3 - Enter an SSN of 10 numbers: ")
                 age = self.inputAgeCheck(ssn)
                 if age < 21:
                     print("Customer has to be above the age of 21")
@@ -105,6 +108,7 @@ class CustomerService:
         return str(ssn), age
 
 # Input check for the address of the customer
+
     def inputAddressCheck(self):
         address = input("Step 3/3 - Enter address: ").capitalize()
         return address
