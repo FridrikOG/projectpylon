@@ -74,8 +74,7 @@ class SalesmanUi:
 # Register a car
             elif action == '10':
                 self.spaces()
-                carType,make,liecensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar = self.createCar()
-                newCar = Car(carType,make,liecensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
+                newCar = self.createCar()
                 self.__carService.addCar(newCar)
 
 # Prints out the pricelist for cars.
@@ -510,7 +509,7 @@ class SalesmanUi:
         color = input('Color: ').capitalize()
         passengers = self.__carService.checkPassengers()
         transmissionInput = self.__carService.checkTransmission()
-        liecensePlate = self.__carService.checkliecensePlate()
+        liecensePlate = self.__carService.checkLicenseplate()
 
         transmission = self.getTransmission(transmissionInput)
         rentCost, carType = self.getCarTypeVariables(carTypeInput)
@@ -521,7 +520,8 @@ class SalesmanUi:
         print("\nCar successfully created!")
         self.printCarHeader()
         print(newCar)
-        return carType,make,liecensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar
+
+        return newCar
 
 
     def getTransmission(self, transmissionInput):
