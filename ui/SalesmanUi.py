@@ -26,9 +26,14 @@ class SalesmanUi:
 
             if action == '1' or action == '2':
                 self.spaces()
-                print(Colors.WHITE + "\nPath: Menu/Available_Cars/" + Colors.END)
                 typeAction = ''
                 dateAvailable = datetime.now()
+                if action == '1':
+                    print(Colors.WHITE + "\nPath: Menu/Available_Cars/" + Colors.END)
+                    self.allAvailableCars()
+                elif action == '2':
+                    print(Colors.WHITE + "\nPath: Menu/UnAvailable_Cars/" + Colors.END)
+                    self.allUnAvilableCars()
                 cars = self.__carService.getCars(action, typeAction, dateAvailable)
                 self.displayAllCarsPrint(cars)
                 self.showCarsByTypeMenu(action,dateAvailable)
