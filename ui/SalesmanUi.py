@@ -157,12 +157,12 @@ class SalesmanUi:
 
     def allAvailableCars(self):
         print(Colors.GREEN +
-        "-------------------------------- ALL AVAILABLE CARS --------------------------------\n"
+        "---------------------------------------------- ALL AVAILABLE CARS ----------------------------------------------\n"
          + Colors.END)
 
     def allUnAvilableCars(self):
         print(Colors.RED +
-        "--------------------------------- ALL DELETED CARS ---------------------------------\n"
+        "--------------------------------------------- ALL UNAVAILABLE CARS ---------------------------------------------\n"
          + Colors.END)
 
     def creatingCustomerPrintHeader(self):
@@ -484,14 +484,34 @@ class SalesmanUi:
             if action == '0':
                 self.mainMenu()
             elif action == '1':
+                if typeAction == '1':
+                    self.allAvailableCars()
+                elif typeAction == '2':
+                    self.allUnAvilableCars()
                 action = 'compact'
             elif action == '2':
+                if typeAction == '1':
+                    self.allAvailableCars()
+                elif typeAction == '2':
+                    self.allUnAvilableCars()
                 action = 'comfort'
             elif action == '3':
+                if typeAction == '1':
+                    self.allAvailableCars()
+                elif typeAction == '2':
+                    self.allUnAvilableCars()
                 action = 'CUV'
             elif action == '4':
+                if typeAction == '1':
+                    self.allAvailableCars()
+                elif typeAction == '2':
+                    self.allUnAvilableCars()
                 action = 'highland'
             elif action == '5':
+                if typeAction == '1':
+                    self.allAvailableCars()
+                elif typeAction == '2':
+                    self.allUnAvilableCars()
                 action = 'luxury'
             else:
                 self.invalidAction(action)
