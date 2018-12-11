@@ -438,14 +438,14 @@ class SalesmanUi:
 
 # The format which the customer is printed out on.
     def displayCustomerHeaderPrint(self):
-        print("{:24} {:15} {:15} {:20} {:15}".format("Name", "Age", "SSN", "Address", "Number"))
+        print(Colors.BLUE+"{:24} {:15} {:15} {:20} {:15}".format("Name", "Age", "SSN", "Address", "Number"))
         print("{:15} {:15} {:15} {:15} {:15}".format("-----------------------",\
-        "---------------","---------------", "--------------------", "---------------"))
+        "---------------","---------------", "--------------------", "---------------"+Colors.END))
 # Comes after the displayCustomerHeaderPrint, prints out all the customers.
     def displayAllCustomersPrint(self,customers):
         self.displayCustomerHeaderPrint()
         for customer in customers:
-            print(customer)
+            print(Colors.WHITE+(str(customer))+Colors.END)
     
 # Header which is printed when user is searching for a customer.
     def searchCustomerHeaderPrint(self):
@@ -549,8 +549,8 @@ class SalesmanUi:
         self.createCarPrint()
         #car type
         carTypeInput = self.__carService.checkCarType()
-        make = input('Make (f.x. Toyota Yaris): ').capitalize()
-        color = input('Color: ').capitalize()
+        make = input(Colors.WHITE+"Make (f.x. Toyota Yaris): "+Colors.END).capitalize()
+        color = input(Colors.WHITE+"Color: "+Colors.END).capitalize()
         passengers = self.__carService.checkPassengers()
         transmissionInput = self.__carService.checkTransmission()
         liecensePlate = self.__carService.checkLicenseplate()
@@ -563,7 +563,7 @@ class SalesmanUi:
         newCar = Car(carType,make,liecensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
         print(Colors.GREEN+"\nCar successfully created!"+Colors.END)
         self.printCarHeader()
-        print(newCar)
+        print(Colors.WHITE+(newCar)+Colors.END)
         return newCar
 
 
@@ -608,18 +608,18 @@ class SalesmanUi:
         print("5. Show only Luxury"+Colors.END)
 
     def createCarPrint(self):
-        print("\nSelect from Car Types:")
-        print("\n1. Compact")
-        print("\n2. Comfort")
-        print("\n3. CUV")
-        print("\n4. Highland")
-        print("\n5. Luxury")
+        self.actionsPrint()
+        print(Colors.WHITE+"\n1. Select Compact")
+        print("\n2. Select Comfort")
+        print("\n3. Select CUV")
+        print("\n4. Select Highland")
+        print("\n5. Select Luxury"+Colors.END)
 
     def printCarHeader(self):
         LINE = '---------------'
         print(Colors.BLUE+"\n{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
-        'Color', 'Passengers','Transmission','Rent Cost'+Colors.END))
-        print(Colors.BLUE+"{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE)+Colors.END)
+        'Color', 'Passengers','Transmission','Rent Cost'))
+        print("{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE)+Colors.END)
 
 
     '''----------------------------------ORDER FUNCTIONS-----------------------------------------------'''
@@ -664,11 +664,11 @@ class SalesmanUi:
         else:
             totalDaysRented = daysRented.days
 
-        print("\nPrice for {} days: ".format(totalDaysRented))         
+        print(Colors.WHITE+"\nPrice for {} days: ".format(totalDaysRented)+Colors.END)         
 
         totalCost = int(totalDaysRented) * rentCost
 
-        print("Price: {} ISK".format(totalCost))
+        print(Colors.WHITE+"Price: {} ISK".format(totalCost)+Colors.END)
 
         return totalCost, totalDaysRented
 
@@ -769,14 +769,14 @@ class SalesmanUi:
     def displayAllOrders(self, orders):
         self.displayAllOrdersHeaderPrint()
         for order in orders:
-            print(order) 
+            print(Colors.WHITE(str(order))+Colors.END)
             #menu? 
 
     def returnCarPrint(self):
         print(Colors.GREEN+"Car has successfully been returned"+Colors.END)
 
     def returnCarAdditionalPricePrint(self,price):
-        print("Additional price to be paid for late delivery: {} ISK".format(price))
+        print(Colors.WHITE+"Additional price to be paid for late delivery: {} ISK".format(price)+Colors.END)
     
     def returnCarAdditionalPrice(self, returnTimeDifference, searchedCar):
         hourPrice = int(searchedCar.getRentcost())/24*1.25
@@ -814,7 +814,7 @@ class SalesmanUi:
     def rentOutToCustomerPrintMenu(self):
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back to main menu")
-        print("1. Select customer")
+        print("1. Select customer"+Colors.END)
 
     def customerNotFoundPrintMenu(self):
         self.actionsPrint()
@@ -852,18 +852,18 @@ class SalesmanUi:
         print("{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE, LINE))
 
     def displayOrderInfo(self,order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
-        print("\n-------------------------------------------------- Order Info --------------------------------------------------\n")
-        print("Order Number: {}".format(order.getOrderNumber()))
-        print("{} | {}".format(order.getCustomer(), order.getSSN()))
-        print("Car type rented: {} | from: {} To: {} | Date rented: {}".format(order.getCarType(), rentOutCarTime, \
-        returnCarTime, timeOfOrder))
-        print("\nCost of {} days without VAT: {} ISK".format(totalDaysRented, carCost))
+        print(Colors.BLUE+"\n-------------------------------------------------- Order Info --------------------------------------------------\n")
+        print("Order Number: {}".format(order.getOrderNumber())+Colors.END)
+        print(Colors.WHITE+"{} | {}".format(order.getCustomer(), order.getSSN())+Colors.END)
+        print(Colors.WHITE+"Car type rented: {} | from: {} To: {} | Date rented: {}".format(order.getCarType(), rentOutCarTime, \
+        returnCarTime, timeOfOrder)+Colors.END)
+        print(Colors.WHITE+"\nCost of {} days without VAT: {} ISK".format(totalDaysRented, carCost)+Colors.END)
         if insurance != 0:
-            print("Extra insurance: {} ISK".format(insurance))
-            print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost()))
+            print(Colors.WHITE+"Extra insurance: {} ISK".format(insurance))
+            print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost())+Colors.END)
 
     def searchCustomerForCarRentalHeaderPrint(self):
-        print("--------------------- Find customer for car rental ---------------------")
+        print(Colors.YELLOW+"--------------------- Find customer for car rental ---------------------"+Colors.END)
     
     def editOrderInfoMenu(self):
         self.actionsPrint()
@@ -873,7 +873,7 @@ class SalesmanUi:
 
     def editCar(self):
         self.editCarInfoMenu()
-        print("----------------Return a Car----------------")
+        print(Colors.YELLOW+"----------------Return a Car----------------"+Colors.END)
 
     def printReturnMenu(self):
         self.actionsPrint()
