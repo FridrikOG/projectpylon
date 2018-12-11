@@ -211,7 +211,7 @@ class SalesmanUi:
                 print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/\n"+Colors.END)
                 self.customerFound()
                 self.displayCustomerHeaderPrint()
-                print(customer)
+                print(Colors.WHITE+(str(customer)+Colors.END))
                 self.afterCustomerIsFoundMenu(customer)
 #show all customers
         elif action == '2':
@@ -253,7 +253,7 @@ class SalesmanUi:
                 self.spaces()
                 self.customerFound()
                 self.displayCustomerHeaderPrint()
-                print(customer)
+                print(Colors.WHITE+(str(customer)+Colors.END))
                 self.afterDeletedCustomerIsFoundMenu(customer)
 
 # After the customer is found the user can go back or reinstate the customer.
@@ -481,7 +481,7 @@ class SalesmanUi:
         print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Deleted_Selected_Customer/"+Colors.END)
         print(Colors.GREEN + "\nSelected customer: " + Colors.END)
         self.displayCustomerHeaderPrint()
-        print(customer)
+        print(Colors.WHITE+(str(customer))+Colors.END)
         print(Colors.RED + "\nWarning: " + Colors.BLUE + "Are you sure you want to delete this customer?" + Colors.END)
         print(Colors.WHITE+"1. Yes, delete this customer")
         print("2. No, do not deleted this customer"+Colors.END)
@@ -605,7 +605,8 @@ class SalesmanUi:
         print("2. Show only Comfort")
         print("3. Show only CUV")
         print("4. Show only Highland")
-        print("5. Show only Luxury"+Colors.END)
+        print("5. Show only Luxury")
+        print("6. Rent out a car"+Colors.END)
 
     def createCarPrint(self):
         self.actionsPrint()
