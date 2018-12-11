@@ -38,12 +38,11 @@ class SalesmanUi:
                 self.displayAllCarsPrint(cars)
                 self.showCarsByTypeMenu(action,dateAvailable)
             
-            # elif action == '2':
-                # print("\n\033[1;37mPath: Menu/Unavailable_cars/\033[1;m")
-
+# Find a customer
             elif action == '3':
-                self.createOrder()
-
+                self.spaces()
+                self.findCustomerMenu()
+# Register a customer
             elif action == '4':
                 self.spaces()
                 print(Colors.WHITE + "\nPath: Menu/Creating_Customer/\n" + Colors.END)
@@ -53,33 +52,39 @@ class SalesmanUi:
                 print(Colors.GREEN + "\nCustomer has been created!\n" + Colors.END)
                 action = self.pressAnyKeyToContinue()
 
+# Create a car order
             elif action == '5':
-                self.spaces()
-                self.findCustomerMenu()
-
+                self.createOrder()
+# Lookup an Order
             elif action == '6':####WORKING ON THIS
                 self.spaces()
                 #search for order by number
-                pass
-            
+
+# Show a list of orders
             elif action == '7':#####WORKING ON THIS
                 self.spaces()
                 orders, nothing = self.__orderService.getAllOrders()
                 self.displayAllOrders(orders)
                 self.pressAnyKeyToContinue()
                 #print all orders and options
-
+# Edit Order            
             elif action == '8':
+                pass
+# Rent out a car
+            elif action == '9':
+                pass
+# Return a car
+            elif action == '10':
                 self.returnCar()
 
 # Register a car
-            elif action == '10':
+            elif action == '11':
                 self.spaces()
                 newCar = self.createCar()
                 self.__carService.addCar(newCar)
 
 # Prints out the pricelist for cars.
-            elif action == '11':
+            elif action == '12':
                 self.spaces()
                 print(open('./data/pricelist.txt').read())
                 action = self.pressAnyKeyToContinue()
@@ -105,15 +110,16 @@ class SalesmanUi:
         print(Colors.BLUE + "You can do the following:" + Colors.END)
         print(Colors.WHITE + "1.  List all available cars")
         print("2.  List all unavailable cars")
-        print("3.  Create car reservation")
+        print("3.  Find a customer")
         print("4.  Register customer")
-        print("5.  Find a customer")
+        print("5.  Create a car order")
         print("6.  Look up an order")
         print("7.  Show list of orders")
-        print("8.  Return a car")
-        print("9.  Edit order")
-        print("10. Register car")
-        print("11. Prints out pricelist for cars."+Colors.END)
+        print("8.  Edit order")
+        print("9.  Rent out a car")
+        print("10. Return a car")
+        print("11. Register car")
+        print("12. Prints out pricelist for cars."+Colors.END)
         print(Colors.BLUE+"Press q to quit\n"+Colors.END)
     
 
@@ -133,7 +139,7 @@ class SalesmanUi:
         print("\n" + Colors.BLUE + "Actions: " + Colors.END)
 
     def customerFound(self):
-        print(Colors.GREEN + "Customer found!" + Colors.END)
+        print(Colors.GREEN + "Customer found!\n" + Colors.END)
 
     def customerNotFound(self):
         print(Colors.RED + "\nCustomer not found!" + Colors.END)
@@ -735,7 +741,7 @@ class SalesmanUi:
 
     def createOrder(self):
         self.spaces()
-        print(Colors.WHITE + "\nPath: Menu/Create_Reservation/" + Colors.END)
+        print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/" + Colors.END)
         #Order Number
         self.searchCustomerForCarRentalHeaderPrint()
         searchTerm = self.searchTermInput()
@@ -743,6 +749,7 @@ class SalesmanUi:
             customer = self.__customerService.findCustomer(searchTerm)
             name = customer.getName()
             ssn = customer.getSsn()
+            print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Customer_Found/" + Colors.END)
             self.customerFound()
             self.displayCustomerHeaderPrint()
             print(Colors.WHITE+(str(customer))+Colors.END)
@@ -854,7 +861,7 @@ class SalesmanUi:
             print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost())+Colors.END)
 
     def searchCustomerForCarRentalHeaderPrint(self):
-        print(Colors.YELLOW+"--------------------- Find customer for car rental ---------------------"+Colors.END)
+        print(Colors.BLUE+"--------------------- Find customer for car rental ---------------------"+Colors.END)
     
     def editOrderInfoMenu(self):
         self.actionsPrint()
