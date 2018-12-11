@@ -88,12 +88,14 @@ class CustomerService:
                 
     
 # Input check for the ssn of the customer
-    def inputSsnCheck(self):
+def inputSsnCheck(self):
         ssn = ''
         booleanCheck = False
         while len(str(ssn)) != 10 or not booleanCheck:
             try:
-                ssn = int(input("Step 2/3 - Enter an SSN of 10 numbers: "))
+                ssn = input("Step 2/3 - Enter an SSN of 10 numbers: ")
+                last9 = int(ssn[1:])
+                first = int(ssn[0])
                 age = self.inputAgeCheck(ssn)
                 if age < 21:
                     print("Customer has to be above the age of 21")
@@ -106,6 +108,7 @@ class CustomerService:
         return str(ssn), age
 
 # Input check for the address of the customer
-    def inputAddressCheck(self):
-        address = input("Step 3/3 - Enter address: ").capitalize()
-        return address
+
+def inputAddressCheck(self):
+    address = input("Step 3/3 - Enter address: ").capitalize()
+    return address
