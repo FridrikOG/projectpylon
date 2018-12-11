@@ -744,7 +744,7 @@ class SalesmanUi:
             ssn = customer.getSsn()
             self.customerFound()
             self.displayCustomerHeaderPrint()
-            print(customer)
+            print(Colors.WHITE+(str(customer))+Colors.END)
             self.rentOutToCustomerMenu()
         except:
             self.customerNotFound()
