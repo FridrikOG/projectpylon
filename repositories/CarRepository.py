@@ -45,6 +45,8 @@ class CarRepository:
         
         with open('./data/cars.csv', 'r') as carFile:
             csvReader = csv.DictReader(carFile, delimiter=',')
+            self.__carsAvailable.clear()
+            self.__carsUnavailable.clear()
 
             for line in csvReader:
                 carType = line['type']
@@ -57,61 +59,23 @@ class CarRepository:
                 status = line['status']
                 rentOutCar = self.createDate(line['rentout'])
                 returnCar = self.createDate(line['return'])
-                   
+                newCar = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
 
-                if licenseplate not in self.__carLicenseplates:
-                    self.__carLicenseplates.add(licenseplate)
-                    newCar = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
+                if rentOutCar < dateAvailable < returnCar or status == 'unavailable':
+                    if typeAction.upper() == '':
+                        self.__carsUnavailable.append(newCar)
+                    elif carType.upper() == typeAction.upper():
+                        self.__carsUnavailable.append(newCar)
+                else:
+                    if typeAction.upper() == '':
+                        self.__carsAvailable.append(newCar)
+                    elif carType.upper() == typeAction.upper():
+                        self.__carsAvailable.append(newCar)     
 
-                    if rentOutCar < dateAvailable < returnCar or status == 'unavailable':
-                        self.__carsUnavailable.append(newCar)  
-                        if carType == 'Compact':
-                            self.__carsCompactUnavailable.append(newCar)
-                        elif carType == 'Comfort':
-                            self.__carsComfortUnavailable.append(newCar)  
-                        elif carType == 'Luxury':
-                            self.__carsLuxuryUnavailable.append(newCar)
-                        elif carType == 'CUV':
-                            self.__carsCUVUnavailable.append(newCar)  
-                        elif carType == 'Highland':
-                            self.__carsHighlandUnavailable.append(newCar) 
-                    else:
-                        self.__carsAvailable.append(newCar)  
-                        if carType == 'Compact':
-                            self.__carsCompactAvailable.append(newCar)
-                        elif carType == 'Comfort':
-                            self.__carsComfortAvailable.append(newCar)  
-                        elif carType == 'Luxury':
-                            self.__carsLuxuryAvailable.append(newCar)
-                        elif carType == 'CUV':
-                            self.__carsCUVAvailable.append(newCar)  
-                        elif carType == 'Highland':
-                            self.__carsHighlandAvailable.append(newCar)               
-                       
-            if action == '1' and typeAction == '':
+            if action == '1':
                 return self.__carsAvailable
-            elif action == '1' and typeAction == 'compact':
-                return self.__carsCompactAvailable
-            elif action == '1' and typeAction == 'comfort':
-                return self.__carsComfortAvailable
-            elif action == '1' and typeAction == 'luxury':
-                return self.__carsLuxuryAvailable
-            elif action == '1' and typeAction == 'highland':
-                return self.__carsHighlandAvailable
-            elif action == '1' and typeAction == 'CUV':
-                return self.__carsCUVAvailable
-            elif action == '2' and typeAction == '':
-                return self.__carsUnavailable
-            elif action == '2' and typeAction == 'compact':
-                return self.__carsCompactUnavailable
-            elif action == '2' and typeAction == 'comfort':
-                return self.__carsComfortUnavailable
-            elif action == '2' and typeAction == 'luxury':
-                return self.__carsLuxuryUnavailable
-            elif action == '2' and typeAction == 'highland':
-                return self.__carsHighlandUnavailable
-            elif action == '2' and typeAction == 'CUV':
-                return self.__carsCUVUnavailable
+            elif action == '2':
+                return self.__carsUnavailable   
 
     def duplicateLicensePlateCheck(self, newLicensePlate):
         with open('./data/cars.csv', 'r') as customerFile:
