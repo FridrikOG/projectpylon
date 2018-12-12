@@ -948,7 +948,7 @@ class SalesmanUi:
         self.showReceipt(order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
 
     def choosePaymentPrint(self):
-        self.chooseAction()
+        self.actionsPrint()
         print(Colors.WHITE+"1. Credit card")
         print("2. Cash"+Colors.END)
 
@@ -1103,8 +1103,8 @@ class SalesmanUi:
         print("2. No additional insurance"+Colors.END)
 
     def areYouSurePrint(self):
-        print(Colors.WHITE+"\nAre you sure?")
-        print("1. Yes")
+        print(Colors.BLUE+"\nAre you sure?")
+        print(Colors.WHITE+"1. Yes")
         print("2. No, go back"+Colors.END)
 
     def finalStepOrderPrint(self):
@@ -1123,7 +1123,7 @@ class SalesmanUi:
         print(Colors.WHITE+"\n-------------------------------------------------- Order Info --------------------------------------------------\n")
         # print("Order Number: {}\n".format(order.getOrderNumber())+Colors.END)
         print(Colors.BLUE+"Order number: "+Colors.WHITE,str(order.getOrderNumber())+Colors.END)
-        print(Colors.BLUE+"\n{:20} {:20}".format('Name','Social-Security-Number'))
+        print(Colors.BLUE+"\n{:20} {:20}".format('Name','Ssn'))
         print("---------------------------------------------------"+Colors.END)
         print(Colors.WHITE+"{:20} {:20}".format(order.getCustomer(), order.getSsn())+Colors.END)
         print(Colors.BLUE+"\n{:20} {:20} {:20} {:20}".format('Car type','From','To','Date rented'))
