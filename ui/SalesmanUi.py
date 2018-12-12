@@ -265,6 +265,10 @@ class SalesmanUi:
                 self.displayCustomerHeaderPrint()
                 print(Colors.WHITE+(str(customer)+Colors.END))
                 self.afterDeletedCustomerIsFoundMenu(customer)
+        else:
+            self.invalidAction(action)
+            self.pressAnyKeyToContinue()
+            self.findCustomerMenu()
 
 # After the customer is found the user can go back or reinstate the customer.
     def afterDeletedCustomerIsFoundMenu(self,customer):
@@ -501,32 +505,17 @@ class SalesmanUi:
     ''' -------------------- CAR FUNCTIONS -------------------- '''
 
     def editCarMenuPrint(self):
-        print("Choose what to edit:\n")
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back")
-        print("1. Car Type"+Colors.END)
-        print("2. Make"+Colors.END)
-        print("3. Color"+Colors.END)
-        print("4. Passenger"+Colors.END)
+        print("1. Car Type")
+        print("2. Make")
+        print("3. Color")
+        print("4. Passenger")
         print("5. Transmission"+Colors.END)
 
-    def editCar(self):
-    
-        licensePlate = self.__carService.checkLicenseplate(False)
-        searchedCar = self.__carService.licensePlateCheck(licensePlate)
-        self.printCarHeader()
-        print(searchedCar)
-        carType = searchedCar.getType()
-        make = searchedCar.getMake()
-        color = searchedCar.getColor()
-        passengers = searchedCar.getPassengers()
-        transmission = searchedCar.getTransmission()
-        rentCost = searchedCar.getRentcost()
-        status = searchedCar.getStatus()
-        rentOutCar = searchedCar.getRentOutCar()
+    def editCarMenu(self):
         self.editCarMenuPrint()
         action = self.chooseAction()
-        print("heidi")#error check
         if action == '0':
             self.editCar()
         elif action == '1':
@@ -545,11 +534,27 @@ class SalesmanUi:
         else:
             self.invalidAction(action)
             self.pressAnyKeyToContinue()
-            self.editCarMenu
+            self.editCarMenu()
+
+    def editCar(self):
+        self.spaces()
+        licensePlate = self.__carService.checkLicenseplate(False)
+        searchedCar = self.__carService.licensePlateCheck(licensePlate)
+        self.printCarHeader()
+        print(Colors.WHITE+str(searchedCar)+Colors.END)
+        carType = searchedCar.getType()
+        make = searchedCar.getMake()
+        color = searchedCar.getColor()
+        passengers = searchedCar.getPassengers()
+        transmission = searchedCar.getTransmission()
+        rentCost = searchedCar.getRentcost()
+        status = searchedCar.getStatus()
+        rentOutCar = searchedCar.getRentOutCar()
+        self.editCarMenu()
         rentOutCar, unusedValue = self.getTimeOfOrder()
         returnCar = rentOutCar
         editedCar = self.__carService.editCar(carType,make,licensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
-        print("\nCar successfull edited!")
+        print(Colors.GREEN+"\nCar successfull edited!"+Colors.END)
         self.printCarHeader()
         print(editedCar)
         self.pressAnyKeyToContinue()
@@ -558,10 +563,10 @@ class SalesmanUi:
         while True:
             self.findCarTypeMenuPrint()
             action = self.chooseAction()
-            self.spaces()
             if action == '0':
                 self.mainMenu()
             elif action == '1':
+                self.spaces()
                 if typeAction == '1':
                     print(Colors.WHITE + "\nPath: Menu/Available_Cars/Compact/" + Colors.END)
                     self.allAvailableCars()
@@ -570,6 +575,7 @@ class SalesmanUi:
                     self.allUnAvilableCars()
                 action = 'compact'
             elif action == '2':
+                self.spaces()
                 if typeAction == '1':
                     print(Colors.WHITE + "\nPath: Menu/Available_Cars/Comfort/" + Colors.END)
                     self.allAvailableCars()
@@ -578,6 +584,7 @@ class SalesmanUi:
                     self.allUnAvilableCars()
                 action = 'comfort'
             elif action == '3':
+                self.spaces()
                 if typeAction == '1':
                     print(Colors.WHITE + "\nPath: Menu/Available_Cars/CUV/" + Colors.END)
                     self.allAvailableCars()
@@ -586,6 +593,7 @@ class SalesmanUi:
                     self.allUnAvilableCars()
                 action = 'CUV'
             elif action == '4':
+                self.spaces()
                 if typeAction == '1':
                     print(Colors.WHITE + "\nPath: Menu/Available_Cars/Highland/" + Colors.END)
                     self.allAvailableCars()
@@ -594,6 +602,7 @@ class SalesmanUi:
                     self.allUnAvilableCars()
                 action = 'highland'
             elif action == '5':
+                self.spaces()
                 if typeAction == '1':
                     print(Colors.WHITE + "\nPath: Menu/Available_Cars/Luxury/" + Colors.END)
                     self.allAvailableCars()
@@ -603,7 +612,7 @@ class SalesmanUi:
                 action = 'luxury'
             elif action == '6':
                 self.rentOutACar()
-                break
+                return False
             else:
                 self.invalidAction(action)
                 self.pressAnyKeyToContinue()
@@ -799,7 +808,6 @@ class SalesmanUi:
             self.finalStepOrder(order)
 
     def createOrder(self):
-        self.spaces()
         print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Searching_Customer/" + Colors.END)
         #Order Number
         self.searchCustomerForCarRentalHeaderPrint()
@@ -862,7 +870,7 @@ class SalesmanUi:
     def returnCar(self):
         licenseplate = self.__carService.checkLicenseplate(False)
         self.printReturnMenu()
-        action = input("Choose action: ")#error check
+        action = self.chooseAction()
         if action == '0':
             self.returnCar()
         elif action == '1':
@@ -941,10 +949,10 @@ class SalesmanUi:
         self.choosePaymentPrint()
         action = self.chooseAction()
         if action == '1':
-            print("Payment will be charged on the following credit card {} for {} ISK".format(creditCard, carCost))
+            print(Colors.WHITE+"Payment will be charged on the following credit card {} for {} ISK"+Colors.END.format(creditCard, carCost))
             self.pressAnyKeyToContinue()
         if action == '2':
-            print("Payment to be paid: {} ISK".format(carCost))
+            print(Colors.WHITE+"Payment to be paid: {} ISK"+Colors.END.format(carCost))
             self.pressAnyKeyToContinue()
         
 
@@ -954,9 +962,9 @@ class SalesmanUi:
         return creditCard
 
     def showReceiptPrint(self):
-        print("Do you want to get receipt ?")
+        print(Colors.WHITE+"Do you want to get a receipt ?")
         print("1. Yes")
-        print("2. No")
+        print("2. No"+Colors.END)
 
     def showReceipt(self, order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
         self.actionsPrint()

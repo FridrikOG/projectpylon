@@ -1,5 +1,6 @@
 from repositories.CarRepository import CarRepository
 from datetime import datetime, timedelta
+from models.Colors import Colors
 
 class CarService:
     def __init__(self):
@@ -61,15 +62,15 @@ class CarService:
         licensePlate = ''
         booleanCheck = False
         while len(licensePlate) != 6 or not booleanCheck:
-            licensePlate = input("License plate (F.x. LL-L00): ").upper()
+            licensePlate = input(Colors.BLUE+"License plate (F.x. LL-L00): "+Colors.END).upper()
             if len(licensePlate) == 6 and newCar == True:
                 booleanCheck = self.__carRepo.duplicateLicensePlateCheck(str(licensePlate))
                 if booleanCheck == False:
-                    print("License plate already registered!")
+                    print(Colors.WHITE+"License plate already registered!"+Colors.END)
             elif len(licensePlate) == 6:
                 booleanCheck = True
             else:
-                print("License plate has to match the format")
+                print(Colors.WHITE+"License plate has to match the format"+Colors.END)
         return licensePlate
   
     def findCar(self, licenseplate, TimeOfOrder):
