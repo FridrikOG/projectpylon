@@ -27,7 +27,6 @@ class OrderRepository:
                 startDate= line['startDate']
                 endDate = line['endDate']
                 rentCost = line['rentCost']
-                
                 if orderNumber not in self.__orderNumbers:
                     self.__orderNumbers.add(int(orderNumber))
                     newOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, ssn)
@@ -55,9 +54,7 @@ class OrderRepository:
             for line in csvReader:
                 orderNumberInFile = line['orderNumber']
                 if orderNumber == orderNumberInFile:
-                    return True
-                else:
-                    pass
+                    return True         
             return False
 
     def findOrder(self, searchedOrderNumber):#duplicate code of checkordernumber
@@ -100,15 +97,15 @@ class OrderRepository:
                     rentCost = line['rentCost']
                     
                     if variable == '1':
-                        line['startDate'] = variable1
-                        line['endDate'] = variable2
-                        line['rentCost']= variable3
+                        startDate = variable1
+                        endDate = variable2
+                        rentCost = variable3
                         lines.append(line)
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
 
                     elif variable == '2':
-                        line['rentCost'] = variable1
-                        line['carType'] = variable2
+                        rentCost = variable1
+                        carType = variable2
                         lines.append(line)
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
                     

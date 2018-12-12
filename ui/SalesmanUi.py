@@ -17,7 +17,6 @@ class SalesmanUi:
         self.__orderService = OrderService()
 
     def mainMenu(self):
-
         action = ''
         while action != 'q':
             self.spaces()
@@ -526,10 +525,12 @@ class SalesmanUi:
         status = searchedCar.getStatus()
         rentOutCar = searchedCar.getRentOutCar()
         self.editCarMenuPrint()
-        action = input("Choose action: ")#error check
+        action = self.chooseAction()
+        print("heidi")#error check
         if action == '0':
             self.editCar()
         elif action == '1':
+            self.selectCarTypePrintMenu()
             carTypeInput = self.__carService.checkCarType()
             rentCost, carType = self.getCarTypeVariables(carTypeInput)
         elif action == '2':
@@ -541,6 +542,10 @@ class SalesmanUi:
         elif action == '5':
             transmissionInput = self.__carService.checkTransmission()
             transmission = self.getTransmission(transmissionInput)
+        else:
+            self.invalidAction(action)
+            self.pressAnyKeyToContinue()
+            self.editCarMenu
         rentOutCar, unusedValue = self.getTimeOfOrder()
         returnCar = rentOutCar
         editedCar = self.__carService.editCar(carType,make,licensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
@@ -625,7 +630,7 @@ class SalesmanUi:
         newCar = Car(carType,make,liecensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
         print(Colors.GREEN+"\nCar successfully created!"+Colors.END)
         self.printCarHeader()
-        print(Colors.WHITE+(newCar)+Colors.END)
+        print(Colors.WHITE+(str(newCar)+Colors.END))
         return newCar
 
 
@@ -965,7 +970,7 @@ class SalesmanUi:
 
     def editOrderInfoMenu(self):
         self.actionsPrint()
-        self.printLookUpOrderMenu()
+        self.lookUpOrderMenuPrint()
         action = self.chooseAction()
         if action == '0':
             self.mainMenu()
@@ -981,7 +986,7 @@ class SalesmanUi:
             originalPrice = orderInfo.getRentCost()
             ##NEEDS FIXING FOR CORRECT INFO IN DISPLAYORDERINFO###
             self.displayOrderInfo(orderInfo, 0, originalDaysRented, originalPrice, originalRentOutCarTime, originalReturnCarTime, orderInfo.getTimeOfOrder())#####
-            self.printEditOrderMenu()
+            self.editOrderMenuPrint()
             action = self.chooseAction()
 
             if action == '0':
@@ -995,10 +1000,10 @@ class SalesmanUi:
                 #get type
                 newDaysRented = self.daysRented(rentOutCarTime, returnCarTime)
                 #get price
-                newCostOfRental = (int(originalPrice) / originalDaysRented) * newDaysRented
+                newCostOfRental = int((int(originalPrice) / originalDaysRented) * newDaysRented)
                 #new order
                 newOrder = self.__orderService.editTimeOfRental(rentOutDate, returnDate, newCostOfRental, orderNumber)
-                print("Rental time updated")
+                print("\nRental time updated")
                 self.displayAllOrdersHeaderPrint()
                 print(newOrder)
 
@@ -1036,7 +1041,7 @@ class SalesmanUi:
         return int(totalDaysRented)
 
 
-    def printEditOrderMenu(self):
+    def editOrderMenuPrint(self):
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back")
         print(Colors.WHITE+"1. Edit rental time")
@@ -1044,7 +1049,7 @@ class SalesmanUi:
         print(Colors.WHITE+"3. Cancel order")
 
     
-    def printLookUpOrderMenu(self):
+    def lookUpOrderMenuPrint(self):
         print(Colors.WHITE+"0. Go back")
         print("1. Search for order"+Colors.END)
 
@@ -1111,12 +1116,6 @@ class SalesmanUi:
 
     def searchCustomerForCarRentalHeaderPrint(self):
         print(Colors.BLUE+"--------------------- Find customer for car rental ---------------------"+Colors.END)
-    
-    def editOrderInfoMenu(self):
-        self.actionsPrint()
-        print(Colors.WHITE+"0. Go back")
-        print("1. "+Colors.END)
-        #edit time of order, cancel, add/discard insurance, 
 
     def printReturnMenu(self):
         self.actionsPrint()

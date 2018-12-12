@@ -68,16 +68,16 @@ class OrderService:
             return returnCar
 
     def checkOrderNumber(self):
-        while True:
+        numberExists = True
+        while numberExists:
             try:
                 orderNumber = input("Enter Order number: ")
                 intOrder = int(orderNumber)
-                self.__orderRepo.checkOrderNumber(orderNumber)
-                orderInfo = self.__orderRepo.findOrder(orderNumber)
-                break
+                if numberExists == self.__orderRepo.checkOrderNumber(orderNumber):
+                    orderInfo = self.__orderRepo.findOrder(orderNumber)
+                    return orderNumber, orderInfo
             except:
                 print("Order number does not exist")
-        return orderNumber, orderInfo
 
     def editTimeOfRental(self, startOfRental, endOfRental, rentCost, orderNumber):
         #     #edit order
