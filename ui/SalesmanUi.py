@@ -852,7 +852,7 @@ class SalesmanUi:
     def displayAllOrders(self, orders):
         self.displayAllOrdersHeaderPrint()
         for order in orders:
-            print(Colors.WHITE(str(order))+Colors.END)
+            print(Colors.WHITE+str(order)+Colors.END)
             #menu? 
 
     def returnCarPrint(self):
@@ -1031,9 +1031,11 @@ class SalesmanUi:
                 confirmingCancellation = self.areYouSure()
                 if confirmingCancellation == True:
                     deletedOrder = self.__orderService.cancelOrder(orderNumber)
-                    print("Order number: {} deleted".format(orderNumber))
+                    print(Colors.RED+"\nOrder number: {} deleted".format(orderNumber)+Colors.END)
+                    print(Colors.RED+"\nOrder number: "+Colors.WHITE,orderNumber,Colors.RED+"has been deleted"+Colors.END)
                     self.displayAllOrdersHeaderPrint()
-                    print(deletedOrder)
+                    print(Colors.WHITE+str(deletedOrder)+Colors.END)
+                    self.pressAnyKeyToContinue()
 
                 else:
                     self.editOrderInfoMenu()
