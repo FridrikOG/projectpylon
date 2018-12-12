@@ -957,7 +957,7 @@ class SalesmanUi:
         action = self.chooseAction()
         self.spaces()
         if action == '1':
-            print(Colors.WHITE+"Payment will be charged on the following credit card {} for {} ISK"+Colors.END.format(creditCard, carCost))
+            print(Colors.WHITE+"Payment will be charged on the following credit card {} for {} ISK".format(creditCard, carCost)+Colors.END)
             self.pressAnyKeyToContinue()
             self.spaces()
         if action == '2':
