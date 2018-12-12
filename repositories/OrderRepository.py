@@ -31,7 +31,10 @@ class OrderRepository:
                     self.__orderNumbers.add(int(orderNumber))
                     newOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, ssn)
                     self.__orders.append(newOrder)
-            newOrderNumber = max(self.__orderNumbers) + 1
+            try:
+                newOrderNumber = max(self.__orderNumbers) + 1
+            except:
+                newOrderNumber = 1
         return self.__orders, newOrderNumber
             
 

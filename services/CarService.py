@@ -73,8 +73,8 @@ class CarService:
                 print(Colors.WHITE+"License plate has to match the format"+Colors.END)
         return licensePlate
   
-    def findCar(self, licenseplate, TimeOfOrder):
-        theFoundLicenseplate = self.__carRepo.findCar(licenseplate, TimeOfOrder)
+    def returnCar(self, licenseplate, TimeOfOrder):
+        theFoundLicenseplate = self.__carRepo.returnCar(licenseplate, TimeOfOrder)
         if theFoundLicenseplate == None:
             return None
         else:

@@ -122,7 +122,7 @@ class CarRepository:
                         return False
             return True
 
-    def findCar(self, licenseplate, timeOfReturn):
+    def returnCar(self, licenseplate, timeOfReturn):
         with open ('./data/cars.csv') as carFile:
             header = ('type','make','licenseplate','color','passengers','transmission','rentcost','status','rentout','return')
             csvReader = csv.DictReader(carFile, header)

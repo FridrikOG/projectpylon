@@ -149,7 +149,7 @@ class SalesmanUi:
         print(Colors.RED + "\nCustomer not found!" + Colors.END)
 
     def searchTermInput(self):
-        searchTerm = input(Colors.BLUE + "Enter SSN or Customer number to find: " + Colors.END)
+        searchTerm = input(Colors.BLUE + "\nEnter SSN or Customer number to find: " + Colors.END)
         return searchTerm
 
     def exitPrint(self):
@@ -513,35 +513,13 @@ class SalesmanUi:
         print("4. Passenger")
         print("5. Transmission"+Colors.END)
 
-    def editCarMenu(self):
-        self.editCarMenuPrint()
-        action = self.chooseAction()
-        if action == '0':
-            self.editCar()
-        elif action == '1':
-            self.selectCarTypePrintMenu()
-            carTypeInput = self.__carService.checkCarType()
-            rentCost, carType = self.getCarTypeVariables(carTypeInput)
-        elif action == '2':
-            make = input('Make (f.x. Toyota Yaris): ').capitalize()
-        elif action == '3':
-            color = input('Color: ').capitalize()
-        elif action == '4':
-            passengers = self.__carService.checkPassengers()
-        elif action == '5':
-            transmissionInput = self.__carService.checkTransmission()
-            transmission = self.getTransmission(transmissionInput)
-        else:
-            self.invalidAction(action)
-            self.pressAnyKeyToContinue()
-            self.editCarMenu()
-
     def editCar(self):
+
         self.spaces()
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
         self.printCarHeader()
-        print(Colors.WHITE+str(searchedCar)+Colors.END)
+        print(searchedCar)
         carType = searchedCar.getType()
         make = searchedCar.getMake()
         color = searchedCar.getColor()
@@ -550,11 +528,33 @@ class SalesmanUi:
         rentCost = searchedCar.getRentcost()
         status = searchedCar.getStatus()
         rentOutCar = searchedCar.getRentOutCar()
-        self.editCarMenu()
+        self.editCarMenuPrint()
+        action = self.chooseAction()
+        if action == '0':
+            self.spaces()
+            self.editCar()
+        elif action == '1':
+            self.spaces()
+            carTypeInput = self.__carService.checkCarType()
+            rentCost, carType = self.getCarTypeVariables(carTypeInput)
+        elif action == '2':
+            self.spaces()
+            make = input('Make (f.x. Toyota Yaris): ').capitalize()
+        elif action == '3':
+            self.spaces()
+            color = input('Color: ').capitalize()
+        elif action == '4':
+            self.spaces()
+            passengers = self.__carService.checkPassengers()
+        elif action == '5':
+            self.spaces()
+            transmissionInput = self.__carService.checkTransmission()
+            transmission = self.getTransmission(transmissionInput)
         rentOutCar, unusedValue = self.getTimeOfOrder()
         returnCar = rentOutCar
         editedCar = self.__carService.editCar(carType,make,licensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
-        print(Colors.GREEN+"\nCar successfull edited!"+Colors.END)
+        self.spaces()
+        print("\nCar successfull edited!")
         self.printCarHeader()
         print(editedCar)
         self.pressAnyKeyToContinue()
@@ -793,6 +793,7 @@ class SalesmanUi:
             status = self.areYouSure()
             if status == True:
                 self.__orderService.addOrder(order)
+                self.spaces()
                 print(Colors.GREEN+"Order complete!"+Colors.END)
             else:
                 self.finalStepOrder(order)
@@ -813,6 +814,7 @@ class SalesmanUi:
         self.searchCustomerForCarRentalHeaderPrint()
         searchTerm = self.searchTermInput()
         try:
+            # find customer
             customer = self.__customerService.findCustomer(searchTerm)
             name = customer.getName()
             ssn = customer.getSsn()
@@ -827,8 +829,12 @@ class SalesmanUi:
             self.customerNotFound()
             self.customerNotFoundMenu()
         nothing, orderNumber = self.__orderService.getAllOrders()
+        self.spaces()
+        # Time for rental
         rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate(True)
         self.pressAnyKeyToContinue()
+        self.spaces()
+        # Choose car type
         rentCost, carType = self.selectCarType()
         #calculate direct costs
         carCost, totalDaysRented = self.getCostOfOrder(rentOutCarTime, returnCarTime, rentCost)
@@ -837,10 +843,11 @@ class SalesmanUi:
         #Time of order
         stringTimeOforder, timeOfOrder = self.getTimeOfOrder()
         # Print out order
-        # self.displayAllOrdersHeaderPrint()
         order = Order(orderNumber, name, carType, stringTimeOforder, rentOutCar, returnCar, totalCost, ssn)
         self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)  
+        # Credit card for insurane
         creditCard = self.creditCardInfo()
+        self.spaces()
         self.finalStepOrder(order)
         #Choose payment
         self.choosePayment(carCost, creditCard)
@@ -859,7 +866,7 @@ class SalesmanUi:
         print(Colors.GREEN+"Car has successfully been returned"+Colors.END)
 
     def returnCarAdditionalPricePrint(self,price):
-        print(Colors.WHITE+"Additional price to be paid for late delivery: {} ISK".format(price)+Colors.END)
+        print(Colors.WHITE+"\nAdditional price to be paid for late delivery: {} ISK\n".format(price)+Colors.END)
     
     def returnCarAdditionalPrice(self, returnTimeDifference, searchedCar):
         hourPrice = int(searchedCar.getRentcost())/24*1.25
@@ -868,15 +875,18 @@ class SalesmanUi:
         self.returnCarAdditionalPricePrint(int(price))
     
     def returnCar(self):
+        self.spaces()
         licenseplate = self.__carService.checkLicenseplate(False)
+        self.spaces()
         self.printReturnMenu()
         action = self.chooseAction()
+        self.spaces()
         if action == '0':
             self.returnCar()
         elif action == '1':
             timeOfReturn = self.__orderService.checkValidDate()
             timeOfreturnInputTimeFormat = self.__orderService.createDate(timeOfReturn)
-            searchedCar = self.__carService.findCar(licenseplate, timeOfReturn)
+            searchedCar = self.__carService.returnCar(licenseplate, timeOfReturn)
             returnTimeDifference = timeOfreturnInputTimeFormat - searchedCar.getReturnCar()
 
             if returnTimeDifference.seconds > 0:
@@ -902,6 +912,8 @@ class SalesmanUi:
         # Prin out the car to be rented
         self.printCarHeader()
         print(searchedCar)
+        self.pressAnyKeyToContinue()
+        self.spaces()
         #Search for customer for the rental
         self.searchCustomerForCarRentalHeaderPrint()
         searchTerm = self.searchTermInput()
@@ -912,7 +924,6 @@ class SalesmanUi:
             self.customerFound()
             self.displayCustomerHeaderPrint()
             print(customer)
-            self.pressAnyKeyToContinue()
             self.rentOutToCustomerMenu()
         except:
             self.customerNotFound()
@@ -920,6 +931,7 @@ class SalesmanUi:
         # Get order number
         nothing, orderNumber = self.__orderService.getAllOrders()
         #Input rent out time and return
+        self.spaces()
         rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate(True)
         #calculate direct costs
         carCost, totalDaysRented = self.getCostOfOrder(rentOutCarTime, returnCarTime, rentCost)
@@ -927,14 +939,13 @@ class SalesmanUi:
         totalCost, insurance = self.addInsurance(carCost)
         #Time of order
         stringTimeOforder, timeOfOrder = self.getTimeOfOrder()
-        # Print out order
+       # Print out order
         order = Order(orderNumber, name, carType, stringTimeOforder, rentOutCar, returnCar, totalCost, ssn)
-        self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder) 
-        # credit card information
-        creditCard = self.creditCardInfo() 
+        self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)  
+        # Credit card for insurane
+        creditCard = self.creditCardInfo()
+        self.spaces()
         self.finalStepOrder(order)
-        # Edit the car:
-        self.__carService.editCar(carType,make,licensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
         #Choose payment
         self.choosePayment(carCost, creditCard)
         # Print receipt
@@ -948,12 +959,15 @@ class SalesmanUi:
     def choosePayment(self, carCost, creditCard):
         self.choosePaymentPrint()
         action = self.chooseAction()
+        self.spaces()
         if action == '1':
             print(Colors.WHITE+"Payment will be charged on the following credit card {} for {} ISK"+Colors.END.format(creditCard, carCost))
             self.pressAnyKeyToContinue()
+            self.spaces()
         if action == '2':
             print(Colors.WHITE+"Payment to be paid: {} ISK"+Colors.END.format(carCost))
             self.pressAnyKeyToContinue()
+            self.spaces()
         
 
 
@@ -970,6 +984,7 @@ class SalesmanUi:
         self.actionsPrint()
         self.showReceiptPrint()
         action = self.chooseAction()
+        self.spaces()
         if action == '1':
             self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
             self.pressAnyKeyToContinue()

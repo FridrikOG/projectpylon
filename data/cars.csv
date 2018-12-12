@@ -1,5 +1,5 @@
 type,make,licenseplate,color,passengers,transmission,rentcost,status,rentout,return
-Compact,VW Golf,MZ-G06,White,5,Auto,14000,available,21-12-2018-11-0,22-12-2018-11-0
+Compact,VW Golf,MZ-G06,White,5,Manual,14000,available,12-12-2018-16-50,12-12-2018-18-0
 Compact,Hunday i-10,KX-E32,Blue,5,Auto,14000,unavailable,1-1-2019-12-0,5-1-2019-12-0
 Compact,Toyota Auris,GS-V90,Silver,5,Manual,14000,available,21-12-2018-12-0,24-12-2018-12-0
 CUV,Ford Kuga,MS-S12,Red,5,Auto,25000,available,10-10-2001-12-00,12-12-2018-12-0
