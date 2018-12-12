@@ -12,7 +12,7 @@ class Order(object):
         #self.__status = status
 
     def __str__(self):
-        return '{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:6} ISK'.format(self.__orderNumber,self.__customer,self.__Ssn, self.__carType,\
+        return '{:13} {:20} {:12} {:10} {:18} {:18} {:18} {} ISK'.format(self.__orderNumber,self.__customer,self.__Ssn, self.__carType,\
         self.__timeOfOrder, self.__startDate, self.__endDate, self.__rentCost)
       
     
