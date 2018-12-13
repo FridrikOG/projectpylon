@@ -279,6 +279,7 @@ class SalesmanUi:
             self.pressAnyKeyToContinue()
             self.afterDeletedCustomerIsFoundMenu(customer)
 
+# Used when reinstating a customer, a warning message appears, if the user wants to reinstate this user or not.
     def reinstatingWarningMessageMenu(self,customer):
         self.spaces()
         self.reinstatingWarningMessagePrint(customer)
@@ -300,6 +301,7 @@ class SalesmanUi:
                 self.pressAnyKeyToContinue()
                 self.reinstatingWarningMessageMenu(customer)
 
+# Warningmessageprint when reinstating a customer.
     def reinstatingWarningMessagePrint(self,customer):
         print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Reinstate_Selected_Customer/"+Colors.END)
         print(Colors.GREEN + "\nSelected customer: " + Colors.END)
@@ -431,7 +433,7 @@ class SalesmanUi:
         ssn, age = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
         number = cs.getSumOfAllCustomers()
-        return name,age,ssn,address,number
+        return name,age,ssn,address,number  
 
 
     '''-------------------------- CUSTOMER PRINT FUNCTIONS -----------------------'''
