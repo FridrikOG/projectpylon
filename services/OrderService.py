@@ -21,8 +21,8 @@ class OrderService:
                 if len(creditCard) == 19:
                     creditList = creditCard.split('-')
                     for split in creditList:
+                        int(split)
                         if len(split) == 4:
-                            int(split)
                             return creditCard
                         else:
                             self.isnsertValidCardPrint()
