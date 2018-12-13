@@ -16,32 +16,32 @@ class CarService:
     def checkValidDate(self):
         while True:
             try:
-                rentOutCar = input("Date created in this format DD-MM-YYYY: ") + '-12-00'
+                rentOutCar = input("Date created in this format DD-MM-YYYY: ").strip() + '-12-00'
                 day, month, year, hour, minutes = map(int, rentOutCar.split('-'))
                 break
             except:
-                print("\nplease input valid date\n")
+                print(Colors.WHITE+"\nplease input valid date\n"+Colors.END)
         return rentOutCar
 
     def checkCarType(self):
         while True:
             try:
-                carTypeInput = int(input("Choose car type number:  "))
+                carTypeInput = int(input("Choose car type number:  ")).strip()
                 if 0 < carTypeInput < 6:
                     break
                 else:
-                    print("Please choose from available types\n")
+                    print(Colors.WHITE+"Please choose from available types\n"+Colors.END)
             except:
-                print("Please only insert integer values\n")
+                print(Colors.WHITE+"Please only insert integer values\n"+Colors.END)
         return str(carTypeInput)
 
     def checkPassengers(self):
         while True:
             try:
-                passengers = int(input("Passengers: "))
+                passengers = int(input("Passengers: ")).strip()
                 break
             except:
-                print("\nPlease only insert integer values\n")
+                print(Colors.WHITE+"\nPlease only insert integer values\n"+Colors.END)
         return passengers
         
     def checkTransmission(self):
@@ -49,13 +49,13 @@ class CarService:
 
         while True:
             try:
-                transmissionInput = int(input("Choose: "))
+                transmissionInput = int(input("Choose: ")).strip()
                 if 0 < transmissionInput < 3:
                     break
                 else:
-                    print("Please choose from available transmissions\n")
+                    print(Colors.WHITE+"Please choose from available transmissions\n"+Colors.END)
             except:
-                print("Please only insert integer values\n")
+                print(Colors.WHITE+"Please only insert integer values\n"+Colors.END)
         return transmissionInput
 
     def checkLicenseplate(self, newCar=True):

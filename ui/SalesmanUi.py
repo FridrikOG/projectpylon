@@ -41,7 +41,6 @@ class SalesmanUi:
 # Find a customer
             elif action == '3':
                 self.spaces()
-                print(Colors.WHITE + "\nPath: Menu/Find_Customer/" + Colors.END)
                 self.findCustomerMenu()
 # Register a customer
             elif action == '4':
@@ -149,11 +148,11 @@ class SalesmanUi:
         print('\n'*50)
 
     def chooseAction(self):
-        action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
+        action = input(Colors.BLUE + "\nChoose action: " + Colors.END).strip()
         return action
 
     def pressEnterToContinue(self):
-        action = input(Colors.BLUE + "\nPress enter to continue: " + Colors.END)
+        action = input(Colors.BLUE + "\nPress enter to continue: " + Colors.END).strip()
         return action
 
     def actionsPrint(self):
@@ -166,7 +165,7 @@ class SalesmanUi:
         print(Colors.RED + "\nCustomer not found!" + Colors.END)
 
     def searchTermInput(self):
-        searchTerm = input(Colors.BLUE + "\nEnter SSN or Customer number to find: " + Colors.END)
+        searchTerm = input(Colors.BLUE + "\nEnter SSN or Customer number to find: " + Colors.END).strip()
         return searchTerm
 
     def exitPrint(self):
@@ -311,10 +310,10 @@ class SalesmanUi:
 
     def reinstatingWarningMessagePrint(self,customer):
         print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Reinstate_Selected_Customer/"+Colors.END)
-        print(Colors.GREEN + "\nSelected customer: " + Colors.END)
+        print(Colors.GREEN+"\nSelected customer: " + Colors.END)
         self.displayCustomerHeaderPrint()
         print(Colors.WHITE+str(customer)+Colors.END)
-        print(Colors.RED + "\nWarning: " + Colors.BLUE + "Are you sure you want to reinstate this customer?" + Colors.END)
+        print(Colors.RED+"\nWarning: " + Colors.BLUE + "Are you sure you want to reinstate this customer?" + Colors.END)
         print(Colors.WHITE+"1. Yes, reinstate this customer")
         print("2. No, do not reinstate this customer"+Colors.END)
         
@@ -529,7 +528,7 @@ class SalesmanUi:
 
     def editCar(self):
         print(Colors.WHITE + "\nPath: Menu/Edit_Car" + Colors.END)
-        print("-------------------------------------------------- Edit a Car --------------------------------------------------")
+        print(Colors.BLUE+"-------------------------------------------------- Edit a Car --------------------------------------------------"+Colors.END)
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
         self.printCarHeader()
@@ -550,9 +549,9 @@ class SalesmanUi:
             carTypeInput = self.__carService.checkCarType()
             rentCost, carType = self.getCarTypeVariables(carTypeInput)
         elif action == '2':
-            make = input(Colors.WHITE+'Make (f.x. Toyota Yaris): '+Colors.END).capitalize()
+            make = input(Colors.BLUE+'Make (f.x. Toyota Yaris): '+Colors.END).strip().capitalize()
         elif action == '3':
-            color = input(Colors.WHITE+'Color: '+Colors.END).capitalize()
+            color = input(Colors.BLUE+'Color: '+Colors.END).strip().capitalize()
         elif action == '4':
             passengers = self.__carService.checkPassengers()
         elif action == '5':
@@ -626,8 +625,8 @@ class SalesmanUi:
         self.createCarPrint()
         #car type
         carTypeInput = self.__carService.checkCarType()
-        make = input(Colors.WHITE+"Make (f.x. Toyota Yaris): "+Colors.END).capitalize()
-        color = input(Colors.WHITE+"Color: "+Colors.END).capitalize()
+        make = input(Colors.BLUE+"Make (f.x. Toyota Yaris): "+Colors.END).strip().capitalize()
+        color = input(Colors.BLUE+"Color: "+Colors.END).strip().capitalize()
         passengers = self.__carService.checkPassengers()
         transmissionInput = self.__carService.checkTransmission()
         liecensePlate = self.__carService.checkLicenseplate()
@@ -844,7 +843,7 @@ class SalesmanUi:
         self.showReceipt(order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
 
     def displayAllOrders(self, orders):
-        print("-------------------------------------------- List of All Orders --------------------------------------------")
+        print(Colors.BLUE+"-------------------------------------------- List of All Orders --------------------------------------------"+Colors.END)
         print(Colors.WHITE + "/Menu/Show_List_Of_All_Orders/"+ Colors.END)
         self.displayAllOrdersHeaderPrint()
         for order in orders:
@@ -867,7 +866,7 @@ class SalesmanUi:
         licenseplate = self.__carService.checkLicenseplate(False)
         car = self.__carService.licensePlateCheck(licenseplate)
         self.printCarHeader()
-        print(car)
+        print(Colors.WHITE+str(car)+Colors.END)
         self.printReturnMenu()
         action = self.chooseAction()
         if action == '0':
@@ -885,7 +884,7 @@ class SalesmanUi:
 
     def rentOutACar(self):
         print(Colors.WHITE + "\nPath: Menu/Rent_Out_Car" + Colors.END)
-        print("-------------------------------------------------- Rent Out a Car --------------------------------------------------")
+        print(Colors.BLUE+"-------------------------------------------------- Rent Out a Car --------------------------------------------------"+Colors.END)
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
         if searchedCar == None:
@@ -1059,13 +1058,13 @@ class SalesmanUi:
     def editOrderMenuPrint(self):
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back")
-        print(Colors.WHITE+"1. Edit rental time")
-        print(Colors.WHITE+"2. Change car type")
-        print(Colors.WHITE+"3. Cancel order")
+        print("1. Edit rental time")
+        print("2. Change car type")
+        print("3. Cancel order"+Colors.END)
 
     
     def lookUpOrderMenuPrint(self):
-        print("--------------------------------------------Look Up an Order--------------------------------------------")
+        print(Colors.BLUE+"--------------------------------------------Look Up an Order--------------------------------------------")
         print(Colors.WHITE+"0. Go back")
         print("1. Search for order"+Colors.END)
 
