@@ -22,22 +22,21 @@ class OrderService:
                 if len(creditCard) == 19:
                     creditList = creditCard.split('-')
                     for split in creditList:
-                        int(split)
                         if len(split) == 4:
+                            int(creditList[0])
+                            int(creditList[1])
+                            int(creditList[2])
+                            int(creditList[3])
                             return creditCard
                         else:
-                            self.isnsertValidCardPrint()
+                            self.insertValidCardPrint()
                 else:
-                    self.isnsertValidCardPrint()
+                    self.insertValidCardPrint()
             except:
-                self.isnsertValidCardPrint()
+                self.insertValidCardPrint()
 
-    def isnsertValidCardPrint(self):
-<<<<<<< HEAD
+    def insertValidCardPrint(self):
         print(Colors.BLUE+"\nPlease insert a valid credit card"+Colors.END)
-=======
-        print(Colors.WHITE+"\nPlease insert a valid credit card"+Colors.END)
->>>>>>> 48595d6fc3120cf14aebf3660a7ed9be81198057
 
 
     def createDate(self, rentDate):
@@ -63,11 +62,7 @@ class OrderService:
                 if returnCarTime > rentOutCarTime:
                     return rentOutCar, returnCar, rentOutCarTime, returnCarTime
                 else:
-<<<<<<< HEAD
-                    print(Colors.BLUE+'Please insert valid end of rental time'+Colors.END)
-=======
                     print(Colors.WHITE+'Please insert valid end of rental time'+Colors.END)
->>>>>>> 48595d6fc3120cf14aebf3660a7ed9be81198057
         #ef ekki ný pöntun
         else:
             while True:
