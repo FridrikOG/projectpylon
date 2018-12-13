@@ -425,7 +425,6 @@ class SalesmanUi:
         
 # Creates a customer, calls a function in the service class to validate the input.
     def createCustomer(self):
-        self.spaces()
         self.creatingCustomerPrintHeader()
         cs = CustomerService()
         name = cs.inputNameCheck()
