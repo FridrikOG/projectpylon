@@ -26,7 +26,7 @@ class CarService:
     def checkCarType(self):
         while True:
             try:
-                carTypeInput = int(input("Choose car type number:  ")).strip()
+                carTypeInput = int(input("Choose car type number:  "))
                 if 0 < carTypeInput < 6:
                     break
                 else:
@@ -38,7 +38,7 @@ class CarService:
     def checkPassengers(self):
         while True:
             try:
-                passengers = int(input("Passengers: ")).strip()
+                passengers = int(input("Passengers: "))
                 break
             except:
                 print(Colors.WHITE+"\nPlease only insert integer values\n"+Colors.END)
@@ -49,7 +49,7 @@ class CarService:
 
         while True:
             try:
-                transmissionInput = int(input("Choose: ")).strip()
+                transmissionInput = int(input("Choose: "))
                 if 0 < transmissionInput < 3:
                     break
                 else:

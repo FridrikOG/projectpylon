@@ -22,18 +22,21 @@ class OrderService:
                 if len(creditCard) == 19:
                     creditList = creditCard.split('-')
                     for split in creditList:
-                        int(split)
                         if len(split) == 4:
+                            int(creditList[0])
+                            int(creditList[1])
+                            int(creditList[2])
+                            int(creditList[3])
                             return creditCard
                         else:
-                            self.isnsertValidCardPrint()
+                            self.insertValidCardPrint()
                 else:
-                    self.isnsertValidCardPrint()
+                    self.insertValidCardPrint()
             except:
-                self.isnsertValidCardPrint()
+                self.insertValidCardPrint()
 
-    def isnsertValidCardPrint(self):
-        print(Colors.WHITE+"\nPlease insert a valid credit card"+Colors.END)
+    def insertValidCardPrint(self):
+        print(Colors.BLUE+"\nPlease insert a valid credit card"+Colors.END)
 
 
     def createDate(self, rentDate):
