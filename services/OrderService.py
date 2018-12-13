@@ -111,16 +111,16 @@ class OrderService:
     def InputValidDate(self):
         while True:
             try:
-                dateInput = input(Colors.WHITE+'1/2 - Input date in this format DD-MM-YYYY: '+Colors.END)
-                timeInput = input(Colors.WHITE+'2/2 - Input time of day in this format HH:MM: '+Colors.END)
+                dateInput = input(Colors.WHITE+"1/2 - Input date in this format DD-MM-YYYY: "+Colors.END)
+                timeInput = input(Colors.WHITE+"2/2 - Input time of day in this format HH:MM: "+Colors.END)
                 day, month, year = map(int, dateInput.split('-'))
                 hour, minutes = map(int,timeInput.split(':'))
                 finalDateTime = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
                 break
             except:
-                print('Please insert valid end of rental time')
-                print("0. Go back to main menu")
-                print("1. Input date again")
+                print(Colors.BLUE+"\nPlease insert valid date")
+                print(Colors.WHITE+"0. Go back to main menu")
+                print("1. Input date again"+Colors.END)
                 action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
                 if action == '0':
                     break
