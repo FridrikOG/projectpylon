@@ -970,7 +970,6 @@ class SalesmanUi:
         print("2. No"+Colors.END)
 
     def showReceipt(self, order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
-        self.actionsPrint()
         self.showReceiptPrint()
         action = self.chooseAction()
         if action == '1':
