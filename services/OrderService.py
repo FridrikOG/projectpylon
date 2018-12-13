@@ -49,7 +49,7 @@ class OrderService:
                 if rentOutCarTime > datetime.now():
                     break
                 else: 
-                    print("Please input a valid date")
+                    print(Colors.WHITE+'\nPlease insert valid start of rental time\n'+Colors.END)
                     
             while True:
                 print(Colors.BLUE+"\nInput time of return:"+Colors.END)
@@ -57,16 +57,18 @@ class OrderService:
                 returnCarTime = self.getTime(returnCar)
                 if returnCarTime > rentOutCarTime:
                     return rentOutCar, returnCar, rentOutCarTime, returnCarTime
+                else:
+                    print('Please insert valid end of rental time')
         #ef ekki ný pöntun
         else:
             while True:
                 print(Colors.BLUE+"\nInput time of return:"+Colors.END)
                 returnCar = self.InputValidDate()
                 returnCarTime = self.getTime(returnCar)
-                if returnCarTime.day == datetime.now().day and returnCarTime.month >= datetime.now().month:
+                if returnCarTime.day >= datetime.now().day and returnCarTime.month >= datetime.now().month:
                     break
                 else:
-                    print("Please input a valid date")
+                    print(Colors.BLUE+"Please insert valid end of rental time"+Colors.END)
             return returnCar
 
     def checkOrderNumber(self):
@@ -108,36 +110,20 @@ class OrderService:
             day, month, year, hour, minutes = map(int, date.split('-'))
             return datetime(year, month, day, hour, minutes)
         except ValueError:
-            print(Colors.WHITE+"Not a valid time"+Colors.END)
+            print(Colors.BLUE+"Not a valid time"+Colors.END)
 
     def InputValidDate(self):
-        boolCondition = False
-        while not boolCondition:
+        while True:
             try:
                 dateInput = input(Colors.WHITE+'1/2 - Input date in this format DD-MM-YYYY: '+Colors.END)
-                timeInput = input(Colors.WHITE+'2/2 - Input time of day in this format HH:MM: '+Colors.END)
+                timeInput = input(Colors.WHITE+'2/2 - Input time in this format HH:MM: '+Colors.END)
                 day, month, year = map(int, dateInput.split('-'))
                 hour, minutes = map(int,timeInput.split(':'))
                 finalDateTime = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
                 break
             except:
-                boolCondition = self.tryAgainDateMenu()
+                print(Colors.BLUE+"\nplease input a valid date\n"+Colors.END)
         return finalDateTime
-
-    def tryAgainDateMenu(self):
-        print(Colors.BLUE+'Please insert valid end of rental time')
-        print(Colors.BLUE+"Actions:"+Colors.END)
-        print(Colors.WHITE+"\n0. Go back to main menu")
-        print("1. Input date again"+Colors.END)
-        action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
-        if action == '0':
-            boolCondition = True
-            return boolCondition
-        elif action == '1':
-            return self.InputValidDate()
-        else:
-            return self.tryAgainDatePrint()
-                
 
     def checkCarTypeSelection(self):
         while True:
