@@ -9,17 +9,6 @@ class CarRepository:
     def __init__(self):
         self.__carsUnavailable = []
         self.__carsAvailable = []
-        self.__carLicenseplates = set()
-        self.__carsCUVAvailable= []
-        self.__carsLuxuryAvailable = []
-        self.__carsHighlandAvailable = []
-        self.__carsCompactAvailable = []
-        self.__carsComfortAvailable = []
-        self.__carsCUVUnavailable= []
-        self.__carsLuxuryUnavailable = []
-        self.__carsHighlandUnavailable = []
-        self.__carsCompactUnavailable = []
-        self.__carsComfortUnavailable = []
 
     def addCar(self, newCar):
         with open('./data/cars.csv', 'a') as carFile:
