@@ -16,8 +16,8 @@ class OrderService:
     def creditCardInfo(self):
         while True:
             try:
-                print("\nInsert credit card information for insurance in this format XXXX-XXXX-XXXX-XXXX")
-                creditCard = input("Credit card: ")
+                print(Colors.WHITE+"\nInsert credit card information for insurance in this format XXXX-XXXX-XXXX-XXXX"+Colors.END)
+                creditCard = input(Colors.WHITE+"Credit card: "+Colors.END).strip()
                 if len(creditCard) == 19:
                     creditList = creditCard.split('-')
                     for split in creditList:
@@ -32,7 +32,7 @@ class OrderService:
                 self.isnsertValidCardPrint()
 
     def isnsertValidCardPrint(self):
-        print("\nPlease insert a valid credit card")
+        print(Colors.WHITE+"\nPlease insert a valid credit card"+Colors.END)
 
 
     def createDate(self, rentDate):
@@ -58,7 +58,7 @@ class OrderService:
                 if returnCarTime > rentOutCarTime:
                     return rentOutCar, returnCar, rentOutCarTime, returnCarTime
                 else:
-                    print('Please insert valid end of rental time')
+                    print(Colors.WHITE+'Please insert valid end of rental time'+Colors.END)
         #ef ekki ný pöntun
         else:
             while True:
@@ -75,17 +75,17 @@ class OrderService:
         numberExists = True
         while numberExists:
             try:
-                orderNumber = input("Enter Order number: ")
+                orderNumber = input(Colors.BLUE+"Enter Order number: "+Colors.END).strip()
                 intOrder = int(orderNumber)
                 if numberExists == self.__orderRepo.checkOrderNumber(orderNumber):
                     orderInfo = self.__orderRepo.findOrder(orderNumber)
                     return orderNumber, orderInfo
             except:
-                print("Order number does not exist")
+                print(Colors.RED+"Order number does not exist"+Colors.END)
                 print("\n" + Colors.BLUE + "Actions: " + Colors.END)
-                print("0. Go back to main menu")
-                print("1. Input order number again")
-                action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
+                print(Colors.WHITE+"0. Go back to main menu")
+                print("1. Input order number again"+Colors.END)
+                action = input(Colors.BLUE + "\nChoose action: " + Colors.END).strip()
                 if action == '0':
                     break 
                 elif action == '1':
@@ -115,8 +115,8 @@ class OrderService:
     def InputValidDate(self):
         while True:
             try:
-                dateInput = input(Colors.WHITE+'1/2 - Input date in this format DD-MM-YYYY: '+Colors.END)
-                timeInput = input(Colors.WHITE+'2/2 - Input time in this format HH:MM: '+Colors.END)
+                dateInput = input(Colors.WHITE+'1/2 - Input date in this format DD-MM-YYYY: '+Colors.END).strip()
+                timeInput = input(Colors.WHITE+'2/2 - Input time in this format HH:MM: '+Colors.END).strip()
                 day, month, year = map(int, dateInput.split('-'))
                 hour, minutes = map(int,timeInput.split(':'))
                 finalDateTime = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
@@ -128,7 +128,7 @@ class OrderService:
     def checkCarTypeSelection(self):
         while True:
             try:
-                action = input(Colors.BLUE+"\nSelect car type for rental: "+Colors.END)
+                action = input(Colors.BLUE+"\nSelect car type for rental: "+Colors.END).strip()
                 checkint = int(action)
                 if '1' <= action <= '5':
                     return action
