@@ -641,6 +641,7 @@ class SalesmanUi:
         self.printCarHeader()
         print(Colors.WHITE+(str(newCar)+Colors.END))
         return newCar
+        self.pressEnterToContinue()
 
 
     def getTransmission(self, transmissionInput):
