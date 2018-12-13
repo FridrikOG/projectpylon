@@ -35,13 +35,8 @@ class OrderService:
             except:
                 self.insertValidCardPrint()
 
-<<<<<<< HEAD
     def insertValidCardPrint(self):
         print(Colors.BLUE+"\nPlease insert a valid credit card"+Colors.END)
-=======
-    def isnsertValidCardPrint(self):
-        print(Colors.WHITE+"\nPlease insert a valid credit card"+Colors.END)
->>>>>>> 13fe6d051e883c723c155af6293ab75f0d6ee659
 
 
     def createDate(self, rentDate):
