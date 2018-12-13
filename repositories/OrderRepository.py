@@ -10,8 +10,6 @@ class OrderRepository:
         self.__highestOrderNumber = []
         #self.__ordersInRental = []
 
-    #geta sett inn og náð í gögn
-    #hvernig fara gögnin inn í skránna
     #number, customer, car, cost, startDate, endDate
     #orderNumber, customer, carNumber, timeOfOrder, startDate, endDate, rentCost
     def getOrders(self):
@@ -27,7 +25,7 @@ class OrderRepository:
                 startDate= line['startDate']
                 endDate = line['endDate']
                 rentCost = line['rentCost']
-                if orderNumber not in self.__orderNumbers:
+                if int(orderNumber) not in self.__orderNumbers:
                     self.__orderNumbers.add(int(orderNumber))
                     newOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, ssn)
                     self.__orders.append(newOrder)
