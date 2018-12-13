@@ -6,6 +6,7 @@ class OrderService:
     
     def __init__(self):
         self.__orderRepo = OrderRepository()
+        
 
     def getAllOrders(self):
         return self.__orderRepo.getOrders()#Problems <--------
@@ -32,7 +33,7 @@ class OrderService:
                 self.isnsertValidCardPrint()
 
     def isnsertValidCardPrint(self):
-        print("\nPlease insert a valid credit card")
+        print(Colors.BLUE+"\nPlease insert a valid credit card"+Colors.END)
 
 
     def createDate(self, rentDate):
@@ -58,7 +59,7 @@ class OrderService:
                 if returnCarTime > rentOutCarTime:
                     return rentOutCar, returnCar, rentOutCarTime, returnCarTime
                 else:
-                    print('Please insert valid end of rental time')
+                    print(Colors.BLUE+'Please insert valid end of rental time'+Colors.END)
         #ef ekki ný pöntun
         else:
             while True:

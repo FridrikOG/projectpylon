@@ -126,7 +126,7 @@ class CarRepository:
                         returnCar = self.createDate(line['return'])
                         returnCarInfo = Car(carType, make,licensePlate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
                         return returnCarInfo
-            return True
+            return None
 
     def editCar(self, carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar):
         with open ('./data/cars.csv') as carFile:
