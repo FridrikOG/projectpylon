@@ -361,8 +361,8 @@ class SalesmanUi:
             self.editCustomerInfo(customer)
 #Edit customer ssn
         elif action =='2':
-            print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/Ssn/\n"+Colors.END)
-            print(Colors.BLUE+"Editing customers ssn:"+Colors.END)
+            print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/SSN/\n"+Colors.END)
+            print(Colors.BLUE+"Editing customers SSN:"+Colors.END)
             ssn,age = cs.inputSsnCheck()
             newCustomer = Customer(name,age,ssn,address,number)
             cs.customerEdit(newCustomer)
@@ -385,7 +385,7 @@ class SalesmanUi:
 #Edit all customer information
         elif action == '4':
             print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/All_Customer_Info/\n"+Colors.END)
-            print(Colors.BLUE+"Editing customers name, ssn and address:"+Colors.END)
+            print(Colors.BLUE+"Editing customers name, SSN and address:"+Colors.END)
             cs = CustomerService()
             name = cs.inputNameCheck()
             ssn,age = cs.inputSsnCheck()
@@ -1140,7 +1140,7 @@ class SalesmanUi:
 
     def displayAllOrdersHeaderPrint(self):
         LINE = '---------------'
-        print(Colors.BLUE+"\n{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:6}".format('Order number', 'Customer', 'ssn', 'Car Type',\
+        print(Colors.BLUE+"\n{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:6}".format('Order number', 'Customer', 'SSN', 'Car Type',\
         'Time of order', 'Start of order','End of order','Rent cost'))
         print("{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:6}".format(LINE,LINE, LINE, LINE, LINE, LINE, LINE, LINE)+Colors.END)
 
@@ -1149,7 +1149,7 @@ class SalesmanUi:
         print(Colors.WHITE+"\n-------------------------------------------------- Order Info --------------------------------------------------\n")
         # print("Order Number: {}\n".format(order.getOrderNumber())+Colors.END)
         print(Colors.BLUE+"Order number: "+Colors.WHITE,str(order.getOrderNumber())+Colors.END)
-        print(Colors.BLUE+"\n{:20} {:20}".format('Name','Ssn'))
+        print(Colors.BLUE+"\n{:20} {:20}".format('Name','SSN'))
         print("---------------------------------------------------"+Colors.END)
         print(Colors.WHITE+"{:20} {:20}".format(order.getCustomer(), order.getSsn())+Colors.END)
         print(Colors.BLUE+"\n{:20} {:20} {:20} {:20}".format('Car type','From','To','Date rented'))
