@@ -41,7 +41,6 @@ class SalesmanUi:
 # Find a customer
             elif action == '3':
                 self.spaces()
-                print(Colors.WHITE + "\nPath: Menu/Find_Customer/" + Colors.END)
                 self.findCustomerMenu()
 # Register a customer
             elif action == '4':

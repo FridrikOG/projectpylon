@@ -97,7 +97,7 @@ class CustomerService:
         booleanCheck = False
         while len(str(ssn)) != 10 or not booleanCheck:
             try:
-                ssn = input(Colors.WHITE+"Step 2/3 - Enter an SSN of 10 numbers: "+Colors.END)
+                ssn = input(Colors.WHITE+"Step 2/3 - Enter an SSN of 10 numbers: "+Colors.END).strip()
                 intssn = int(ssn)
                 age = self.inputAgeCheck(ssn)
                 if age < 21:
@@ -113,5 +113,5 @@ class CustomerService:
 # Input check for the address of the customer
 
     def inputAddressCheck(self):
-        address = input(Colors.WHITE+"Step 3/3 - Enter address: "+Colors.END).capitalize()
+        address = input(Colors.WHITE+"Step 3/3 - Enter address: "+Colors.END).strip().capitalize()
         return address
