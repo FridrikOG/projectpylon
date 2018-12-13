@@ -1,2 +1,3 @@
 orderNumber,customer,SSN,carType,timeOfOrder,startDate,endDate,rentCost
 1,Jóhannes,2508962737,Compact,13-12-2018-12-0,1-1-2019-12-0,1-2-2019-12-0,434000
+2,Jóhannes,2508962737,Compact,13-12-2018-12-5,1-1-2019-12-0,2-1-2019-12-0,14700
