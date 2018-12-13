@@ -23,4 +23,4 @@
 Insurance cost:
 Insurance is included in the price. 
 Additional insurance is 5% of the total rent price.
-
+When car is delivered late each extra hour will cost an additional 25% 
