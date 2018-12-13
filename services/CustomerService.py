@@ -64,10 +64,9 @@ class CustomerService:
             for name in fullName:
                 if name not in string.punctuation and name.isalpha():
                     newName += name + ' '
+                    check = True
                 else:
-                    self.inputNameCheck()
-            check = True
-
+                    check = False
         newName = newName.strip()
         return newName
 
