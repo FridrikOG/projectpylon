@@ -18,15 +18,12 @@ class OrderService:
             try:
                 print("\nInsert credit card information for insurance in this format XXXX-XXXX-XXXX-XXXX")
                 creditCard = input("Credit card: ")
-                creditList = creditCard.split('-')
-                for split in creditList:
-                    int(split)
-                    splitList = []
-                    for x in split:
-                        splitList.append(x)
-                        len(splitList) == 4
-                    len(creditList) == 4
-                return creditCard
+                if len(creditCard) == 19:
+                    creditList = creditCard.split('-')
+                    for split in creditList:
+                        if len(split) == 4:
+                            int(split)
+                            return creditCard
             except:
                 print("\nPlease insert a valid credit card")
 
