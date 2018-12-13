@@ -742,18 +742,20 @@ class SalesmanUi:
         return totalCost, totalDaysRented
 
     def addInsurance(self, cost):
-        self.addInsurancePrint()
-        action = self.chooseAction()
         insurance = 0
-        if action == '1':
-            totalCost = cost * 1.05
-            insurance = cost * 0.05
-        elif action == '2':
-            totalCost = cost
-        else:
-            self.invalidAction(action)
-            self.addInsurance(cost)
-        return int(totalCost), int(insurance)
+        action = ''
+        while action != '1' or action != '2':
+            self.addInsurancePrint()
+            action = self.chooseAction()
+            if action == '1':
+                totalCost = cost * 1.05
+                insurance = cost * 0.05
+                return int(totalCost), int(insurance)
+            elif action == '2':
+                totalCost = cost
+                return int(totalCost), int(insurance)
+            else:
+                self.invalidAction(action)
 
     def getTimeOfOrder(self):
         year = datetime.now().year
