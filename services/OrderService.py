@@ -120,10 +120,10 @@ class OrderService:
                 print("1. Input date again"+Colors.END)
                 action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
                 if action == '0':
-                    break
+                    return
+                else:
+                    self.InputValidDate()
                     
-                elif action == '1':
-                    pass
                 
         return finalDateTime
 
