@@ -98,6 +98,7 @@ class CustomerService:
         while len(str(ssn)) != 10 or not booleanCheck:
             try:
                 ssn = input(Colors.WHITE+"Step 2/3 - Enter an SSN of 10 numbers: "+Colors.END)
+                intssn = int(ssn)
                 age = self.inputAgeCheck(ssn)
                 if age < 21:
                     print(Colors.WHITE+"Customer has to be above the age of 21"+Colors.END)
