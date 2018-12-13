@@ -45,7 +45,7 @@ class OrderService:
                 if rentOutCarTime > datetime.now():
                     break
                 else: 
-                    print(Colors.WHITE+'\nPlease insert valid start of rental time\n'+Colors.END)
+                    print("Please input a valid date")
                     
             while True:
                 print(Colors.BLUE+"\nInput time of return:"+Colors.END)
@@ -54,17 +54,17 @@ class OrderService:
                 if returnCarTime > rentOutCarTime:
                     return rentOutCar, returnCar, rentOutCarTime, returnCarTime
                 else:
-                    print('Please insert valid end of rental time')
+                    pass
         #ef ekki ný pöntun
         else:
             while True:
                 print(Colors.BLUE+"\nInput time of return:"+Colors.END)
                 returnCar = self.InputValidDate()
                 returnCarTime = self.getTime(returnCar)
-                if returnCarTime.day >= datetime.now().day and returnCarTime.month >= datetime.now().month:
+                if returnCarTime.day == datetime.now().day and returnCarTime.month >= datetime.now().month:
                     break
                 else:
-                    print('Please insert valid end of rental time')
+                    print("Please input a valid date")
             return returnCar
 
     def checkOrderNumber(self):
@@ -78,6 +78,14 @@ class OrderService:
                     return orderNumber, orderInfo
             except:
                 print("Order number does not exist")
+                print("\n" + Colors.BLUE + "Actions: " + Colors.END)
+                print("0. Go back to main menu")
+                print("1. Input order number again")
+                action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
+                if action == '0':
+                    break 
+                elif action == '1':
+                    pass
 
     def editTimeOfRental(self, startOfRental, endOfRental, rentCost, orderNumber):
         #     #edit order
@@ -104,13 +112,22 @@ class OrderService:
         while True:
             try:
                 dateInput = input(Colors.WHITE+'1/2 - Input date in this format DD-MM-YYYY: '+Colors.END)
-                timeInput = input(Colors.WHITE+'2/2 - Input time in this format HH:MM: '+Colors.END)
+                timeInput = input(Colors.WHITE+'2/2 - Input time of day in this format HH:MM: '+Colors.END)
                 day, month, year = map(int, dateInput.split('-'))
                 hour, minutes = map(int,timeInput.split(':'))
                 finalDateTime = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
                 break
             except:
-                print(Colors.WHITE+"\nplease input a valid date\n"+Colors.WHITE)
+                print('Please insert valid end of rental time')
+                print("0. Go back to main menu")
+                print("1. Input date again")
+                action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
+                if action == '0':
+                    break
+                    
+                elif action == '1':
+                    pass
+                
         return finalDateTime
 
     def checkCarTypeSelection(self):

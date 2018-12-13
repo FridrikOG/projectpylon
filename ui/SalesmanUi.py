@@ -19,12 +19,10 @@ class SalesmanUi:
     def mainMenu(self):
         action = ''
         while action != 'q':
-            self.spaces()
             self.mainMenuPrint()
             action = self.chooseAction()
 
             if action == '1' or action == '2':
-                self.spaces()
                 typeAction = ''
                 dateAvailable = datetime.now()
                 if action == '1':
@@ -40,54 +38,58 @@ class SalesmanUi:
             
 # Find a customer
             elif action == '3':
-                self.spaces()
+                print(Colors.WHITE + "\nPath: Menu/Find_Customer/" + Colors.END)
                 self.findCustomerMenu()
 # Register a customer
             elif action == '4':
-                self.spaces()
                 print(Colors.WHITE + "\nPath: Menu/Creating_Customer/\n" + Colors.END)
                 name,age,ssn,address,number = self.createCustomer()
                 newCustomer = Customer(name,age,ssn,address,number)
                 self.__customerService.addCustomer(newCustomer)
                 print(Colors.GREEN + "\nCustomer has been created!\n" + Colors.END)
-                action = self.pressAnyKeyToContinue()
+                action = self.pressEnterToContinue()
 
 # Create a car order
             elif action == '5':
+                print(Colors.WHITE + "\nPath: Menu/Create_Car_Order/" + Colors.END)
                 self.createOrder()
 # Lookup an Order
             elif action == '6':####WORKING ON THIS
-                self.spaces()
+                print(Colors.WHITE + "\nPath: Menu/Look_Up_Order/" + Colors.END)
+
                 self.editOrderInfoMenu()
 
 # Show a list of orders
             elif action == '7':#####WORKING ON THIS
-                self.spaces()
+                print(Colors.WHITE + "\nPath: Menu/List_Of_Orders/" + Colors.END)
                 orders, nothing = self.__orderService.getAllOrders()
                 self.displayAllOrders(orders)
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 #print all orders and options
 # Rent out a car
             elif action == '8':
+                print(Colors.WHITE + "\nPath: Menu/Rent_Out_Car/" + Colors.END)
                 self.rentOutACar()
 # Return a car
             elif action == '9':
+                print(Colors.WHITE + "\nPath: Menu/Return_Car/" + Colors.END)
                 self.returnCar()
 
 # Register a car
             elif action == '10':
-                self.spaces()
+                print(Colors.WHITE + "\nPath: Menu/Register_New_Car/" + Colors.END)
                 newCar = self.createCar()
                 self.__carService.addCar(newCar)
 # Edit a car
-            elif action == '111':
+            elif action == '11':
+                print(Colors.WHITE + "\nPath: Menu/Edit_Car/" + Colors.END)
                 self.editCar()
 
 # Prints out the pricelist for cars.
             elif action == '12':
-                self.spaces()
+                print(Colors.WHITE + "\nPath: Menu/Pricelist/" + Colors.END)
                 print(open('./data/pricelist.txt').read())
-                action = self.pressAnyKeyToContinue()
+                action = self.pressEnterToContinue()
 
 # Prints exit message and exits the program.
             elif action == 'q':
@@ -97,7 +99,7 @@ class SalesmanUi:
 # unwanted action gets recognized and gives feedback to the user.
             else:
                 self.invalidAction(action)
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 self.mainMenu()
 
 # Prints the mainMenuPage.
@@ -131,8 +133,8 @@ class SalesmanUi:
         action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
         return action
 
-    def pressAnyKeyToContinue(self):
-        action = input(Colors.BLUE + "\nPress any key to continue: " + Colors.END)
+    def pressEnterToContinue(self):
+        action = input(Colors.BLUE + "\nPress enter to continue: " + Colors.END)
         return action
 
     def actionsPrint(self):
@@ -159,29 +161,29 @@ class SalesmanUi:
 
     def allDeletedCustomerHeaderPrint(self):
         print(Colors.RED +
-        "------------------------------ ALL DELETED CUSTOMERS ------------------------------\n"
+        "------------------------------ All Deleted Customers ------------------------------\n"
          + Colors.END)
 
     def allAvailableCars(self):
         print(Colors.GREEN +
-        "---------------------------------------------- ALL AVAILABLE CARS ----------------------------------------------\n"
+        "---------------------------------------------- ALL Available Cars ----------------------------------------------\n"
          + Colors.END)
 
     def allUnAvilableCars(self):
         print(Colors.RED +
-        "--------------------------------------------- ALL UNAVAILABLE CARS ---------------------------------------------\n"
+        "--------------------------------------------- ALL Unavailable Cars ---------------------------------------------\n"
          + Colors.END)
 
     def creatingCustomerPrintHeader(self):
         print(Colors.GREEN + 
-        "-----------Creating customer account-----------"
+        "-----------Creating Customer Account-----------"
         + Colors.END)
 
     def invalidAction(self,action):
         print(Colors.RED+"\nAction "+Colors.WHITE+f"'{action}'"+Colors.RED+" is not a valid action!"+Colors.END)
         # else:
         # self.invalidAction(action)
-        # self.pressAnyKeyToContinue()
+        # self.pressEnterToContinue()
         # self.showCarsByTypeMenu(typeAction,dateAvailable)
 
     ''' -------------------- Customer Functions -------------------- '''
@@ -208,7 +210,7 @@ class SalesmanUi:
                 self.spaces()
                 print(Colors.WHITE+"Path: Menu/Find_Customer/Not_Found/\n"+Colors.END)
                 self.customerNotFound()
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 self.findCustomerMenu()
     
 # If the customer is found it prints found message.
@@ -226,7 +228,7 @@ class SalesmanUi:
             self.allCustomersHeaderPrint()
             customers = self.__customerService.getAllCustomers()
             self.displayAllCustomersPrint(customers)
-            action = self.pressAnyKeyToContinue()
+            action = self.pressEnterToContinue()
             self.findCustomerMenu()
 
 # Shows all deleted customers.
@@ -236,7 +238,7 @@ class SalesmanUi:
             self.allDeletedCustomerHeaderPrint()
             customers = self.__customerService.getAllDeletedCustomers()
             self.displayAllCustomersPrint(customers)
-            action = self.pressAnyKeyToContinue()
+            action = self.pressEnterToContinue()
             self.findCustomerMenu()
 
 # Search engine in the deleted customers dir.
@@ -251,7 +253,7 @@ class SalesmanUi:
             if customer == None:
                 self.spaces()
                 self.customerNotFound()
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 self.findCustomerMenu()
             
 # If the customer is found it prints found message.
@@ -263,7 +265,7 @@ class SalesmanUi:
                 self.afterDeletedCustomerIsFoundMenu(customer)
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.findCustomerMenu()
 
 # After the customer is found the user can go back or reinstate the customer.
@@ -276,10 +278,9 @@ class SalesmanUi:
             self.reinstatingWarningMessageMenu(customer)
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.afterDeletedCustomerIsFoundMenu(customer)
 
-# Used when reinstating a customer, a warning message appears, if the user wants to reinstate this user or not.
     def reinstatingWarningMessageMenu(self,customer):
         self.spaces()
         self.reinstatingWarningMessagePrint(customer)
@@ -290,7 +291,7 @@ class SalesmanUi:
                 self.__customerService.restoringCustomer(customerNumber)
                 self.spaces()
                 print(Colors.GREEN+"Customer "+Colors.WHITE+f"'{customer.getName()}'"+Colors.GREEN+" has been reinstated."+Colors.END)  # Customer reinstated
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 self.spaces()
                 self.findCustomerMenu()
             elif action == '2':
@@ -298,10 +299,9 @@ class SalesmanUi:
                 self.afterDeletedCustomerIsFoundMenu(customer)
             else:
                 self.invalidAction(action)
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 self.reinstatingWarningMessageMenu(customer)
 
-# Warningmessageprint when reinstating a customer.
     def reinstatingWarningMessagePrint(self,customer):
         print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Reinstate_Selected_Customer/"+Colors.END)
         print(Colors.GREEN + "\nSelected customer: " + Colors.END)
@@ -324,7 +324,7 @@ class SalesmanUi:
             self.warningMessageMenu(customer)
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.afterCustomerIsFoundMenu(customer)
     
             
@@ -351,7 +351,7 @@ class SalesmanUi:
             cs.customerEdit(newCustomer)
             print(Colors.GREEN+"\nCustomer name has been changed from "\
             +Colors.WHITE+f"'{customer.getName()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{name}'"+Colors.END)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.editCustomerInfo(customer)
 #Edit customer ssn
         elif action =='2':
@@ -362,7 +362,7 @@ class SalesmanUi:
             cs.customerEdit(newCustomer)
             print(Colors.GREEN+"\nCustomer address has been changed from "\
             +Colors.WHITE+f"'{customer.getSsn()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{ssn}'"+Colors.END)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.editCustomerInfo(customer)
 #Edit customer address
         elif action =='3':
@@ -373,7 +373,7 @@ class SalesmanUi:
             cs.customerEdit(newCustomer)
             print(Colors.GREEN+"\nCustomer address has been changed from "\
             +Colors.WHITE+f"'{customer.getAddress()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{address}'"+Colors.END)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.editCustomerInfo(customer)
 
 #Edit all customer information
@@ -395,11 +395,11 @@ class SalesmanUi:
 # Address changed
             print(Colors.GREEN+"\nCustomer address has been changed from "\
             +Colors.WHITE+f"'{customer.getAddress()}'"+Colors.END+Colors.GREEN+" to "+Colors.WHITE+f"'{address}'"+Colors.END)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.editCustomerInfo(customer)
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.editCustomerInfo(customer)
 
 # Safety function that asks the user if he is certain that he wants to delete the selected customer.
@@ -413,7 +413,7 @@ class SalesmanUi:
                 self.__customerService.deletingCustomer(customerNumber)
                 self.spaces()
                 print(Colors.RED+"Customer "+Colors.WHITE+f"'{customer.getName()}'"+Colors.RED+" has been deleted."+Colors.END) # Customer Deleted
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 self.spaces()
                 self.findCustomerMenu()
             elif action == '2':
@@ -421,19 +421,20 @@ class SalesmanUi:
                 self.afterCustomerIsFoundMenu(customer)
             else:
                 self.invalidAction(action)
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 self.warningMessageMenu(customer)
 
         
 # Creates a customer, calls a function in the service class to validate the input.
     def createCustomer(self):
+        self.spaces()
         self.creatingCustomerPrintHeader()
         cs = CustomerService()
         name = cs.inputNameCheck()
         ssn, age = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
         number = cs.getSumOfAllCustomers()
-        return name,age,ssn,address,number  
+        return name,age,ssn,address,number
 
 
     '''-------------------------- CUSTOMER PRINT FUNCTIONS -----------------------'''
@@ -461,7 +462,7 @@ class SalesmanUi:
 # Header which is printed when user is searching for a customer.
     def searchCustomerHeaderPrint(self):
         print(Colors.YELLOW + 
-        "--------------------------------------------Search for customer-------------------------------------------"
+        "-------------------------------------------- Search for customer -------------------------------------------"
         + Colors.END)
 
 # Prints the option to go back or reinstate the customer back into the main customer dir file.   VANTAR PATH
@@ -511,8 +512,8 @@ class SalesmanUi:
         print("5. Transmission"+Colors.END)
 
     def editCar(self):
-
-        self.spaces()
+        print(Colors.WHITE + "\nPath: Menu/Edit_Car" + Colors.END)
+        print("-------------------------------------------------- Edit a Car --------------------------------------------------")
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
         self.printCarHeader()
@@ -554,7 +555,7 @@ class SalesmanUi:
         print(Colors.GREEN+"\nCar successfull edited!"+Colors.END)
         self.printCarHeader()
         print(Colors.WHITE+str(editedCar)+Colors.END)
-        self.pressAnyKeyToContinue()
+        self.pressEnterToContinue()
 
     def showCarsByTypeMenu(self, typeAction,dateAvailable):
         while True:
@@ -612,7 +613,7 @@ class SalesmanUi:
                 return False
             else:
                 self.invalidAction(action)
-                self.pressAnyKeyToContinue()
+                self.pressEnterToContinue()
                 self.showCarsByTypeMenu(typeAction,dateAvailable)
             cars = self.__carService.getCars(typeAction, action,dateAvailable)
             self.displayAllCarsPrint(cars)
@@ -688,12 +689,12 @@ class SalesmanUi:
         print("\n3. Select CUV")
         print("\n4. Select Highland")
         print("\n5. Select Luxury"+Colors.END)
-
+    
     def printCarHeader(self):
-        LINE = '-'
-        print(Colors.BLUE+"\n{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
-        'Color', 'Passengers','Transmission','Rent Cost'))
-        print("{:-<15} {:-<15} {:-<15} {:-<15} {:-<15} {:-<15} {:-<15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE)+Colors.END)
+            LINE = '-'
+            print(Colors.BLUE+"\n{:15} {:15} {:15} {:15} {:<15} {:15} {:15}".format('Type', 'Make', 'License Plate',\
+            'Color', 'Passengers','Transmission','Rent Cost'))
+            print("{:-<15} {:-<15} {:-<15} {:-<15} {:-<15} {:-<15} {:-<15}".format(LINE, LINE, LINE, LINE, LINE, LINE, LINE)+Colors.END)
 
 
     '''----------------------------------ORDER FUNCTIONS-----------------------------------------------'''
@@ -706,7 +707,7 @@ class SalesmanUi:
             self.createOrder()
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.customerNotFound()
 
     def rentOutToCustomerMenu(self):
@@ -718,15 +719,13 @@ class SalesmanUi:
             return
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.rentOutToCustomerMenu()
 
     def selectCarType(self):
         self.selectCarTypePrintMenu()
-
         action = self.__orderService.checkCarTypeSelection()
         rentCost, carType = self.getCarTypeVariables(action)
-
         return rentCost, carType
 
     def getCostOfOrder(self, rentOutCarTime, returnCarTime, rentCost):
@@ -737,11 +736,8 @@ class SalesmanUi:
             totalDaysRented = daysRentedCount.days
         else:
             totalDaysRented = daysRented.days        
-
         totalCost = int(totalDaysRented) * rentCost
-
         print(Colors.WHITE+"Price for {} days rental is {} ISK without VAT".format(totalDaysRented,totalCost)+Colors.END)
-
         return totalCost, totalDaysRented
 
     def addInsurance(self, cost):
@@ -756,7 +752,7 @@ class SalesmanUi:
             totalCost = cost
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.addInsurance()
         return int(totalCost), int(insurance)
 
@@ -780,7 +776,7 @@ class SalesmanUi:
             return False
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.areYouSure()
 
     def finalStepOrder(self, order):
@@ -802,11 +798,10 @@ class SalesmanUi:
                 self.finalStepOrder(order)
         else:
             self.invalidAction(action)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.finalStepOrder(order)
 
-    def createOrder(self):
-        print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Searching_Customer/" + Colors.END)
+    def createOrder(self):###WORKING ON THIS#####
         #Order Number
         self.searchCustomerForCarRentalHeaderPrint()
         searchTerm = self.searchTermInput()
@@ -815,8 +810,7 @@ class SalesmanUi:
             customer = self.__customerService.findCustomer(searchTerm)
             name = customer.getName()
             ssn = customer.getSsn()
-            self.spaces()
-            print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Customer_Found/\n" + Colors.END)
+            print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Select_Customer/\n" + Colors.END)
             self.customerFound()
             self.displayCustomerHeaderPrint()
             print(Colors.WHITE+(str(customer))+Colors.END)
@@ -825,35 +819,43 @@ class SalesmanUi:
             print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Customer_Not_Found/" + Colors.END)
             self.customerNotFound()
             self.customerNotFoundMenu()
-        nothing, orderNumber = self.__orderService.getAllOrders()
-        self.spaces()
+        unusedValue, orderNumber = self.__orderService.getAllOrders()
         # Time for rental
-        rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate(True)
-        self.pressAnyKeyToContinue()
-        self.spaces()
+        print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Select_Customer/Input_Time_Of_Rental/\n" + Colors.END)
+        try:
+            #FAILS####
+            rentOutCar, returnCar, rentOutCarTime, returnCarTime = self.__orderService.checkValidDate(True)
+            self.pressEnterToContinue()
+        except:
+            self.mainMenu()
         # Choose car type
+        print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Select_Car_Type/" + Colors.END)
         rentCost, carType = self.selectCarType()
         #calculate direct costs
         carCost, totalDaysRented = self.getCostOfOrder(rentOutCarTime, returnCarTime, rentCost)
         #Add insurance
+        print(Colors.WHITE + "\nPath: Menu/Creating_Car_Order/Select_Car_Type/Add_Insurance/" + Colors.END)
         totalCost, insurance = self.addInsurance(carCost)
         #Time of order
         stringTimeOforder, timeOfOrder = self.getTimeOfOrder()
         # Print out order
         order = Order(orderNumber, name, carType, stringTimeOforder, rentOutCar, returnCar, totalCost, ssn)
+        print(Colors.WHITE + "\nPath: Menu/Create_Car_Order/Select_Car_Type/Order_Info/" + Colors.END)
         self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)  
-        # Credit card for insurane
+        # Credit card for insurance
         creditCard = self.creditCardInfo()
-        self.spaces()
+        print(Colors.WHITE + "\nPath: Menu/Create_Car_Order/Select_Car_Type/Order_Info/Final_Step/" + Colors.END)
         self.finalStepOrder(order)
         #Choose payment
+        print(Colors.WHITE + "\nPath: Menu/Create_Car_Order/Select_Car_Type/Order_Info/Final_Step/Payment/" + Colors.END)
         self.choosePayment(carCost, creditCard)
         # Print receipt
+        print(Colors.WHITE + "\nPath: Menu/Create_Car_Order/Select_Car_Type/Order_Info/Final_Step/Payment/Receipt/" + Colors.END)
         self.showReceipt(order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
 
-        return 
-
     def displayAllOrders(self, orders):
+        print("-------------------------------------------- List of All Orders --------------------------------------------")
+        print(Colors.WHITE + "/Menu/Show_List_Of_All_Orders/"+ Colors.END)
         self.displayAllOrdersHeaderPrint()
         for order in orders:
             print(Colors.WHITE+str(order)+Colors.END)
@@ -872,12 +874,9 @@ class SalesmanUi:
         self.returnCarAdditionalPricePrint(int(price))
     
     def returnCar(self):
-        self.spaces()
         licenseplate = self.__carService.checkLicenseplate(False)
-        self.spaces()
         self.printReturnMenu()
         action = self.chooseAction()
-        self.spaces()
         if action == '0':
             self.returnCar()
         elif action == '1':
@@ -889,9 +888,11 @@ class SalesmanUi:
             if returnTimeDifference.seconds > 0:
                 self.returnCarAdditionalPrice(returnTimeDifference, searchedCar)
             self.returnCarPrint()
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
 
     def rentOutACar(self):
+        print(Colors.WHITE + "\nPath: Menu/Rent_Out_Car" + Colors.END)
+        print("-------------------------------------------------- Rent Out a Car --------------------------------------------------")
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
         # Info about the car to be rented
@@ -909,7 +910,7 @@ class SalesmanUi:
         # Prin out the car to be rented
         self.printCarHeader()
         print(Colors.WHITE+str(searchedCar)+Colors.END)
-        self.pressAnyKeyToContinue()
+        self.pressEnterToContinue()
         self.spaces()
         #Search for customer for the rental
         self.searchCustomerForCarRentalHeaderPrint()
@@ -959,11 +960,11 @@ class SalesmanUi:
         self.spaces()
         if action == '1':
             print(Colors.WHITE+"Payment will be charged on the following credit card {} for {} ISK".format(creditCard, carCost)+Colors.END)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.spaces()
         if action == '2':
             print(Colors.WHITE+"Payment to be paid: {} ISK".format(carCost)+Colors.END)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
             self.spaces()
         
 
@@ -984,9 +985,9 @@ class SalesmanUi:
         self.spaces()
         if action == '1':
             self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
         elif action == '2':
-            self.pressAnyKeyToContinue()
+            self.pressEnterToContinue()
 
     def editOrderInfoMenu(self):
         self.actionsPrint()
@@ -996,17 +997,21 @@ class SalesmanUi:
             self.mainMenu()
         elif action == '1':
             #get order info
-            orderNumber, orderInfo = self.__orderService.checkOrderNumber()#check for illegitimacy##might be stuck in loop
-            #prints order info
-            #variables for rent cost
-            originalRentOutCarTime = self.__orderService.createDate(orderInfo.getStartDate())
-            originalReturnCarTime = self.__orderService.createDate(orderInfo.getEndDate())
-            originalDaysRented = self.daysRented(originalRentOutCarTime, originalReturnCarTime)
-            #NOT THE ORIGINAL PRICE AND 0.0
-            originalPrice = orderInfo.getRentCost()
-            ##NEEDS FIXING FOR CORRECT INFO IN DISPLAYORDERINFO###
-            self.displayOrderInfo(orderInfo, 0, originalDaysRented, originalPrice, originalRentOutCarTime, originalReturnCarTime, orderInfo.getTimeOfOrder())#####
-            self.editOrderMenuPrint()
+            try:
+                orderNumber, orderInfo = self.__orderService.checkOrderNumber()#check for illegitimacy##might be stuck in loop
+                #prints order info
+                #variables for rent cost
+                originalRentOutCarTime = self.__orderService.createDate(orderInfo.getStartDate())
+                originalReturnCarTime = self.__orderService.createDate(orderInfo.getEndDate())
+                originalDaysRented = self.daysRented(originalRentOutCarTime, originalReturnCarTime)
+                #NOT THE ORIGINAL PRICE AND 0.0
+                originalPrice = orderInfo.getRentCost()
+                ##NEEDS FIXING FOR CORRECT INFO IN DISPLAYORDERINFO###
+                self.displayOrderInfo(orderInfo, 0, originalDaysRented, originalPrice, originalRentOutCarTime, originalReturnCarTime, orderInfo.getTimeOfOrder())#####
+                self.editOrderMenuPrint()
+            except:
+                self.mainMenu()
+                
             action = self.chooseAction()
 
             if action == '0':
@@ -1047,7 +1052,7 @@ class SalesmanUi:
                     print(Colors.RED+"\nOrder number: "+Colors.WHITE,orderNumber,Colors.RED+"has been deleted"+Colors.END)
                     self.displayAllOrdersHeaderPrint()
                     print(Colors.WHITE+str(deletedOrder)+Colors.END)
-                    self.pressAnyKeyToContinue()
+                    self.pressEnterToContinue()
 
                 else:
                     self.editOrderInfoMenu()
@@ -1072,6 +1077,7 @@ class SalesmanUi:
 
     
     def lookUpOrderMenuPrint(self):
+        print("--------------------------------------------Look Up an Order--------------------------------------------")
         print(Colors.WHITE+"0. Go back")
         print("1. Search for order"+Colors.END)
 
@@ -1114,6 +1120,29 @@ class SalesmanUi:
         print(Colors.RED+"2. Cancel order"+Colors.END)
 
     def displayAllOrdersHeaderPrint(self):
+        LINE = '---------------'
+        print(Colors.BLUE+"\n{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:6}".format('Order number', 'Customer', 'ssn', 'Car Type',\
+        'Time of order', 'Start of order','End of order','Rent cost'))
+        print("{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:6}".format(LINE,LINE, LINE, LINE, LINE, LINE, LINE, LINE)+Colors.END)
+
+    def displayOrderInfo(self,order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
+# THIS LOOKS HORRIBLE, FIX LATER
+        print(Colors.WHITE+"\n-------------------------------------------------- Order Info --------------------------------------------------\n")
+        # print("Order Number: {}\n".format(order.getOrderNumber())+Colors.END)
+        print(Colors.BLUE+"Order number: "+Colors.WHITE,str(order.getOrderNumber())+Colors.END)
+        print(Colors.BLUE+"\n{:20} {:20}".format('Name','Ssn'))
+        print("---------------------------------------------------"+Colors.END)
+        print(Colors.WHITE+"{:20} {:20}".format(order.getCustomer(), order.getSsn())+Colors.END)
+        print(Colors.BLUE+"\n{:20} {:20} {:20} {:20}".format('Car type','From','To','Date rented'))
+        print("{:20} {:20} {:20} {:20}".format('-------------------','-------------------','-------------------','-------------------')+Colors.END)
+        print(Colors.WHITE+"{:20} {:20} {:20} {:20}".format(order.getCarType(),str(rentOutCarTime),str(returnCarTime), str(timeOfOrder))+Colors.END)
+        print(Colors.BLUE+"\nCost of"+Colors.WHITE,str(totalDaysRented),Colors.BLUE+"days without VAT: "+Colors.WHITE,str(carCost),"ISK"+Colors.END)
+        if insurance != 0:
+            print(Colors.BLUE+"Extra insurance: "+Colors.WHITE,str(insurance),"ISK"+Colors.END)
+            # print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost()))
+            print(Colors.BLUE+"\nTotal cost of"+Colors.WHITE,str(totalDaysRented),Colors.BLUE+"days without VAT: "+Colors.WHITE,str(order.getRentCost())," ISK")
+    
+    def displayAllOrdersHeaderPrint(self):
         LINE = '-'
         print(Colors.BLUE+"\n{:13} {:20} {:12} {:10} {:18} {:18} {:18} {:10}".format('Order number', 'Customer', 'SSN', 'Car Type',\
         'Time of order', 'Start of order','End of order','Rent cost'))
@@ -1138,13 +1167,14 @@ class SalesmanUi:
             print(Colors.BLUE+"\nTotal cost of"+Colors.WHITE,str(totalDaysRented),Colors.BLUE+"days without VAT: "+Colors.WHITE,str(order.getRentCost())," ISK")
 
     def searchCustomerForCarRentalHeaderPrint(self):
-        print(Colors.BLUE+"--------------------- Find customer for car rental ---------------------"+Colors.END)
+        print(Colors.BLUE+"--------------------- Find Customer for Car Rental ---------------------"+Colors.END)
 
     def printReturnMenu(self):
+        print("-------------------------------------------------- Return a Car --------------------------------------------------")
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back")
         print("1. Return selected car"+Colors.END)
-
+    ##NOT IN USE###
     def listofOrdersMenu(self):
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back")
