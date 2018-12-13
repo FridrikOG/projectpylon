@@ -17,6 +17,7 @@ class SalesmanUi:
         self.__orderService = OrderService()
 
     def mainMenu(self):
+        self.spaces()
         action = ''
         while action != 'q':
             self.mainMenuPrint()
@@ -134,7 +135,7 @@ class SalesmanUi:
 
     '''----------Functions for repetitive code-----------'''
     def spaces(self):
-        print('\n'*43)
+        print('\n'*50)
 
     def chooseAction(self):
         action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
