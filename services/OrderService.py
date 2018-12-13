@@ -57,8 +57,6 @@ class OrderService:
                 returnCarTime = self.getTime(returnCar)
                 if returnCarTime > rentOutCarTime:
                     return rentOutCar, returnCar, rentOutCarTime, returnCarTime
-                else:
-                    pass
         #ef ekki ný pöntun
         else:
             while True:
@@ -123,10 +121,10 @@ class OrderService:
                 finalDateTime = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
                 break
             except:
-                boolCondition = self.tryAgainDatePrint()
+                boolCondition = self.tryAgainDateMenu()
         return finalDateTime
 
-    def tryAgainDatePrint(self):
+    def tryAgainDateMenu(self):
         print(Colors.BLUE+'Please insert valid end of rental time')
         print(Colors.BLUE+"Actions:"+Colors.END)
         print(Colors.WHITE+"\n0. Go back to main menu")
@@ -146,8 +144,12 @@ class OrderService:
             try:
                 action = input(Colors.BLUE+"\nSelect car type for rental: "+Colors.END)
                 checkint = int(action)
-                if '0' <= action <= '5':
+                if '1' <= action <= '5':
                     return action
+                else:
+                    print(Colors.WHITE+"\nPlease choose from available options"+Colors.END)
+
+
             except:
                 print(Colors.WHITE+"\nPlease choose from available options"+Colors.END)
 

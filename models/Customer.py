@@ -7,7 +7,7 @@ class Customer():
         self.__number = number
 
     def __str__(self):
-        s = '{:24} {:15} {:15} {:20} {:15}'.format(self.__name,self.__age,self.__ssn, self.__address, self.__number)
+        s = '{:24} {:15} {:15} {:20} {:<15}'.format(self.__name,self.__age,self.__ssn, self.__address, self.__number)
         return s 
     
     def __repr__(self):
