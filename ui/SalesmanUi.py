@@ -712,7 +712,7 @@ class SalesmanUi:
         else:
             self.invalidAction(action)
             self.pressEnterToContinue()
-            self.customerNotFound()
+            self.customerNotFoundMenu()
 
     def rentOutToCustomerMenu(self):
         self.rentOutToCustomerPrintMenu()
