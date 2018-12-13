@@ -871,6 +871,9 @@ class SalesmanUi:
     
     def returnCar(self):
         licenseplate = self.__carService.checkLicenseplate(False)
+        car = self.__carService.licensePlateCheck(licenseplate)
+        self.printCarHeader()
+        print(car)
         self.printReturnMenu()
         action = self.chooseAction()
         if action == '0':
