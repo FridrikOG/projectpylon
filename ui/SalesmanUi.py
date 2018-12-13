@@ -466,7 +466,7 @@ class SalesmanUi:
 
 # The format which the customer is printed out on.
     def displayCustomerHeaderPrint(self):
-        print(Colors.BLUE+"{:24} {:15} {:15} {:20} {:15}".format("Name", "Age", "SSN", "Address", "Number"))
+        print(Colors.BLUE+"{:24} {:15} {:15} {:20} {:<15}".format("Name", "Age", "SSN", "Address", "Number"))
         print("{:15} {:15} {:15} {:15} {:15}".format("-----------------------",\
         "---------------","---------------", "--------------------", "---------------"+Colors.END))
 # Comes after the displayCustomerHeaderPrint, prints out all the customers.
