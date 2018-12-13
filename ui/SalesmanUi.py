@@ -783,9 +783,13 @@ class SalesmanUi:
         self.finalStepOrderPrint()
         action = self.chooseAction()
         if action == '1':
-            self.__orderService.addOrder(order)
-            self.spaces()
-            print(Colors.GREEN+"Order complete!"+Colors.END)
+            status = self.areYouSure()
+            if status == True:
+                self.__orderService.addOrder(order)
+                self.spaces()
+                print(Colors.GREEN+"Order complete!"+Colors.END)
+            else:
+                self.finalStepOrder(order)
         elif action == '2':
             status = self.areYouSure()
             if status == True:
@@ -973,7 +977,7 @@ class SalesmanUi:
         return creditCard
 
     def showReceiptPrint(self):
-        print(Colors.BLUE+"Do you want to print the receipt ?")
+        print(Colors.BLUE+"Do you want to get a receipt ?")
         print(Colors.WHITE+"1. Yes")
         print("2. No"+Colors.END)
 
@@ -1105,11 +1109,11 @@ class SalesmanUi:
 
     def addInsurancePrint(self):
         self.actionsPrint()
-        print(Colors.WHITE+"1. Add SCDW:\n\t{0}\n\t{1}\n\t{2}\n\t{3}\n\t{4}".format("Includes:","-Front window","-Sandstorm","-Chassis", "-Theft insurance"))
+        print(Colors.WHITE+"1. Add SCDW(Includes):\n\t{0}\n\t{1}\n\t{2}\n\t{3}".format("-Front window","-Sandstorm","-Chassis", "-Theft insurance"))
         print("2. No additional insurance"+Colors.END)
 
     def areYouSurePrint(self):
-        print(Colors.BLUE+"\nAre you sure you want to cancel?")
+        print(Colors.BLUE+"\nAre you sure?")
         print(Colors.WHITE+"1. Yes")
         print("2. No, go back"+Colors.END)
 

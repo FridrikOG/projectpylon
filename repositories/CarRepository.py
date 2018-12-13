@@ -10,6 +10,11 @@ class CarRepository:
         self.__carsUnavailable = []
         self.__carsAvailable = []
 
+    def createDate(self, rentDate):
+        # takes date string and changes it to datetime format
+        day, month, year, hour, minutes = map(int, rentDate.split('-'))
+        return datetime(year, month, day, hour, minutes)
+
     def addCar(self, newCar):
         with open('./data/cars.csv', 'a') as carFile:
             carType = newCar.getType()
@@ -25,10 +30,6 @@ class CarRepository:
             
             carFile.write("{},{},{},{},{},{},{},{},{},{}\n".format(carType,make,licenseplate,color,passengers,transmission,\
             rentCost,status,rentOutCar,returnCar))
-
-    def createDate(self, rentDate):
-        day, month, year, hour, minutes = map(int, rentDate.split('-'))
-        return datetime(year, month, day, hour, minutes)
        
     def getCars(self, action, typeAction, dateAvailable):
         
@@ -67,6 +68,7 @@ class CarRepository:
                 return self.__carsUnavailable   
 
     def duplicateLicensePlateCheck(self, newLicensePlate):
+        # Check if car is already in the system
         with open('./data/cars.csv', 'r') as customerFile:
             csvReader = csv.DictReader(customerFile)
             for line in csvReader:
