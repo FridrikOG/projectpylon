@@ -1,9 +1,18 @@
 name,age,ssn,address,number
+<<<<<<< HEAD
+Kristinn,62,1234567890,Hlíðar 2,1
+Jóhann,25,2508932712,Jóhannland,2 
+Kiddi,23,0410953349,Holagata 45,5
+=======
 Fjölnir Jóhann,43,2002753172,Helluland 13,1
 Kristinn,24,2508942121,Kársnes 13,2
 Sædís Ósk,22,2508962712,Sólstaðir 145,3
 Björgvin B. Björgvinsson,85,3107332893,Ásnes,4
+<<<<<<< HEAD
 ,23,2508953030,Vila nova,5
 Jóhanna Solberg,27,2508917321,Fjolnirsuckmydsdfdsa,6
 ,27,2508917232,Fjolnisk,7
 Johannes Fjölnir,26,2508927182,Gunnar,8
+=======
+>>>>>>> 48595d6fc3120cf14aebf3660a7ed9be81198057
+>>>>>>> f4f2573329d407d9ac3446c3384ce5e43d9d61c3

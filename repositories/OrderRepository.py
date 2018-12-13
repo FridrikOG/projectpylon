@@ -113,7 +113,7 @@ class OrderRepository:
                     elif variable == '3':
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
                 else:
-                    lines.appednd(line)
+                    lines.append(line)
 
         
         with open ('./data/orders.csv', 'w') as orderFile:

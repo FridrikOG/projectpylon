@@ -742,18 +742,20 @@ class SalesmanUi:
         return totalCost, totalDaysRented
 
     def addInsurance(self, cost):
-        self.addInsurancePrint()
-        action = self.chooseAction()
         insurance = 0
-        if action == '1':
-            totalCost = cost * 1.05
-            insurance = cost * 0.05
-        elif action == '2':
-            totalCost = cost
-        else:
-            self.invalidAction(action)
-            self.addInsurance(cost)
-        return int(totalCost), int(insurance)
+        action = ''
+        while action != '1' or action != '2':
+            self.addInsurancePrint()
+            action = self.chooseAction()
+            if action == '1':
+                totalCost = cost * 1.05
+                insurance = cost * 0.05
+                return int(totalCost), int(insurance)
+            elif action == '2':
+                totalCost = cost
+                return int(totalCost), int(insurance)
+            else:
+                self.invalidAction(action)
 
     def getTimeOfOrder(self):
         year = datetime.now().year
@@ -887,6 +889,10 @@ class SalesmanUi:
         print(Colors.BLUE+"-------------------------------------------------- Rent Out a Car --------------------------------------------------"+Colors.END)
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
+        if searchedCar == None:
+            print(Colors.BLUE+"Car not found!"+Colors.END)
+            self.pressEnterToContinue()
+            self.rentOutACar()
         # Info about the car to be rented
         carType = searchedCar.getType()
         make = searchedCar.getMake()
@@ -995,12 +1001,9 @@ class SalesmanUi:
                 self.editOrderMenuPrint()
             except:
                 self.mainMenu()
-                
             action = self.chooseAction()
-
             if action == '0':
                 self.editOrderInfoMenu()
-            
             elif action == '1':
                 #gets beginning of rental time and 
                 #edit rental time
@@ -1015,6 +1018,7 @@ class SalesmanUi:
                 print(Colors.GREEN+"\nRental time updated"+Colors.END)
                 self.displayAllOrdersHeaderPrint()
                 print(Colors.GREEN+str(newOrder)+Colors.END)
+                self.pressEnterToContinue()
 
             elif action == '2':
                 #Change car type
@@ -1025,10 +1029,10 @@ class SalesmanUi:
                 print(Colors.GREEN+"Car Type updated"+Colors.END)
                 self.displayAllOrdersHeaderPrint()
                 print(Colors.WHITE+str(newOrder)+Colors.END)
+                self.pressEnterToContinue()
             
             elif action == '3':
                 #Cancel order
-                #flawed... prints out old car type
                 confirmingCancellation = self.areYouSure()
                 if confirmingCancellation == True:
                     deletedOrder = self.__orderService.cancelOrder(orderNumber)
@@ -1037,9 +1041,10 @@ class SalesmanUi:
                     self.displayAllOrdersHeaderPrint()
                     print(Colors.WHITE+str(deletedOrder)+Colors.END)
                     self.pressEnterToContinue()
-
-                else:
-                    self.editOrderInfoMenu()
+            else:
+                self.editOrderInfoMenu()
+        else:
+            self.editOrderInfoMenu()
 
     def daysRented(self, rentOutCarTime, returnCarTime):
         daysRented = returnCarTime - rentOutCarTime
@@ -1089,7 +1094,7 @@ class SalesmanUi:
 
     def addInsurancePrint(self):
         self.actionsPrint()
-        print(Colors.WHITE+"1. Add SCDW:\n{0}:\n\t{1}\n\t{2}\n\t{3}\n\t{4}".format("Includes"," -Front window","-Sandstorm","-Chassis", "-Theft insurance"))
+        print(Colors.WHITE+"1. Add SCDW:\n{0}:\n\t{1}\n\t{2}\n\t{3}\n\t{4}".format("Includes","-Front window","-Sandstorm","-Chassis", "-Theft insurance"))
         print("2. No additional insurance"+Colors.END)
 
     def areYouSurePrint(self):
