@@ -1,4 +1,5 @@
 orderNumber,customer,SSN,carType,timeOfOrder,startDate,endDate,rentCost
+<<<<<<< HEAD
 1,Fridrik Gunnarsson,2508963247,Compact,12-12-2018-16-25,14-12-2018-11-0,15-12-2018-11-0,14700
 2,Fridrik Gunnarsson,2508963247,Compact,12-12-2018-16-33,14-12-2018-11-0,14-12-2018-14-0,14700
 3,Fridrik Gunnarsson,2508963247,Compact,12-12-2018-16-36,14-12-2018-11-0,15-12-2018-11-0,14700
@@ -10,3 +11,5 @@ orderNumber,customer,SSN,carType,timeOfOrder,startDate,endDate,rentCost
 9,Thorarinn,1608976655,Compact,13-12-2018-11-14,1-1-2019-12-0,1-2-2019-12-0,455700
 10,Thorarinn,1608976655,Compact,13-12-2018-11-15,1-1-2019-12-0,1-2-2019-12-0,455700
 11,Fridrik Gunnarsson,2508963247,Compact,13-12-2018-11-16,1-1-2019-12-0,2-1-2019-12-0,14700
+=======
+>>>>>>> 49d7c769c5be6c8f30300aa5538e792b3f45d824
