@@ -66,8 +66,10 @@ class CustomerService:
                     newName += name + ' '
                     check = True
                 else:
+                    newName = ''
                     check = False
         newName = newName.strip()
+        
         return newName
 
 
