@@ -69,6 +69,10 @@ class SalesmanUi:
 # Rent out a car
             elif action == '8':
                 print(Colors.WHITE + "\nPath: Menu/Rent_Out_Car/" + Colors.END)
+                # display available cars
+                cars = self.__carService.getCars('1', '', datetime.now())
+                self.displayAllCarsPrint(cars)
+                # rent out a car funcion
                 self.rentOutACar()
 # Return a car
             elif action == '9':
