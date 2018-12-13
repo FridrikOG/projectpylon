@@ -97,20 +97,20 @@ class CustomerService:
         booleanCheck = False
         while len(str(ssn)) != 10 or not booleanCheck:
             try:
-                ssn = input("Step 2/3 - Enter an SSN of 10 numbers: ")
+                ssn = input(Colors.WHITE+"Step 2/3 - Enter an SSN of 10 numbers: "+Colors.END)
                 age = self.inputAgeCheck(ssn)
                 if age < 21:
-                    print("Customer has to be above the age of 21")
+                    print(Colors.WHITE+"Customer has to be above the age of 21"+Colors.END)
                 else:  
                     booleanCheck = self.__customerRepo.duplicateSsnCheck(str(ssn))
                     if booleanCheck == False:
-                        print("SSN already exists!")
+                        print(Colors.WHITE+"SSN already exists!"+Colors.END)
             except ValueError:
-                print("Please enter only 10 integers")
+                print(Colors.WHITE+"Please enter only 10 integers"+Colors.END)
         return str(ssn),str(age)
 
 # Input check for the address of the customer
 
     def inputAddressCheck(self):
-        address = input("Step 3/3 - Enter address: ").capitalize()
+        address = input(Colors.WHITE+"Step 3/3 - Enter address: "+Colors.END).capitalize()
         return address
