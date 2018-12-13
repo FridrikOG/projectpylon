@@ -17,6 +17,7 @@ class SalesmanUi:
         self.__orderService = OrderService()
 
     def mainMenu(self):
+        self.spaces
         action = ''
         while action != 'q':
             self.mainMenuPrint()
