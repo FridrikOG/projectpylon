@@ -705,11 +705,11 @@ class SalesmanUi:
 
     def createCarPrint(self):
         self.actionsPrint()
-        print(Colors.WHITE+"\n1. Select Compact")
-        print("\n2. Select Comfort")
-        print("\n3. Select CUV")
-        print("\n4. Select Highland")
-        print("\n5. Select Luxury"+Colors.END)
+        print(Colors.WHITE+"1. Select Compact")
+        print("2. Select Comfort")
+        print("3. Select CUV")
+        print("4. Select Highland")
+        print("5. Select Luxury"+Colors.END)
     
     def printCarHeader(self):
             LINE = '-'
