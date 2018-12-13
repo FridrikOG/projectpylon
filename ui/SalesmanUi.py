@@ -148,11 +148,11 @@ class SalesmanUi:
         print('\n'*50)
 
     def chooseAction(self):
-        action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
+        action = input(Colors.BLUE + "\nChoose action: " + Colors.END).strip()
         return action
 
     def pressEnterToContinue(self):
-        action = input(Colors.BLUE + "\nPress enter to continue: " + Colors.END)
+        action = input(Colors.BLUE + "\nPress enter to continue: " + Colors.END).strip()
         return action
 
     def actionsPrint(self):
@@ -165,7 +165,7 @@ class SalesmanUi:
         print(Colors.RED + "\nCustomer not found!" + Colors.END)
 
     def searchTermInput(self):
-        searchTerm = input(Colors.BLUE + "\nEnter SSN or Customer number to find: " + Colors.END)
+        searchTerm = input(Colors.BLUE + "\nEnter SSN or Customer number to find: " + Colors.END).strip()
         return searchTerm
 
     def exitPrint(self):
@@ -549,9 +549,9 @@ class SalesmanUi:
             carTypeInput = self.__carService.checkCarType()
             rentCost, carType = self.getCarTypeVariables(carTypeInput)
         elif action == '2':
-            make = input(Colors.WHITE+'Make (f.x. Toyota Yaris): '+Colors.END).capitalize()
+            make = input(Colors.WHITE+'Make (f.x. Toyota Yaris): '+Colors.END).strip().capitalize()
         elif action == '3':
-            color = input(Colors.WHITE+'Color: '+Colors.END).capitalize()
+            color = input(Colors.WHITE+'Color: '+Colors.END).strip().capitalize()
         elif action == '4':
             passengers = self.__carService.checkPassengers()
         elif action == '5':
@@ -625,8 +625,8 @@ class SalesmanUi:
         self.createCarPrint()
         #car type
         carTypeInput = self.__carService.checkCarType()
-        make = input(Colors.WHITE+"Make (f.x. Toyota Yaris): "+Colors.END).capitalize()
-        color = input(Colors.WHITE+"Color: "+Colors.END).capitalize()
+        make = input(Colors.WHITE+"Make (f.x. Toyota Yaris): "+Colors.END).strip().capitalize()
+        color = input(Colors.WHITE+"Color: "+Colors.END).strip().capitalize()
         passengers = self.__carService.checkPassengers()
         transmissionInput = self.__carService.checkTransmission()
         liecensePlate = self.__carService.checkLicenseplate()
