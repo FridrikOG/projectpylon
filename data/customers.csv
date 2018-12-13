@@ -1,10 +1,3 @@
 name,age,ssn,address,number
-Jóhannes,22,2508962737,Johannestown,1
-<<<<<<< HEAD
-,95,5699234569,Sólin 1,3
-=======
-Frikki,21,1608973322,Balaland 32,3
-Fjolnir,21,1608975544,Northurbakki 22,4
-Kristinn Örn Gunnarsson,23,1608956743,Hjallavegur 20,5
-Gunnar Gunnarsson,51,2089675434,Brunaland 32,6
->>>>>>> e234de55f2cb219d40357f123dc778b840b457c3
+Jonína,25,2508932712,Hlíðar,1
+Jóhann,25,2508932712,Jóhannland,2 
