@@ -890,8 +890,7 @@ class SalesmanUi:
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
         if searchedCar == None:
-            print(Colors.BLUE+"Car not found!"+Colors.END)
-            self.pressEnterToContinue()
+            print(Colors.BLUE+"\nCar not found!"+Colors.END)
             self.rentOutACar()
         # Info about the car to be rented
         carType = searchedCar.getType()
@@ -970,7 +969,6 @@ class SalesmanUi:
         print("2. No"+Colors.END)
 
     def showReceipt(self, order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
-        self.actionsPrint()
         self.showReceiptPrint()
         action = self.chooseAction()
         if action == '1':

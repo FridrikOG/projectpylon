@@ -16,7 +16,7 @@ class OrderRepository:
         with open('./data/orders.csv', 'r') as orderFile:
             csvReader = csv.DictReader(orderFile, delimiter=',')
 #orderNumber,customer,carNumber,timeOfOrder,startDate,endDate,rentCost
-            for line in csvReader:#Problems <-----
+            for line in csvReader:
                 orderNumber= line['orderNumber']
                 customer = line['customer']
                 ssn = line['SSN']
