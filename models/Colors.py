@@ -5,4 +5,3 @@ class Colors:
     END = '\033[0m'
     WHITE = '\033[97m'
     YELLOW = '\033[93m'
-    RED = '\033[91m'

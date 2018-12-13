@@ -442,12 +442,16 @@ class SalesmanUi:
         ssn, age = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
         number = cs.getSumOfAllCustomers()
-        self.createCustomerCheckPrint()
-        action = self.chooseAction()
-        if action == '1':
-            return name,age,ssn,address,number
-        elif action == '2':
-            self.mainMenu()
+        action = ''
+        while action != '1' or action != '2':
+            self.createCustomerCheckPrint()
+            action = self.chooseAction()
+            if action == '1':
+                return name,age,ssn,address,number
+            elif action == '2':
+                self.mainMenu()
+            self.invalidAction(action)
+            self.pressEnterToContinue()
 
     def createCustomerCheckPrint(self):
         print(Colors.BLUE+"\nDo you want to create this customer?")
