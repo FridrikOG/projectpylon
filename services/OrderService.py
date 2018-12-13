@@ -20,12 +20,19 @@ class OrderService:
                 creditCard = input("Credit card: ")
                 if len(creditCard) == 19:
                     creditList = creditCard.split('-')
+                else:
+                    self.isnsertValidCardPrint()
                     for split in creditList:
                         if len(split) == 4:
                             int(split)
+                        else:
+                            self.isnsertValidCardPrint()
                             return creditCard
             except:
-                print("\nPlease insert a valid credit card")
+                self.isnsertValidCardPrint()
+
+    def isnsertValidCardPrint(self):
+        print("\nPlease insert a valid credit card")
 
 
     def createDate(self, rentDate):
