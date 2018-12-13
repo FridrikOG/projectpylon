@@ -106,6 +106,7 @@ class SalesmanUi:
             else:
                 self.invalidAction(action)
                 self.pressEnterToContinue()
+                self.spaces()
                 self.mainMenu()
 
 # Prints the mainMenuPage.
