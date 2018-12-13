@@ -1116,8 +1116,7 @@ class SalesmanUi:
 
     def selectCarTypePrintMenu(self):
         self.actionsPrint()
-        print(Colors.WHITE+"0. <-- Go back")
-        print("1. Compact")
+        print(Colors.WHITE+"1. Compact")
         print("2. Comfort")
         print("3. CUV")
         print("4. Highland")
