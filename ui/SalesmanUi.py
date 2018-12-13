@@ -47,6 +47,8 @@ class SalesmanUi:
                 newCustomer = Customer(name,age,ssn,address,number)
                 self.__customerService.addCustomer(newCustomer)
                 print(Colors.GREEN + "\nCustomer has been created!\n" + Colors.END)
+                self.displayCustomerHeaderPrint()
+                print(Colors.WHITE+str(newCustomer)+Colors.END)
                 action = self.pressEnterToContinue()
 
 # Create a car order
@@ -438,7 +440,17 @@ class SalesmanUi:
         ssn, age = cs.inputSsnCheck()
         address = cs.inputAddressCheck()
         number = cs.getSumOfAllCustomers()
-        return name,age,ssn,address,number
+        self.createCustomerCheckPrint()
+        action = self.chooseAction()
+        if action == '1':
+            return name,age,ssn,address,number
+        elif action == '2':
+            self.mainMenu()
+
+    def createCustomerCheckPrint(self):
+        print(Colors.BLUE+"\nDo you want to create this customer?")
+        print(Colors.GREEN+"1. Yes, I want to create this customer")
+        print(Colors.RED+"2. No, I don't want to create this customer"+Colors.END)
 
 
     '''-------------------------- CUSTOMER PRINT FUNCTIONS -----------------------'''

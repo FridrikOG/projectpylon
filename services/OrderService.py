@@ -123,10 +123,10 @@ class OrderService:
                 finalDateTime = '{}-{}-{}-{}-{}'.format(day, month, year, hour, minutes)
                 break
             except:
-                boolCondition = self.tryAgainDatePrint()
+                boolCondition = self.tryAgainDateMenu()
         return finalDateTime
 
-    def tryAgainDatePrint(self):
+    def tryAgainDateMenu(self):
         print(Colors.BLUE+'Please insert valid end of rental time')
         print(Colors.WHITE+"0. Go back to main menu")
         print("1. Input date again"+Colors.END)
