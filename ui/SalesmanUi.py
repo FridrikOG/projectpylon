@@ -17,11 +17,7 @@ class SalesmanUi:
         self.__orderService = OrderService()
 
     def mainMenu(self):
-<<<<<<< HEAD
-        self.spaces()
-=======
         self.spaces
->>>>>>> a72cf68a8249884813d4a07c43f8ae8965b57fc6
         action = ''
         while action != 'q':
             self.mainMenuPrint()
