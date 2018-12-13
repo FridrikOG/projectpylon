@@ -128,7 +128,8 @@ class OrderService:
 
     def tryAgainDatePrint(self):
         print(Colors.BLUE+'Please insert valid end of rental time')
-        print(Colors.WHITE+"0. Go back to main menu")
+        print(Colors.BLUE+"Actions:"+Colors.END)
+        print(Colors.WHITE+"\n0. Go back to main menu")
         print("1. Input date again"+Colors.END)
         action = input(Colors.BLUE + "\nChoose action: " + Colors.END)
         if action == '0':

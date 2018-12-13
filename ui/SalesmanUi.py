@@ -159,7 +159,7 @@ class SalesmanUi:
         print(Colors.GREEN + "Exiting program.." + Colors.END)
 
     def allCustomersHeaderPrint(self):
-        print(Colors.GREEN +
+        print(Colors.BLUE +
         "---------------------------------- ALL CUSTOMERS ----------------------------------\n"
          + Colors.END)
 
@@ -179,8 +179,8 @@ class SalesmanUi:
          + Colors.END)
 
     def creatingCustomerPrintHeader(self):
-        print(Colors.GREEN + 
-        "-----------Creating Customer Account-----------"
+        print(Colors.BLUE + 
+        "--------------------------------------------- Create a Customer Account ---------------------------------------------"
         + Colors.END)
 
     def invalidAction(self,action):
@@ -445,6 +445,9 @@ class SalesmanUi:
 # Actions the user has after 5 is pressed on the mainPage.
     def findCustomerMenuPrint(self):
         print(Colors.WHITE+"Path: Menu/Find_Customer/"+Colors.END)
+        print(Colors.BLUE + 
+        "-------------------------------------------- Find a Customer -------------------------------------------"
+        + Colors.END)
         self.actionsPrint()
         print(Colors.WHITE + "0. <-- Go back")
         print("1. Search for a customer")
@@ -465,15 +468,15 @@ class SalesmanUi:
     
 # Header which is printed when user is searching for a customer.
     def searchCustomerHeaderPrint(self):
-        print(Colors.YELLOW + 
-        "-------------------------------------------- Search for customer -------------------------------------------"
+        print(Colors.BLUE + 
+        "-------------------------------------------- Search for Customer -------------------------------------------"
         + Colors.END)
 
 # Prints the option to go back or reinstate the customer back into the main customer dir file.   VANTAR PATH
     def afterDeletedCustomerIsFoundPrint(self):
         self.actionsPrint()
         print(Colors.WHITE+"0. Go back")
-        print("1. Reinstate selected customer"+Colors.END)
+        print("1. Re-instate selected customer"+Colors.END)
 
 # 
     def afterCustomerIsFoundPrint(self):
