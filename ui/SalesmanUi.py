@@ -1112,29 +1112,6 @@ class SalesmanUi:
         print(Colors.RED+"2. Cancel order"+Colors.END)
 
     def displayAllOrdersHeaderPrint(self):
-        LINE = '---------------'
-        print(Colors.BLUE+"\n{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:6}".format('Order number', 'Customer', 'SSN', 'Car Type',\
-        'Time of order', 'Start of order','End of order','Rent cost'))
-        print("{:15} {:15} {:15} {:15} {:17} {:17} {:17} {:6}".format(LINE,LINE, LINE, LINE, LINE, LINE, LINE, LINE)+Colors.END)
-
-    def displayOrderInfo(self,order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
-# THIS LOOKS HORRIBLE, FIX LATER
-        print(Colors.WHITE+"\n-------------------------------------------------- Order Info --------------------------------------------------\n")
-        # print("Order Number: {}\n".format(order.getOrderNumber())+Colors.END)
-        print(Colors.BLUE+"Order number: "+Colors.WHITE,str(order.getOrderNumber())+Colors.END)
-        print(Colors.BLUE+"\n{:20} {:20}".format('Name','SSN'))
-        print("---------------------------------------------------"+Colors.END)
-        print(Colors.WHITE+"{:20} {:20}".format(order.getCustomer(), order.getSsn())+Colors.END)
-        print(Colors.BLUE+"\n{:20} {:20} {:20} {:20}".format('Car type','From','To','Date rented'))
-        print("{:20} {:20} {:20} {:20}".format('-------------------','-------------------','-------------------','-------------------')+Colors.END)
-        print(Colors.WHITE+"{:20} {:20} {:20} {:20}".format(order.getCarType(),str(rentOutCarTime),str(returnCarTime), str(timeOfOrder))+Colors.END)
-        print(Colors.BLUE+"\nCost of"+Colors.WHITE,str(totalDaysRented),Colors.BLUE+"days without VAT: "+Colors.WHITE,str(carCost),"ISK"+Colors.END)
-        if insurance != 0:
-            print(Colors.BLUE+"Extra insurance: "+Colors.WHITE,str(insurance),"ISK"+Colors.END)
-            # print("\nTotal cost of {} days without VAT: {} ISK".format(totalDaysRented, order.getRentCost()))
-            print(Colors.BLUE+"\nTotal cost of"+Colors.WHITE,str(totalDaysRented),Colors.BLUE+"days without VAT: "+Colors.WHITE,str(order.getRentCost())," ISK")
-    
-    def displayAllOrdersHeaderPrint(self):
         LINE = '-'
         print(Colors.BLUE+"\n{:13} {:20} {:12} {:10} {:18} {:18} {:18} {:10}".format('Order number', 'Customer', 'SSN', 'Car Type',\
         'Time of order', 'Start of order','End of order','Rent cost'))
