@@ -545,7 +545,8 @@ class SalesmanUi:
         action = self.chooseAction()
         if action == '0':
             self.editCar()
-        elif action == '1':            
+        elif action == '1':
+            self.selectCarTypePrintMenu()         
             carTypeInput = self.__carService.checkCarType()
             rentCost, carType = self.getCarTypeVariables(carTypeInput)
         elif action == '2':
