@@ -60,16 +60,14 @@ class CustomerService:
         check = False
         newName = ''
         while not check:
-            fullName = input(Colors.WHITE+'Step 1/3 - Enter name: '+Colors.END).strip().title().split()
+            fullName = input(Colors.WHITE+'Enter name: '+Colors.END).strip().title().split()
             for name in fullName:
                 if name not in string.punctuation and name.isalpha():
                     newName += name + ' '
                     check = True
                 else:
-                    newName = ''
                     check = False
         newName = newName.strip()
-        
         return newName
 
 
@@ -93,26 +91,27 @@ class CustomerService:
 # Input check for the ssn of the customer
 # 
 # 
+
     def inputSsnCheck(self):
-        intSsn = ''
+        ssn = ''
         booleanCheck = False
-        while len(str(intSsn)) != 10 or not booleanCheck:
+        while len(str(ssn)) != 10 or not booleanCheck:
             try:
-                ssn = input(Colors.WHITE+"Step 2/3 - Enter an SSN of 10 numbers: "+Colors.END).strip()
-                intSsn = int(ssn)
+                ssn = input("Step 2/3 - Enter an SSN of 10 numbers: ")
                 age = self.inputAgeCheck(ssn)
                 if age < 21:
-                    print(Colors.WHITE+"Customer has to be above the age of 21"+Colors.END)
+                    print("Customer has to be above the age of 21")
                 else:  
                     booleanCheck = self.__customerRepo.duplicateSsnCheck(str(ssn))
                     if booleanCheck == False:
-                        print(Colors.WHITE+"SSN already exists!"+Colors.END)
+                        print("SSN already exists!")
             except ValueError:
-                print(Colors.WHITE+"Please enter only 10 integers"+Colors.END)
+                print("Please enter only 10 integers")
         return str(ssn),str(age)
+
 
 # Input check for the address of the customer
 
     def inputAddressCheck(self):
-        address = input(Colors.WHITE+"Step 3/3 - Enter address: "+Colors.END).strip().capitalize()
+        address = input(Colors.WHITE+"Enter address: "+Colors.END).strip().capitalize()
         return address

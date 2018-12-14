@@ -1,11 +1,10 @@
 type,make,licenseplate,color,passengers,transmission,rentcost,status,rentout,return
-Compact,VW Golf,MZ-G06,White,5,Manual,14000,available,12-12-2018-16-50,12-12-2018-18-0
-Compact,Hunday i-10,KX-E32,Blue,5,Auto,14000,unavailable,1-1-2019-12-0,5-1-2019-12-0
-Compact,Toyota Auris,GS-V90,Silver,5,Manual,14000,available,21-12-2018-12-0,24-12-2018-12-0
+Compact,VW Golf,MZ-G06,White,5,Auto,14000,available,14-12-2018-18-48,14-12-2018-18-48
+Compact,Hunday i-10,KX-E32,Blue,5,Auto,14000,available,15-12-2018-11-0,14-12-2018-11-0
+Compact,Toyota Auris,GS-V90,Silver,5,Manual,14000,unavailable,15-12-2018-11-0,16-12-2018-18-0
 CUV,Ford Kuga,MS-S12,Red,5,Auto,25000,available,10-10-2001-12-00,12-12-2018-12-0
 Luxury,M-Benz C-class,BG-G37,Black,5,Auto,35000,available,12-12-2018-11-0,12-12-2018-12-0
 Highland,Toyota Hilux,TE-E93,White,5,Auto,30000,available,06-12-2018-19-0,13-12-2018-13-0
-Highland,Toyota Hilux,LK-L98,Silver,2,Auto,30000,available,21-12-2018-10-0,12-12-2018-12-0
-Compact,Toyota Camry,AP-G29,Blue,5,Auto,14000,available,12-12-2018-15-44,12-12-2018-15-44
+Highland,Toyota Hilux,LK-L98,Silver,2,Auto,30000,available,21-12-2018-10-0,14-12-2018-12-0
+Compact,Toyota Camry,AP-G29,Blue,5,Auto,14000,available,14-12-2018-13-3,14-12-2018-13-3
 Compact,Toyota yaris,ER-S64,Green,5,Auto,14000,available,13-12-2018-17-57,13-12-2018-17-57
-Compact,Mercedec benz,VG-201,Black,5,Manual,14000,available,14-12-2018-14-56,14-12-2018-14-56

@@ -34,10 +34,9 @@ class OrderService:
                     self.insertValidCardPrint()
             except:
                 self.insertValidCardPrint()
-                
+
     def insertValidCardPrint(self):
         print(Colors.BLUE+"\nPlease insert a valid credit card"+Colors.END)
-
 
 
     def createDate(self, rentDate):
@@ -63,14 +62,14 @@ class OrderService:
                 if returnCarTime > rentOutCarTime:
                     return rentOutCar, returnCar, rentOutCarTime, returnCarTime
                 else:
-                    print(Colors.BLUE+'Please insert valid end of rental time'+Colors.END)
+                    print(Colors.WHITE+'Please insert valid end of rental time'+Colors.END)
         #ef ekki ný pöntun
         else:
             while True:
                 print(Colors.BLUE+"\nInput time of return:"+Colors.END)
                 returnCar = self.InputValidDate()
                 returnCarTime = self.getTime(returnCar)
-                if returnCarTime.day >= datetime.now().day and returnCarTime.month >= datetime.now().month:
+                if returnCarTime.day == datetime.now().day and returnCarTime.month == datetime.now().month:
                     break
                 else:
                     print(Colors.BLUE+"Please insert valid end of rental time"+Colors.END)
@@ -85,6 +84,8 @@ class OrderService:
                 if numberExists == self.__orderRepo.checkOrderNumber(orderNumber):
                     orderInfo = self.__orderRepo.findOrder(orderNumber)
                     return orderNumber, orderInfo
+                else:
+                    print(Colors.RED+"Order number does not exist"+Colors.END)
             except:
                 print(Colors.RED+"Order number does not exist"+Colors.END)
                 print("\n" + Colors.BLUE + "Actions: " + Colors.END)
@@ -116,6 +117,7 @@ class OrderService:
             return datetime(year, month, day, hour, minutes)
         except ValueError:
             print(Colors.BLUE+"Not a valid time"+Colors.END)
+            return datetime(1,1,1)
 
     def InputValidDate(self):
         while True:

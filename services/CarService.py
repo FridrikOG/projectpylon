@@ -26,7 +26,7 @@ class CarService:
     def checkCarType(self):
         while True:
             try:
-                carTypeInput = int(input(Colors.BLUE+"Choose car type number:  "+Colors.END))
+                carTypeInput = int(input(Colors.BLUE+"Choose from available car types:  "+Colors.END))
                 if 0 < carTypeInput < 6:
                     break
                 else:
@@ -62,7 +62,7 @@ class CarService:
         licensePlate = ''
         booleanCheck = False
         while len(licensePlate) != 6 or not booleanCheck:
-            licensePlate = input(Colors.BLUE+"License plate (F.x. LL-L00): "+Colors.END).upper()
+            licensePlate = input(Colors.BLUE+"\nLicense plate (F.x. LL-L00): "+Colors.END).upper()
             if len(licensePlate) == 6 and newCar == True:
                 booleanCheck = self.__carRepo.duplicateLicensePlateCheck(str(licensePlate))
                 if booleanCheck == False:

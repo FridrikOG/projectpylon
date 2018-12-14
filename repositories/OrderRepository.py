@@ -80,7 +80,7 @@ class OrderRepository:
 # ('1', orderNumber, startOfRental, endOfRental, rentCost)
 
 # '2', totalCost, carType, orderNumber
-    def editOrderVariable(self, variable, orderNumber, variable1=0, variable2=0, variable3=0):#fá fyrst hvaða gildum á að breyta áður en farið hingað
+    def editOrderVariable(self, action, orderNumber, variable1=0, variable2=0, variable3=0):#fá fyrst hvaða gildum á að breyta áður en farið hingað
         with open ('./data/orders.csv', 'r') as orderFile:
             header = ('orderNumber','customer','SSN','carType','timeOfOrder','startDate','endDate','rentCost')
             csvReader = csv.DictReader(orderFile, header)
@@ -97,20 +97,23 @@ class OrderRepository:
                     endDate = line['endDate']
                     rentCost = line['rentCost']
                     
-                    if variable == '1':
+                    if action == '1':
+                        #edit time of rental
                         startDate = variable1
                         endDate = variable2
                         rentCost = variable3
                         lines.append(line)
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
 
-                    elif variable == '2':
+                    elif action == '2':
+                        #edit car type
                         rentCost = variable1
                         carType = variable2
                         lines.append(line)
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
                     
-                    elif variable == '3':
+                    elif action == '3':
+                        #cancel order
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
                 else:
                     lines.append(line)
