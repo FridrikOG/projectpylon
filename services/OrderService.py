@@ -35,7 +35,7 @@ class OrderService:
             except:
                 self.insertValidCardPrint()
                 
-    def isnsertValidCardPrint(self):
+    def insertValidCardPrint(self):
         print(Colors.BLUE+"\nPlease insert a valid credit card"+Colors.END)
 
 
