@@ -36,6 +36,7 @@ class OrderService:
                 self.insertValidCardPrint()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     def isnsertValidCardPrint(self):
         print(Colors.BLUE+"\nPlease insert a valid credit card"+Colors.END)
 =======
@@ -47,6 +48,10 @@ class OrderService:
         print(Colors.WHITE+"\nPlease insert a valid credit card"+Colors.END)
 >>>>>>> 13fe6d051e883c723c155af6293ab75f0d6ee659
 >>>>>>> af77a4e059d5e675b06f1eca76f5f498a543c3db
+=======
+    def insertValidCardPrint(self):
+        print(Colors.BLUE+"\nPlease insert a valid credit card"+Colors.END)
+>>>>>>> d2cd9186ae8b77c0d0692a6e9795be06fa9901d3
 
 
     def createDate(self, rentDate):

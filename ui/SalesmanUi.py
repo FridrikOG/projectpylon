@@ -641,6 +641,7 @@ class SalesmanUi:
         self.printCarHeader()
         print(Colors.WHITE+(str(newCar)+Colors.END))
         return newCar
+        self.pressEnterToContinue()
 
 
     def getTransmission(self, transmissionInput):
@@ -964,18 +965,23 @@ class SalesmanUi:
         return creditCard
 
     def showReceiptPrint(self):
-        print(Colors.BLUE+"Do you want to get a receipt ?")
+        print(Colors.BLUE+"\nDo you want to get a receipt ?")
         print(Colors.WHITE+"1. Yes")
         print("2. No"+Colors.END)
 
     def showReceipt(self, order,insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder):
-        self.showReceiptPrint()
-        action = self.chooseAction()
-        if action == '1':
-            self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
-            self.pressEnterToContinue()
-        elif action == '2':
-            self.pressEnterToContinue()
+        while True:
+            self.showReceiptPrint()
+            action = self.chooseAction()
+            if action == '1':
+                self.displayOrderInfo(order, insurance, totalDaysRented, carCost, rentOutCarTime, returnCarTime, timeOfOrder)
+                self.pressEnterToContinue()
+                return False
+            elif action == '2':
+                self.pressEnterToContinue()
+                return False
+            else:
+                self.invalidAction(action)
 
     def editOrderInfoMenu(self):
         self.actionsPrint()
