@@ -1,17 +1,12 @@
 from models.Order import Order
 import csv
-# form datetime import datetime
-# CURRENTTIME = datetime.now()
 
 class OrderRepository:
     def __init__(self):
         self.__orderNumbers = set()
         self.__orders = []
         self.__highestOrderNumber = []
-        #self.__ordersInRental = []
-
-    #number, customer, car, cost, startDate, endDate
-    #orderNumber, customer, carNumber, timeOfOrder, startDate, endDate, rentCost
+        
     def getOrders(self):
         with open('./data/orders.csv', 'r') as orderFile:
             csvReader = csv.DictReader(orderFile, delimiter=',')
@@ -46,7 +41,6 @@ class OrderRepository:
             endDate = order.getEndDate()
             rentCost = order.getRentCost()
             ssn = order.getSsn()
-
             orderFile.write("{},{},{},{},{},{},{},{}\n".format(orderNumber,customer,ssn,carType,timeOfOrder,startDate,endDate,rentCost))
         
     def checkOrderNumber(self, orderNumber):
@@ -95,8 +89,7 @@ class OrderRepository:
                     timeOfOrder = line['timeOfOrder']
                     startDate= line['startDate']
                     endDate = line['endDate']
-                    rentCost = line['rentCost']
-                    
+                    rentCost = line['rentCost']                    
                     if action == '1':
                         #edit time of rental
                         startDate = variable1
@@ -104,21 +97,17 @@ class OrderRepository:
                         rentCost = variable3
                         lines.append(line)
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
-
                     elif action == '2':
                         #edit car type
                         rentCost = variable1
                         carType = variable2
                         lines.append(line)
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
-                    
                     elif action == '3':
                         #cancel order
                         updatedOrder = Order(orderNumber, customer, carType, timeOfOrder, startDate, endDate, rentCost, SSN)
                 else:
                     lines.append(line)
-
-        
         with open ('./data/orders.csv', 'w') as orderFile:
             writer = csv.DictWriter(orderFile, fieldnames=header)
             writer.writeheader()

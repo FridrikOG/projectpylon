@@ -13,7 +13,6 @@ class Car:
         self.__rentOutCar = rentOutCar
         self.__returnCar = returnCar
 
-
     def __str__(self):
         return "{:<15} {:<15} {:<15} {:<15} {:<15} {:<15} {:<6} ISK ".format(self.__type, \
         self.__make,self.__licenseplate,self.__color ,self.__passengers,self.__transmission,\

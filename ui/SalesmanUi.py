@@ -659,7 +659,6 @@ class SalesmanUi:
         passengers = self.__carService.checkPassengers()
         transmissionInput = self.__carService.checkTransmission()
         liecensePlate = self.__carService.checkLicenseplate()
-
         transmission = self.getTransmission(transmissionInput)
         rentCost, carType = self.getCarTypeVariables(carTypeInput)
         status = 'available'
@@ -897,7 +896,6 @@ class SalesmanUi:
         print("0. Go back")
         print("1. Mark car returned")
 
-    
     def returnCar(self):
         print(Colors.WHITE + "\nPath: Menu/Return_Car/" + Colors.END)
         print(Colors.WHITE+"\n------------------------------------------------- Return a Car -------------------------------------------------"+Colors.END)
@@ -933,7 +931,6 @@ class SalesmanUi:
                     timeOfreturnInputTimeFormat = self.__orderService.createDate(timeOfReturn)
                     searchedCar = self.__carService.returnCar(licenseplate, timeOfReturn)
                     returnTimeDifference = timeOfreturnInputTimeFormat - searchedCar.getReturnCar()
-
                     if returnTimeDifference.seconds > 0:
                         self.returnCarAdditionalPrice(returnTimeDifference, searchedCar)
                     print(Colors.GREEN +"Car marked returned"+Colors.END)
@@ -943,7 +940,6 @@ class SalesmanUi:
                     return False
             else:
                 self.invalidAction(action)
-
 
     def rentOutACar(self):
         print(Colors.WHITE + "\nPath: Menu/Rent_Out_Car_/Find_Customer\n" + Colors.END)

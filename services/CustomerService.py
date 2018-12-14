@@ -90,7 +90,6 @@ class CustomerService:
     
 # Input check for the ssn of the customer
 # 
-# 
 
     def inputSsnCheck(self):
         ssn = ''

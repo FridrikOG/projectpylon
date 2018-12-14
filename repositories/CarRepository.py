@@ -32,7 +32,6 @@ class CarRepository:
             rentCost,status,rentOutCar,returnCar))
        
     def getCars(self, action, typeAction, dateAvailable):
-        
         with open('./data/cars.csv', 'r') as carFile:
             csvReader = csv.DictReader(carFile, delimiter=',')
             self.__carsAvailable.clear()
@@ -50,7 +49,6 @@ class CarRepository:
                 rentOutCar = self.createDate(line['rentout'])
                 returnCar = self.createDate(line['return'])
                 newCar = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
-
                 if rentOutCar < dateAvailable < returnCar or status == 'unavailable':
                     if typeAction.upper() == '':
                         self.__carsUnavailable.append(newCar)
@@ -61,7 +59,6 @@ class CarRepository:
                         self.__carsAvailable.append(newCar)
                     elif carType.upper() == typeAction.upper():
                         self.__carsAvailable.append(newCar)     
-
             if action == '1':
                 return self.__carsAvailable
             elif action == '2':
@@ -105,8 +102,7 @@ class CarRepository:
         with open('./data/cars.csv', 'w') as carFile:
             writer = csv.DictWriter(carFile, fieldnames=header)
             writer.writeheader()
-            writer.writerows(lines)
-            
+            writer.writerows(lines)    
         return returnCarInfo
 
     def LicensePlateCheck(self, newLicensePlate):
@@ -148,12 +144,10 @@ class CarRepository:
                     line['return'] = returnCar
                     lines.append(line)
                     returnCarInfo = Car(carType, make,licenseplate, color, passengers,transmission, rentcost, status,rentOutCar,returnCar)
-
                 else:
                     lines.append(line)
         with open('./data/cars.csv', 'w') as carFile:
             writer = csv.DictWriter(carFile, fieldnames=header)
             writer.writeheader()
             writer.writerows(lines)
-
         return returnCarInfo

@@ -5,6 +5,3 @@ def main():
     ui.mainMenu()
 
 main()
-
-
-"""Pull"""
