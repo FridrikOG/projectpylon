@@ -48,9 +48,9 @@ class OrderService:
         if newOrder == True:
             while True:
                 print(Colors.BLUE+"\nInput time of rental:"+Colors.END)
-                rentOutCar = self.InputValidDate()
+                rentOutCar = self.inputValidTime()
                 rentOutCarTime = self.getTime(rentOutCar)
-                if rentOutCarTime > datetime.now():
+                if rentOutCarTime.day == datetime.now().day:
                     break
                 else: 
                     print(Colors.WHITE+'\nPlease insert valid start of rental time\n'+Colors.END)
@@ -67,11 +67,11 @@ class OrderService:
         # Return time
         else:
             print(Colors.BLUE+"\nInput time of return:"+Colors.END)
-            returnCar = self.inputValidReturnTime()
+            returnCar = self.inputValidTime()
             returnCarTime = self.getTime(returnCar)
             return returnCar
 
-    def inputValidReturnTime(self):
+    def inputValidTime(self):
         while True:
             try:
                 timeInput = input(Colors.WHITE+'Input time in this format HH:MM: '+Colors.END).strip()

@@ -28,8 +28,8 @@ class SalesmanUi:
                 typeAction = ''
                 dateAvailable = datetime.now()
                 if action == '1':
-                    self.allAvailableCars()
                     print(Colors.WHITE + "\nPath: Menu/Available_Cars/" + Colors.END)
+                    self.allAvailableCars()
                 elif action == '2':
                     print(Colors.WHITE + "\nPath: Menu/UnAvailable_Cars/" + Colors.END)
                     self.allUnAvilableCars()
@@ -932,7 +932,7 @@ class SalesmanUi:
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
         if searchedCar == None:
-            print(Colors.BLUE+"\nCar not found!"+Colors.END)
+            print(Colors.RED+"\nCar not found!"+Colors.END)
             self.rentOutACar()
         # Info about the car to be rented
         print(Colors.GREEN+"\nCar found!\n"+Colors.END)
