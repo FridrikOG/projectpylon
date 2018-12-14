@@ -43,7 +43,7 @@ class OrderService:
         day, month, year, hour, minutes = map(int, rentDate.split('-'))
         return datetime(year, month, day, hour, minutes)
 
-    def checkValidDate(self, newOrder=False):#SEGJA AÐ SÉ SATT FYRIR NEW ORDER
+    def checkValidDate(self, newOrder=False): # True if new order
 
         if newOrder == True:
             while True:
@@ -63,17 +63,25 @@ class OrderService:
                     return rentOutCar, returnCar, rentOutCarTime, returnCarTime
                 else:
                     print(Colors.WHITE+'Please insert valid end of rental time'+Colors.END)
-        #ef ekki ný pöntun
+        # If not new order:
+        # Return time
         else:
-            while True:
-                print(Colors.BLUE+"\nInput time of return:"+Colors.END)
-                returnCar = self.InputValidDate()
-                returnCarTime = self.getTime(returnCar)
-                if returnCarTime.day == datetime.now().day and returnCarTime.month == datetime.now().month:
-                    break
-                else:
-                    print(Colors.BLUE+"Please insert valid end of rental time"+Colors.END)
+            print(Colors.BLUE+"\nInput time of return:"+Colors.END)
+            returnCar = self.inputValidReturnTime()
+            returnCarTime = self.getTime(returnCar)
             return returnCar
+
+    def inputValidReturnTime(self):
+        while True:
+            try:
+                timeInput = input(Colors.WHITE+'Input time in this format HH:MM: '+Colors.END).strip()
+                hour, minutes = map(int,timeInput.split(':'))
+                finalDateTime = '{}-{}-{}-{}-{}'.format(datetime.now().day, datetime.now().month, datetime.now().year, hour, minutes)
+                return finalDateTime
+            except:
+                print(Colors.BLUE+"\nplease input a valid time\n"+Colors.END)
+
+
 
     def checkOrderNumber(self):
         numberExists = True

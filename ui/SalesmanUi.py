@@ -385,21 +385,6 @@ class SalesmanUi:
             print(newCustomer)
             self.pressEnterToContinue()
             self.editCustomerInfo(newCustomer)
-
-#Edit all customer information
-        # elif action == '4':
-        #     print(Colors.WHITE+"Path: Menu/Find_Customer/Selected_Customer/Edit_Customer/All_Customer_Info/\n"+Colors.END)
-        #     print(Colors.BLUE+"Editing customers name, SSN and address:"+Colors.END)
-        #     cs = CustomerService()
-        #     name = cs.inputNameCheck()
-        #     ssn,age = cs.inputSsnCheck()
-        #     address = cs.inputAddressCheck()
-        #     newCustomer = Customer(name,age,ssn,address,number)
-        #     cs.customerEdit(newCustomer)
-        #     displayCustomerHeaderPrint()
-        #     print(newCustomer)
-        #     self.pressEnterToContinue()
-        #     self.editCustomerInfo(newCustomer)
             
 # Name changed
             print(Colors.GREEN+"\nCustomer address has been changed from "\
