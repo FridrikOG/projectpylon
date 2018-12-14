@@ -1172,7 +1172,7 @@ class SalesmanUi:
         # print("Order Number: {}\n".format(order.getOrderNumber())+Colors.END)
         print(Colors.BLUE+"Order number: "+Colors.WHITE,str(order.getOrderNumber())+Colors.END)
         print(Colors.BLUE+"\n{:20} {:20}".format('Name','SSN'))
-        print("{:-<32}".format(LINE)+Colors.END)
+        print("{:-<20} {:-<20}".format(LINE, LINE)+Colors.END)
         print(Colors.WHITE+"{:20} {:20}".format(order.getCustomer(), order.getSsn())+Colors.END)
         print(Colors.BLUE+"\n{:10} {:20} {:20} {:20}".format('Car type','From','To','Date rented'))
         print("{:-<10} {:-<20} {:-<20} {:-<20}".format(LINE,LINE,LINE,LINE)+Colors.END)

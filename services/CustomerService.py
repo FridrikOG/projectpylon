@@ -60,7 +60,7 @@ class CustomerService:
         check = False
         newName = ''
         while not check:
-            fullName = input(Colors.WHITE+'Enter name: '+Colors.END).strip().title().split()
+            fullName = input(Colors.WHITE+"Step 1/3 - Enter name: "+Colors.END).strip().title().split()
             for name in fullName:
                 if name not in string.punctuation and name.isalpha():
                     newName += name + ' '
@@ -112,5 +112,5 @@ class CustomerService:
 # Input check for the address of the customer
 
     def inputAddressCheck(self):
-        address = input(Colors.WHITE+"Enter address: "+Colors.END).strip().capitalize()
+        address = input(Colors.WHITE+"Step 3/3 - Enter address: "+Colors.END).strip().capitalize()
         return address
