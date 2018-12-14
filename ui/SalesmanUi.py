@@ -532,7 +532,7 @@ class SalesmanUi:
         licensePlate = self.__carService.checkLicenseplate(False)
         searchedCar = self.__carService.licensePlateCheck(licensePlate)
         self.printCarHeader()
-        print(searchedCar)
+        print(Colors.WHITE+str(searchedCar)+Colors.END)
         carType = searchedCar.getType()
         make = searchedCar.getMake()
         color = searchedCar.getColor()
@@ -560,7 +560,7 @@ class SalesmanUi:
         rentOutCar, unusedValue = self.getTimeOfOrder()
         returnCar = rentOutCar
         editedCar = self.__carService.editCar(carType,make,licensePlate,color,passengers,transmission,rentCost,status,rentOutCar,returnCar)
-        print(Colors.GREEN+"\nCar successfull edited!"+Colors.END)
+        print(Colors.GREEN+"\nCar successfully edited!"+Colors.END)
         self.printCarHeader()
         print(Colors.WHITE+str(editedCar)+Colors.END)
         self.pressEnterToContinue()
@@ -640,8 +640,8 @@ class SalesmanUi:
         print(Colors.GREEN+"\nCar successfully created!"+Colors.END)
         self.printCarHeader()
         print(Colors.WHITE+(str(newCar)+Colors.END))
-        return newCar
         self.pressEnterToContinue()
+        return newCar
 
 
     def getTransmission(self, transmissionInput):
